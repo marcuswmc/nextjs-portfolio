@@ -44,11 +44,11 @@ body {
 }
 
 @utility banner-text-responsive {
-  @apply text-[68px] sm:text-[118px] md:text-[126px] lg:text-[152px] leading-9 sm:leading-16 lg:leading-20;
+  @apply text-[60px] sm:text-[98px] md:text-[118px] lg:text-[136px] leading-14 sm:leading-20 lg:leading-28;
 }
 
 @utility value-text-responsive {
-  @apply text-2xl md:text-[26px] lg:text-[32px];
+  @apply text-[14px] md:text-[18px] lg:text-[24px];
 }
 
 @utility marquee-text-responsive {
@@ -56,7 +56,7 @@ body {
 }
 
 @utility contact-text-responsive {
-  @apply text-[42px] sm:text-[52px] md:text-[62px] lg:text-[100px];
+  @apply text-[42px] sm:text-[52px] md:text-[62px] lg:text-[90px];
 }
 
 .navbar-initial {
