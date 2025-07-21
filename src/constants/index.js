@@ -6,12 +6,12 @@ export const servicesData = [
       "Your business deserves a fast, secure, and future-proof digital foundation. I develop custom web apps with clean architecture, optimized databases, and seamless integrations—ensuring reliability at every layer.",
     items: [
       {
-        title: "Backend Engineering",
-        description: "(REST/GraphQL APIs, Microservices, Auth Systems)",
+        title: "Frontend Excellence",
+        description: "(React, Nextjs, TypeScript, Interactive UI/UX)",
       },
       {
-        title: "Frontend Excellence",
-        description: "(React, Vue, TypeScript, Interactive UI/UX)",
+        title: "Backend Engineering",
+        description: "(REST APIs, Microservices, Auth Systems)",
       },
       {
         title: "Database Design",
@@ -20,24 +20,24 @@ export const servicesData = [
     ],
   },
   {
-    title: "DevOps & Cloud Solutions",
+    title: "Advanced UI & Motion Design",
     description:
-      "Deploying software shouldn't be a gamble. I automate infrastructure, enforce security, and leverage cloud platforms (AWS/Azure) to keep your app running smoothly—24/7, at any scale.",
+      "Transform static interfaces into immersive digital experiences. I craft visually striking, highly interactive UIs using cutting-edge animation tools—bringing emotion, depth, and precision to the frontend. Perfect for brands that want to stand out.",
     items: [
       {
-        title: "CI/CD Pipelines",
-        description: "(GitHub Actions, Docker, Kubernetes)",
+        title: "Dynamic Animations",
+        description: "(GSAP, Framer Motion, Scroll-based Interactions)",
       },
       {
-        title: "Server Management ",
-        description: "(Linux, Nginx, Load Balancing)",
+        title: "3D Web Experiences",
+        description: "(Three.js, WebGL, Real-time Visuals)",
       },
       {
-        title: "Performance Tuning",
-        description: "(Caching, Compression, Lighthouse 90+ Scores)",
+        title: "Creative Design Integration",
+        description: "(Figma, Photoshop, Illustrator)",
       },
     ],
-  },
+  },  
   {
     title: "Security & Optimization",
     description:
@@ -46,10 +46,6 @@ export const servicesData = [
       {
         title: "Code Audits",
         description: "(Refactoring, Tech Debt Cleanup)",
-      },
-      {
-        title: "Pen Testing",
-        description: "(Vulnerability Assessments)",
       },
       {
         title: "SEO Tech Stack",
@@ -64,15 +60,12 @@ export const servicesData = [
     items: [
       {
         title: "Cross-Platform Apps",
-        description: "(Single codebase for iOS/Android/Web)",
       },
       {
-        title: "PWAs",
-        description: "(Offline mode, Push Notifications)",
+        title: "AI Automation (chatbot / assistant)",
       },
       {
-        title: "E-Commerce",
-        description: "(Checkout flows, Payment Gateways, Inventory APIs)",
+        title: "E-Commerce, Booking Systems, landing pages",
       },
     ],
   },
@@ -80,78 +73,65 @@ export const servicesData = [
 export const projects = [
   {
     id: 1,
-    name: "Mobile Accessories E-commerce",
-    description:
-      "An online store specializing in phone accessories including cases, chargers, cables, and power banks with MagSafe compatibility.",
-    href: "",
-    image: "/assets/projects/mobile-accessories-store.jpg",
+    name: "Sattis Studio - Website and Booking system",
+    image: "/assets/projects/sattis-studio-site.jpg",
     bgImage: "/assets/backgrounds/blanket.jpg",
     frameworks: [
       { id: 1, name: "React" },
       { id: 2, name: "Next.js" },
-      { id: 3, name: "Node.js" },
-      { id: 4, name: "MongoDB" },
-      { id: 5, name: "Tailwind CSS" },
+      { id: 3, name: "Typescript" },
+      { id: 4, name: "Node.js" },
+      { id: 5, name: "MongoDB" },
     ],
   },
   {
     id: 2,
-    name: "Plant Shop E-commerce",
-    description:
-      "An online store specializing in rare and decorative plants with a clean, user-friendly interface.",
-    href: "",
-    image: "/assets/projects/plant-shop.jpg",
+    name: "C Model 2.0",
+    image: "/assets/projects/cmodel.jpg",
     bgImage: "/assets/backgrounds/curtains.jpg",
     frameworks: [
       { id: 1, name: "React" },
       { id: 2, name: "Next.js" },
-      { id: 3, name: "Stripe API" },
-      { id: 4, name: "Tailwind CSS" },
+      { id: 3, name: "Tailwind CSS" },
+      { id: 4, name: "Typescript" },
+      { id: 5, name: "MongoDB" },
     ],
   },
   {
     id: 3,
-    name: "Apple Tech Marketplace",
-    description:
-      "An e-commerce platform for Apple products and accessories with deals and category filtering.",
-    href: "",
-    image: "/assets/projects/apple-tech-store.jpg",
+    name: "DeJongh Drones",
+    image: "/assets/projects/djdrones.jpg",
     bgImage: "/assets/backgrounds/map.jpg",
     frameworks: [
-      { id: 1, name: "Blazor" },
-      { id: 2, name: "ASP.NET Core" },
-      { id: 3, name: "SQL Server" },
-      { id: 4, name: "Bootstrap" },
+      { id: 1, name: "React" },
+      { id: 2, name: "React Router" },
+      { id: 3, name: "Styled-components" },
     ],
   },
   {
     id: 4,
-    name: "Electronics & Gadgets Store",
-    description:
-      "A multi-category online shop featuring electronics, home appliances, and gaming gear with special offers.",
-    href: "",
-    image: "/assets/projects/electronics-store.jpg",
+    name: "Playlife Fitness Center",
+    image: "/assets/projects/playlife-gyn.jpg",
     bgImage: "/assets/backgrounds/poster.jpg",
     frameworks: [
-      { id: 1, name: "Vue.js" },
-      { id: 2, name: "Laravel" },
-      { id: 3, name: "MySQL" },
-      { id: 4, name: "SCSS" },
+      { id: 1, name: "Wordpress" },
+      { id: 2, name: "PHP" },
+      { id: 3, name: "Woocommerce" },
+      { id: 4, name: "Stripe" },
+
     ],
   },
   {
     id: 5,
-    name: "Home Decor Marketplace",
-    description:
-      "A curated collection of designer home decor items, including furniture and artisan vases.",
-    href: "",
-    image: "/assets/projects/home-decor-store.jpg",
+    name: "Eletronic Store",
+    image: "/assets/projects/electronics-store.jpg",
     bgImage: "/assets/backgrounds/table.jpg",
     frameworks: [
-      { id: 1, name: "Angular" },
+      { id: 1, name: "React" },
       { id: 2, name: "Firebase" },
-      { id: 3, name: "GraphQL" },
+      { id: 3, name: "Node.js" },
       { id: 4, name: "Material UI" },
+      { id: 5, name: "Stripe" },
     ],
   },
   {
@@ -163,7 +143,7 @@ export const projects = [
     image: "/assets/projects/game-store.jpg",
     bgImage: "/assets/backgrounds/curtains.jpg",
     frameworks: [
-      { id: 1, name: "Svelte" },
+      { id: 1, name: "React" },
       { id: 2, name: "Node.js" },
       { id: 3, name: "MongoDB" },
       { id: 4, name: "Chakra UI" },
@@ -171,11 +151,7 @@ export const projects = [
   },
 ];
 export const socials = [
-  { name: "Instagram", href: "https://www.instagram.com/ali.sanatidev/reels/" },
-  {
-    name: "Youtube",
-    href: "https://www.youtube.com/channel/UCZhtUWTtk3bGJiMPN9T4HWA",
-  },
-  { name: "LinkedIn", href: "https://www.linkedin.com/in/ali-sanati/" },
-  { name: "GitHub", href: "https://github.com/Ali-Sanati" },
+  { name: "Instagram", href: "https://www.instagram.com/_mvmarcuss_/" },
+  { name: "LinkedIn", href: "https://www.linkedin.com/in/mvinicius-dev/" },
+  { name: "GitHub", href: "https://www.linkedin.com/in/mvinicius-dev/" },
 ];

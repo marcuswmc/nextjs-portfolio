@@ -48,7 +48,7 @@ body {
 }
 
 @utility value-text-responsive {
-  @apply text-[14px] md:text-[18px] lg:text-[24px];
+  @apply text-[18px] md:text-[22px] lg:text-[24px];
 }
 
 @utility marquee-text-responsive {

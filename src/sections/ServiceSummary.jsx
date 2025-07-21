@@ -23,14 +23,14 @@ export default function ServiceSummary() {
       },
     });
     gsap.to("#title-service-3", {
-      xPercent: 80,
+      xPercent: 60,
       scrollTrigger: {
         trigger: "#title-service-3",
         scrub: true,
       },
     });
     gsap.to("#title-service-4", {
-      xPercent: -80,
+      xPercent: -60,
       scrollTrigger: {
         trigger: "#title-service-4",
         scrub: true,

@@ -23,6 +23,7 @@
     "three": "^0.178.0"
   },
   "devDependencies": {
+    "@iconify/react": "^6.0.0",
     "@tailwindcss/postcss": "^4",
     "tailwindcss": "^4"
   }
