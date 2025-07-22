@@ -124,7 +124,7 @@ export default function Works() {
             }}
             className="absolute inset-0 hidden md:block duration-200 bg-black -z-10 clip-path"/>
             {/* title */}
-            <div className="flex justify-between px-8 text-black transition-all duration-500 md:group-hover:px-12 md:group-hover:text-white">
+            <div className="flex justify-between px-8 md:px-10 lg:px-10 text-black transition-all duration-500 md:group-hover:px-12 md:group-hover:text-white">
               <h2 className="lg:text-[32px] text-[26px] leading-none">
                 {project.name}
               </h2>
@@ -135,7 +135,7 @@ export default function Works() {
             <div className="w-full h-0.5 bg-black/80" />
 
             {/* framework */}
-            <div className="flex px-8 text-xs leading-loose uppercase transition-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12">
+            <div className="flex px-8 md:px-10 lg:px-10 text-xs leading-loose uppercase transition-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12">
               {project.frameworks.map((framework) => (
                 <p
                   key={framework.id}
