@@ -154,5 +154,5 @@ export const projects = [
 export const socials = [
   { name: "Instagram", href: "https://www.instagram.com/_mvmarcuss_/" },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/mvinicius-dev/" },
-  { name: "GitHub", href: "https://www.linkedin.com/in/mvinicius-dev/" },
+  { name: "GitHub", href: "https://github.com/marcuswmc" },
 ];
