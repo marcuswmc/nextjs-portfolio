@@ -9,7 +9,7 @@ import { useMediaQuery } from "react-responsive";
 
 export default function Services() {
   const text = `I build secure, high-performance full-stack apps 
-  with smoothUX to drive growth 
+  with smooth UX to drive growth 
   not headaches`;
   const serviceRefs = useRef([]);
   const isDesktop = useMediaQuery({ minWidth: "42rem" });
