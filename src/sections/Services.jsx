@@ -48,7 +48,7 @@ export default function Services() {
         <div
           ref={(el) => (serviceRefs.current[index] = el)}
           key={index}
-          className="sticky px-10 pt-6 pb-12 text-white bg-black border-t-2 border-white/30"
+          className="sticky px-8 pt-6 pb-12 text-white bg-black border-t-2 border-white/30"
           style={
             handleOnDesktop
             ? {

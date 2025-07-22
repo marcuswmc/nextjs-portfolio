@@ -51,7 +51,7 @@ export default function About() {
       textColor={"text-white"} 
       withScrollTrigger={true}
       />
-      <div className="flex flex-col items-center justify-between gap-16 px-10 pb-16 text-lg font-light tracking-wide lg:flex-row md:text-xl lg:text-2xl text-white/60">
+      <div className="flex flex-col items-center justify-between gap-16 px-8 pb-16 text-lg font-light tracking-wide lg:flex-row md:text-xl lg:text-2xl text-white/60">
         <img ref={imgRef} src="images/man.jpg" alt="Marcus Vinicius" className="w-md rounded-2xl"/>
         <AnimatedTextLines text={aboutText}/>  
       </div>
