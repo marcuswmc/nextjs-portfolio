@@ -10,6 +10,7 @@ import {
   amiamieRoundBlackItalic,
 } from "./fonts/fonts.js"; 
 import "./globals.css";
+import { Analytics } from "@vercel/analytics/next"
 
 export const metadata = {
   title: "Marcus Vinicius",
@@ -34,6 +35,7 @@ export default function RootLayout({ children }) {
         `}
       >
         {children}
+        <Analytics/>
       </body>
     </html>
   );
