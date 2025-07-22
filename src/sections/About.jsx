@@ -61,6 +61,8 @@ When I’m not coding:
           src={AboutImg}
           alt="Marcus Vinicius"
           className="w-md rounded-2xl"
+          quality={100}
+          placeholder="blur"
         />
         <AnimatedTextLines text={aboutText} />
       </div>
