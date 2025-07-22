@@ -3,6 +3,8 @@ import AnimatedHeaderSection from "@/components/AnimatedHeaderSection";
 import { AnimatedTextLines } from "@/components/AnimatedTextLines";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
+import Image from "next/image";
+import AboutImg from "../app/public/man.jpg"
 import { useRef } from "react";
 
 export default function About() {
@@ -54,9 +56,9 @@ When I’m not coding:
         withScrollTrigger={true}
       />
       <div className="flex flex-col items-center justify-between gap-16 px-8 md:px-10 lg:px-10 pb-16 text-lg font-light tracking-wide lg:flex-row md:text-xl lg:text-2xl text-white/60">
-        <img
+        <Image
           ref={imgRef}
-          src="images/man.jpg"
+          src={AboutImg}
           alt="Marcus Vinicius"
           className="w-md rounded-2xl"
         />
