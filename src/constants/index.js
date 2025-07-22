@@ -20,6 +20,22 @@ export const servicesData = [
     ],
   },
   {
+    title: "Web & Mobile Apps",
+    description:
+      "A clunky interface can sink even the best ideas. I craft responsive, pixel perfect web and mobile apps (React Native/Flutter) that users love—bridging design and functionality seamlessly.",
+    items: [
+      {
+        title: "Cross-Platform Apps",
+      },
+      {
+        title: "AI Automation (chatbot / assistant)",
+      },
+      {
+        title: "E-Commerce, Booking Systems, landing pages",
+      },
+    ],
+  },
+  {
     title: "Advanced UI & Motion Design",
     description:
       "Transform static interfaces into immersive digital experiences. I craft visually striking, highly interactive UIs using cutting-edge animation tools—bringing emotion, depth, and precision to the frontend. Perfect for brands that want to stand out.",
@@ -37,48 +53,35 @@ export const servicesData = [
         description: "(Figma, Photoshop, Illustrator)",
       },
     ],
-  },  
-  {
-    title: "Security & Optimization",
-    description:
-      "Slow or hacked apps destroy trust. I harden security (XSS/SQLI protection, OAuth) and optimize bottlenecks so your app stays fast, safe, and scalable as you grow.",
-    items: [
-      {
-        title: "Code Audits",
-        description: "(Refactoring, Tech Debt Cleanup)",
-      },
-      {
-        title: "SEO Tech Stack",
-        description: "(SSR, Metadata, Structured Data)",
-      },
-    ],
   },
   {
-    title: "Web & Mobile Apps",
+    title: "Performance & SEO",
     description:
-      "A clunky interface can sink even the best ideas. I craft responsive, pixel perfect web and mobile apps (React Native/Flutter) that users love—bridging design and functionality seamlessly.",
+      "Speed is a feature, and visibility is power. I fine-tune your web app for blazing-fast load times and high search rankings—ensuring users find you quickly and stay engaged. From core vitals to advanced SEO strategy, performance is built in.",
     items: [
       {
-        title: "Cross-Platform Apps",
+        title: "Performance Optimization",
+        description: "(Lazy Loading, Code Splitting, Asset Compression)",
       },
       {
-        title: "AI Automation (chatbot / assistant)",
+        title: "Core Web Vitals",
+        description: "(LCP, FID, CLS Monitoring & Improvements)",
       },
       {
-        title: "E-Commerce, Booking Systems, landing pages",
+        title: "SEO Engineering",
+        description: "(SSR, Structured Data, Semantic HTML, Metadata)",
       },
     ],
-  },
+  }
 ];
 export const projects = [
   {
     id: 1,
-    name: "Sattis Studio - Website and Booking system",
+    name: "Sattis Studio",
     image: "/assets/projects/sattis-studio-site.jpg",
     bgImage: "/assets/backgrounds/blanket.jpg",
     frameworks: [
-      { id: 1, name: "React" },
-      { id: 2, name: "Next.js" },
+      { id: 1, name: "Next.js" },
       { id: 3, name: "Typescript" },
       { id: 4, name: "Node.js" },
       { id: 5, name: "MongoDB" },
@@ -90,8 +93,7 @@ export const projects = [
     image: "/assets/projects/cmodel.jpg",
     bgImage: "/assets/backgrounds/curtains.jpg",
     frameworks: [
-      { id: 1, name: "React" },
-      { id: 2, name: "Next.js" },
+      { id: 1, name: "Next.js" },
       { id: 3, name: "Tailwind CSS" },
       { id: 4, name: "Typescript" },
       { id: 5, name: "MongoDB" },
@@ -131,7 +133,6 @@ export const projects = [
       { id: 2, name: "Firebase" },
       { id: 3, name: "Node.js" },
       { id: 4, name: "Material UI" },
-      { id: 5, name: "Stripe" },
     ],
   },
   {

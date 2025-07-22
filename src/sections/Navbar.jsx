@@ -121,6 +121,13 @@ export function Navbar() {
                 smooth
                 offset={0}
                 duration={2000}
+                onClick={() => {
+                  if (isOpen) {
+                    tl.current.reverse();
+                    iconsTl.current.reverse();
+                    setIsOpen(false);
+                  }
+                }}
                 >
                   {section}
                 </Link>

@@ -146,7 +146,7 @@ export default function Works() {
               ))}
             </div>
             {/* mobile preview image */}
-            <div className="relative flex items-center justify-center px-10 md:hidden h-[400px]">
+            <div className="relative flex items-center justify-center px-10 md:hidden h-[200px]">
               <img
                 src={project.bgImage}
                 alt={`${project.name}-bg-image`}

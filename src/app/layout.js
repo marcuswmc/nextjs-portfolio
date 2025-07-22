@@ -13,7 +13,7 @@ import "./globals.css";
 
 export const metadata = {
   title: "Marcus Vinicius",
-  description: "My personal portfolio",
+  description: "Full Stack Web - Creative Developer",
 };
 
 export default function RootLayout({ children }) {
