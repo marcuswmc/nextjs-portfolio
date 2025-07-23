@@ -80,7 +80,7 @@ export const projects = [
     name: "Sattis Studio",
     link: "https://www.sattis.me/",
     image: "/assets/projects/sattis-studio-site.jpg",
-    bgImage: "/assets/backgrounds/blanket.jpg",
+    bgImage: "/assets/backgrounds/sattis-bg.jpg",
     frameworks: [
       { id: 1, name: "Next.js" },
       { id: 3, name: "Typescript" },
@@ -93,7 +93,7 @@ export const projects = [
     name: "C Model 2.0",
     link: "https://www.cmodel.co/",
     image: "/assets/projects/cmodel.jpg",
-    bgImage: "/assets/backgrounds/curtains.jpg",
+    bgImage: "/assets/backgrounds/cmodel-bg.jpg",
     frameworks: [
       { id: 1, name: "Next.js" },
       { id: 3, name: "Tailwind CSS" },
@@ -106,7 +106,7 @@ export const projects = [
     name: "DeJongh Drones",
     link: "https://djdrones.com.br/",
     image: "/assets/projects/djdrones.jpg",
-    bgImage: "/assets/backgrounds/map.jpg",
+    bgImage: "/assets/backgrounds/dj-bg.jpg",
     frameworks: [
       { id: 1, name: "React" },
       { id: 2, name: "React Router" },
@@ -118,7 +118,7 @@ export const projects = [
     name: "Oceano Azul Expedition - Gorringe",
     link: "https://expeditions.oceanoazulfoundation.org/",
     image: "/assets/projects/oceanoazul-gorringe.jpg",
-    bgImage: "/assets/backgrounds/poster.jpg",
+    bgImage: "/assets/backgrounds/gorringe-bg.jpg",
     frameworks: [
       { id: 1, name: "Wordpress" },
       { id: 2, name: "PHP" },
@@ -131,7 +131,7 @@ export const projects = [
     name: "Oceanario de Lisboa",
     link: "https://oceanario.pt/",
     image: "/assets/projects/oceanario.jpg",
-    bgImage: "/assets/backgrounds/table.jpg",
+    bgImage: "/assets/backgrounds/oceanario-bg.jpg",
     frameworks: [
       { id: 1, name: "Wordpress" },
       { id: 2, name: "PHP" },
