@@ -105,7 +105,7 @@ export default function Works() {
         textColor={"text-black"}
         withScrollTrigger={true}
       />
-      <div className="relative flex flex-col font-light"
+      <div className="relative flex flex-col font-light mb-16"
         onMouseMove={handleMouseMove}
       >
         {projects.map((project, index) => (
