@@ -156,3 +156,10 @@ export const socials = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/mvinicius-dev/" },
   { name: "GitHub", href: "https://github.com/marcuswmc" },
 ];
+export const brands = [
+  "asset11.png", "asset12.png", "asset13.png", "asset14.png",
+  "asset15.png", "asset16.png", "asset17.png", "asset18.png",
+  "asset19.png", "asset20.png", "asset21.png", "asset22.png",
+  "asset23.png", "asset24.png", "asset25.png", "asset26.png",
+  "asset27.png", "asset28.png", "asset29.png", "asset30.png",
+]

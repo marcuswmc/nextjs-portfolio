@@ -105,7 +105,7 @@ export default function Works() {
         textColor={"text-black"}
         withScrollTrigger={true}
       />
-      <div className="relative flex flex-col font-light pb-16"
+      <div className="relative flex flex-col font-light"
         onMouseMove={handleMouseMove}
       >
         {projects.map((project, index) => (
@@ -146,7 +146,7 @@ export default function Works() {
               ))}
             </div>
             {/* mobile preview image */}
-            <div className="relative flex items-center justify-center px-8 md:hidden h-[200px]">
+            <div className="relative flex items-center justify-center px-8 md:hidden h-[250px]">
               <img
                 src={project.bgImage}
                 alt={`${project.name}-bg-image`}

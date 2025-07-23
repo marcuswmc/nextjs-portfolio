@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 @theme {
   --color-primary: #e5e5e0;
   --color-DarkLava: #393632;
@@ -56,7 +57,7 @@ body {
 }
 
 @utility contact-text-responsive {
-  @apply text-[42px] sm:text-[52px] md:text-[62px] lg:text-[90px];
+  @apply text-[52px] sm:text-[52px] md:text-[62px] lg:text-[90px];
 }
 
 .navbar-initial {
