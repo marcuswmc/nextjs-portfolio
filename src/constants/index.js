@@ -78,6 +78,7 @@ export const projects = [
   {
     id: 1,
     name: "Sattis Studio",
+    link: "https://www.sattis.me/",
     image: "/assets/projects/sattis-studio-site.jpg",
     bgImage: "/assets/backgrounds/blanket.jpg",
     frameworks: [
@@ -90,6 +91,7 @@ export const projects = [
   {
     id: 2,
     name: "C Model 2.0",
+    link: "https://www.cmodel.co/",
     image: "/assets/projects/cmodel.jpg",
     bgImage: "/assets/backgrounds/curtains.jpg",
     frameworks: [
@@ -102,6 +104,7 @@ export const projects = [
   {
     id: 3,
     name: "DeJongh Drones",
+    link: "https://djdrones.com.br/",
     image: "/assets/projects/djdrones.jpg",
     bgImage: "/assets/backgrounds/map.jpg",
     frameworks: [
@@ -112,54 +115,33 @@ export const projects = [
   },
   {
     id: 4,
-    name: "Playlife Fitness Center",
-    image: "/assets/projects/playlife-gyn.jpg",
+    name: "Oceano Azul Expedition - Gorringe",
+    link: "https://expeditions.oceanoazulfoundation.org/",
+    image: "/assets/projects/oceanoazul-gorringe.jpg",
     bgImage: "/assets/backgrounds/poster.jpg",
     frameworks: [
       { id: 1, name: "Wordpress" },
       { id: 2, name: "PHP" },
-      { id: 3, name: "Woocommerce" },
-      { id: 4, name: "Stripe" },
-
+      { id: 3, name: "CPT UI" },
+      { id: 4, name: "Javascript" },
     ],
   },
   {
     id: 5,
-    name: "Eletronic Store",
-    image: "/assets/projects/electronics-store.jpg",
+    name: "Oceanario de Lisboa",
+    link: "https://oceanario.pt/",
+    image: "/assets/projects/oceanario.jpg",
     bgImage: "/assets/backgrounds/table.jpg",
     frameworks: [
-      { id: 1, name: "React" },
-      { id: 2, name: "Firebase" },
-      { id: 3, name: "Node.js" },
-      { id: 4, name: "Material UI" },
+      { id: 1, name: "Wordpress" },
+      { id: 2, name: "PHP" },
+      { id: 3, name: "CPT UI" },
+      { id: 4, name: "Javascript" },
     ],
-  },
-  {
-    id: 6,
-    name: "Digital Game Store",
-    description:
-      "A gaming platform featuring discounted titles, top sellers, and genre-based browsing.",
-    href: "",
-    image: "/assets/projects/game-store.jpg",
-    bgImage: "/assets/backgrounds/curtains.jpg",
-    frameworks: [
-      { id: 1, name: "React" },
-      { id: 2, name: "Node.js" },
-      { id: 3, name: "MongoDB" },
-      { id: 4, name: "Chakra UI" },
-    ],
-  },
+  }
 ];
 export const socials = [
   { name: "Instagram", href: "https://www.instagram.com/_mvmarcuss_/" },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/mvinicius-dev/" },
   { name: "GitHub", href: "https://github.com/marcuswmc" },
 ];
-export const brands = [
-  "asset11.png", "asset12.png", "asset13.png", "asset14.png",
-  "asset15.png", "asset16.png", "asset17.png", "asset18.png",
-  "asset19.png", "asset20.png", "asset21.png", "asset22.png",
-  "asset23.png", "asset24.png", "asset25.png", "asset26.png",
-  "asset27.png", "asset28.png", "asset29.png", "asset30.png",
-]
