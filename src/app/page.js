@@ -7,7 +7,6 @@ import Services from "@/sections/Services"
 import ReactLenis from "lenis/react"
 import About from "@/sections/About"
 import Works from "@/sections/Works"
-import ContactSummary from "@/sections/ContactSummary"
 import Contact from "@/sections/Contact"
 import { useProgress } from "@react-three/drei"
 import { useEffect, useState } from "react"
@@ -45,7 +44,6 @@ export default function Home() {
       <Services />
       <About/>
       <Works/>
-      <ContactSummary/>
       <Contact/>
       </div>
     </ReactLenis>
