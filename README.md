@@ -179,8 +179,9 @@ Update the services data in the same file to reflect your offerings.
 
 ## 📄 License
 
-This project is private and proprietary. All rights reserved.
+This project is under the MIT license. See the `LICENSE` file for more details.
 
 ---
 
-Built with ❤️ by Marcus Vinicius 
+Built with ❤️ by Marcus Oliveira
+
