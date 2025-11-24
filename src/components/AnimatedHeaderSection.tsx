@@ -5,15 +5,23 @@ import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 import { AnimatedTextLines } from "@/components/AnimatedTextLines";
 
+type AnimatedHeaderSectionProps = {
+  subtitle: string;
+  title: string | React.ReactNode;
+  text: string;
+  textColor: string;
+  withScrollTrigger?: boolean;
+};
+
 export default function AnimatedHeaderSection({
   subtitle,
   title,
   text,
   textColor,
   withScrollTrigger = false,
-}) {
-  const contextRef = useRef(null);
-  const headerRef = useRef(null);
+}: AnimatedHeaderSectionProps) {
+  const contextRef = useRef<HTMLDivElement | null>(null);
+  const headerRef = useRef<HTMLDivElement | null>(null);
 
   useGSAP(() => {
     const tl = gsap.timeline({

@@ -17,16 +17,23 @@
     "lenis": "^1.3.8",
     "maath": "^0.10.8",
     "next": "15.4.1",
+    "npx": "^10.2.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-responsive": "^10.0.1",
     "react-scroll": "^1.9.3",
     "react-slick": "^0.30.3",
-    "three": "^0.178.0"
+    "three": "^0.178.0",
+    "tsc": "^2.0.4"
   },
   "devDependencies": {
     "@iconify/react": "^6.0.0",
     "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "@types/node": "^24.10.1",
+    "@types/react": "^19.2.7",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-scroll": "^1.8.10",
+    "tailwindcss": "^4",
+    "typescript": "^5.9.3"
   }
 }

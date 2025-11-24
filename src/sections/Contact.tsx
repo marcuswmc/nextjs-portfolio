@@ -28,7 +28,7 @@ export default function Contact() {
     >
       <div>
         <AnimatedHeaderSection
-          subTitle={"You Dream It, I Code it"}
+          subtitle={"You Dream It, I Code it"}
           title={"Contact"}
           text={text}
           textColor={"text-white"}

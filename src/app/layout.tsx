@@ -8,7 +8,7 @@ import {
   amiamieRoundRegular,
   amiamieRoundBlack,
   amiamieRoundBlackItalic,
-} from "./fonts/fonts.js"; 
+} from "./fonts/fonts";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/next"
 
@@ -17,7 +17,7 @@ export const metadata = {
   description: "Full Stack Web - Creative Developer",
 };
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body
