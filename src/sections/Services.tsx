@@ -11,7 +11,7 @@ export default function Services() {
   const text = `I build secure, high-performance full-stack apps 
   with smooth UX to drive growth 
   not headaches`;
-  const serviceRefs = useRef([]);
+  const serviceRefs = useRef<(HTMLDivElement | null)[]>([]);
   const isDesktop = useMediaQuery({ minWidth: "42rem" });
   const [handleOnDesktop, setHandleOnDesktop] = useState(false)
 
@@ -46,7 +46,9 @@ export default function Services() {
       />
       {servicesData.map((service, index) => (
         <div
-          ref={(el) => (serviceRefs.current[index] = el)}
+ref={(el) => {
+  serviceRefs.current[index] = el;
+}}
           key={index}
           className="sticky px-8 md:px-10 lg:px-10 pt-6 pb-12 text-white bg-black border-t-2 border-white/30"
           style={

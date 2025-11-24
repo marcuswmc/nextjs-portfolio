@@ -7,13 +7,13 @@ import gsap from "gsap";
 import { Link } from "react-scroll";
 
 export function Navbar() {
-  const navRef = useRef(null);
-  const linksRef = useRef([]);
-  const contactRef = useRef(null);
-  const topLineRef = useRef(null);
-  const bottomLineRef = useRef(null);
-  const tl = useRef(null);
-  const iconsTl = useRef(null);
+  const navRef = useRef<HTMLDivElement | null>(null);
+  const linksRef = useRef<(HTMLDivElement | null)[]>([]);
+  const contactRef = useRef<HTMLDivElement | null>(null);
+  const topLineRef = useRef<HTMLSpanElement | null>(null);
+  const bottomLineRef = useRef<HTMLSpanElement | null>(null);
+  const tl = useRef<gsap.core.Timeline | null>(null);
+  const iconsTl = useRef<gsap.core.Timeline | null>(null);
   const [isOpen, setIsOpen] = useState(false);
   const [showBurguer, setShowBurguer] = useState(true);
 
@@ -97,11 +97,11 @@ export function Navbar() {
 
   const toggleMenu = () => {
     if (isOpen) {
-      tl.current.reverse();
-      iconsTl.current.reverse();
+      tl.current?.reverse();
+      iconsTl.current?.reverse();
     } else {
-      tl.current.play();
-      iconsTl.current.play();
+      tl.current?.play();
+      iconsTl.current?.play();
     }
     setIsOpen(!isOpen);
   };
@@ -115,7 +115,7 @@ export function Navbar() {
         <div className="flex flex-col text-5xl gap-y-2 md:text-6xl lg:text-8xl">
           {["home", "services", "about", "work", "contact"].map(
             (section, index) => (
-              <div key={index} ref={(el) => (linksRef.current[index] = el)}>
+              <div key={index} ref={(el) => { linksRef.current[index] = el; }}>
                 <Link className="transition-all duration-300 hover:text-white cursor-pointer"
                 to={`${section}`}
                 smooth
@@ -123,8 +123,8 @@ export function Navbar() {
                 duration={2000}
                 onClick={() => {
                   if (isOpen) {
-                    tl.current.reverse();
-                    iconsTl.current.reverse();
+                    tl.current?.reverse() || null;
+                    iconsTl.current?.reverse();
                     setIsOpen(false);
                   }
                 }}

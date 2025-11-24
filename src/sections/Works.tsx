@@ -8,16 +8,16 @@ import gsap from "gsap";
 import { useRef, useState } from "react";
 
 export default function Works() {
-  const overlayRefs = useRef([]);
-  const previewRef = useRef(null);
-  const [currentIndex, setCurrentIndex] = useState(null);
+  const overlayRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const previewRef = useRef<HTMLDivElement | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number | null>(null);
   const text = `Featured projects that have been meticulously 
   crafted with passion to drive
   results and impact.`;
 
   const mouse = useRef({ x: 0, y: 0 });
-  const moveX = useRef(null);
-  const moveY = useRef(null);
+  const moveX = useRef<((v: number) => void) | null>(null);
+  const moveY = useRef<((v: number) => void) | null>(null);
   useGSAP(() => {
     moveX.current = gsap.quickTo(previewRef.current, "x", {
       duration: 1.5,
@@ -41,7 +41,7 @@ export default function Works() {
     });
   });
 
-  const handleMouseEnter = (index) => {
+  const handleMouseEnter = (index: number) => {
     if (window.innerWidth < 768) return;
     setCurrentIndex(index);
 
@@ -68,7 +68,7 @@ export default function Works() {
       ease: "power2.out",
     });
   };
-  const handleMouseLeave = (index) => {
+  const handleMouseLeave = (index: number) => {
     if (window.innerWidth < 768) return;
     setCurrentIndex(null);
 
@@ -90,12 +90,12 @@ export default function Works() {
     });
   };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
     if (window.innerWidth < 768) return;
     mouse.current.x = e.clientX + 24;
     mouse.current.y = e.clientY + 24;
-    moveX.current(mouse.current.x);
-    moveY.current(mouse.current.y);
+    moveX.current?.(mouse.current.x);
+    moveY.current?.(mouse.current.y);
   };
 
   return (

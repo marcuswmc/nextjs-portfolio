@@ -1,7 +1,6 @@
 "use client";
 
 import { useRef } from "react";
-import Marquee from "@/components/Marquee";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 
@@ -38,16 +37,6 @@ export default function ContactSummary() {
         </p>
       </div>
       <div className="">
-        <Marquee
-          images={brands}
-          className="bg-black"
-          reverse={false}
-          speed={1}
-          imageWidth={180}
-          imageHeight={80}
-          imageClassName="object-contain"
-          gap={80}
-        />
       </div>
     </section>
   );

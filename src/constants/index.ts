@@ -1,5 +1,28 @@
-// index.js
-export const servicesData = [
+export type ServiceItem = {
+  title: string;
+  description?: string;
+};
+
+export type Service = {
+  title: string;
+  description: string;
+  items: ServiceItem[];
+};
+
+export type ProjectFramework = { id: number; name: string };
+
+export type Project = {
+  id: number;
+  name: string;
+  link: string;
+  image: string;
+  bgImage: string;
+  frameworks: ProjectFramework[];
+};
+
+export type Social = { name: string; href: string };
+
+export const servicesData: Service[] = [
   {
     title: "FullStack Development",
     description:
@@ -74,7 +97,7 @@ export const servicesData = [
     ],
   }
 ];
-export const projects = [
+export const projects: Project[] = [
   {
     id: 1,
     name: "Sattis Studio",
@@ -140,7 +163,7 @@ export const projects = [
     ],
   }
 ];
-export const socials = [
+export const socials: Social[] = [
   { name: "Instagram", href: "https://www.instagram.com/_mvmarcuss_/" },
   { name: "LinkedIn", href: "https://www.linkedin.com/in/mvinicius-dev/" },
   { name: "GitHub", href: "https://github.com/marcuswmc" },
