@@ -10,6 +10,7 @@ import Works from "@/sections/Works"
 import Contact from "@/sections/Contact"
 import { useProgress } from "@react-three/drei"
 import { useEffect, useState } from "react"
+import { Chat } from "@/sections/Chat"
 
 export default function Home() {
   const {progress} = useProgress()
@@ -45,6 +46,7 @@ export default function Home() {
       <About/>
       <Works/>
       <Contact/>
+      <Chat/>
       </div>
     </ReactLenis>
   )
