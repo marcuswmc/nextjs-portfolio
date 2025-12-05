@@ -48,8 +48,8 @@ export const MessageContent = ({
   <div
     className={cn(
       "is-user:dark flex w-fit flex-col gap-2 overflow-hidden text-sm",
-      "group-[.is-user]:ml-auto group-[.is-user]:rounded-lg group-[.is-user]:bg-secondary group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-foreground",
-      "group-[.is-assistant]:text-foreground",
+      "group-[.is-user]:ml-auto group-[.is-user]:rounded-lg group-[.is-user]:bg-[#282a2c] group-[.is-user]:px-4 group-[.is-user]:py-3 group-[.is-user]:text-white/80",
+      "group-[.is-assistant]:text-white/80 group-[.is-assistant]:rounded-lg group-[.is-assistant]:bg-back group-[.is-assistant]:px-4 group-[.is-assistant]:py-3",
       className
     )}
     {...props}
@@ -310,7 +310,7 @@ export const MessageResponse = memo(
   ({ className, ...props }: MessageResponseProps) => (
     <Streamdown
       className={cn(
-        "size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0",
+        "size-full [&>*:first-child]:mt-0 [&>*:last-child]:mb-0 [&>link]:text-gray-500 hover:[&>a]:text-gray-500",
         className
       )}
       {...props}

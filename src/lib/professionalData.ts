@@ -8,302 +8,480 @@ export interface ProfessionalInfo {
 export const professionalData: ProfessionalInfo[] = [
   {
     id: "bio",
-    category: "Biografia e Apresentação",
-    content: `Sou Marcus Vinicius, desenvolvedor Full Stack com foco em frontend, e trago mais de uma década de experiência em desenvolvimento web moderno.
+    category: "Biography and Introduction",
+    content: `I am Marcus Vinicius, brazilian, 30 years old, a Full Stack Developer with a focus on frontend, bringing over a decade of experience in modern web development.
     
-Especializo-me em criar aplicações escaláveis e performáticas com arquitetura limpa, utilizando tecnologias como React, Next.js, TypeScript e Node.js. Tenho paixão por fundir design e tecnologia (UI/UX e Motion Design) para resolver problemas complexos e criar experiências de usuário excepcionais.
+I specialize in creating scalable and performant applications with clean architecture, using technologies like React, Next.js, TypeScript, and Node.js. I am passionate about merging design and technology (UI/UX and Motion Design) to solve complex problems and build exceptional user experiences.
 
-Localizado em Porto, Portugal (com trabalho em Lisboa), colaboro em projetos remotos e presenciais, entregando soluções de alta qualidade, desde UI/UX pixel-perfect até soluções full-stack robustas.`,
+Based in Porto, Portugal (working in Lisbon), I collaborate on remote and on-site projects, delivering high-quality solutions, from pixel-perfect UI/UX to robust full-stack solutions.`,
     keywords: [
-      "sobre", "quem", "biografia", "apresentação", "desenvolvedor",
-      "experiência", "década", "trabalho", "profissional", "sou", "marcus vinicius"
-    ]
+      "about",
+      "who",
+      "biography",
+      "introduction",
+      "developer",
+      "experience",
+      "decade",
+      "work",
+      "professional",
+      "i am",
+      "marcus vinicius",
+      "full stack",
+      "frontend",
+      "portugal",
+      "porto",
+      "lisbon",
+      "remote",
+      "onsite",
+      "summary",
+    ],
   },
 
   {
     id: "skills-frontend",
-    category: "Habilidades - Front-end",
+    category: "Skills - Front-end",
     content: `Front-end:
 - React.js & Next.js
 - TypeScript & JavaScript (ES6+)
 - Tailwind CSS, SASS & Styled-components
 - Responsive Design & Mobile First
-- State Management (Redux, Context API)
-- Animações (Framer Motion, Motion, GSAP, CSS Animations)
-- UI Libraries (ShadcnUI, Material Design UI)
-- Testes (Jest, Cypress)
-- Design Tools (Figma, Adobe XD, Photoshop)`,
+- State Management (Redux, Context API, Zustand)
+- Animations (Framer Motion, Motion, GSAP, CSS Animations)
+- UI Libraries (ShadcnUI, Material Design UI, AI Elements, AI SDK Vercel)
+- Testing (Jest, Cypress, react-testing-library)
+- Design Tools (Figma, Adobe XD, Photoshop)
+- Accessibility (WCAG Standards)
+- Performance Optimization & SEO`,
     keywords: [
-      "frontend", "front-end", "react", "nextjs", "next.js", "typescript",
-      "javascript", "tailwind", "css", "html", "ui", "interface", "design", "figma", "motion"
-    ]
+      "frontend",
+      "front-end",
+      "react",
+      "nextjs",
+      "next.js",
+      "typescript",
+      "javascript",
+      "tailwind",
+      "css",
+      "html",
+      "ui",
+      "interface",
+      "design",
+      "figma",
+      "motion",
+      "animation",
+      "testing",
+      "jest",
+      "cypress",
+      "seo",
+    ],
   },
 
   {
     id: "skills-backend",
-    category: "Habilidades - Back-end",
+    category: "Skills - Back-end",
     content: `Back-end:
 - Node.js & Express.js
 - Next.js API Routes
 - REST APIs & WebSockets
-- Pagamentos (Stripe)
-- Integração com APIs externas`,
+- Payments (Stripe, PayPal)
+- Authentication & Authorization (JWT, OAuth)
+- Server-side Rendering (SSR) & Static Site Generation (SSG)
+- Performance Optimization
+- Integration with external APIs`,
     keywords: [
-      "backend", "back-end", "nodejs", "node", "express", "api", "rest",
-      "servidor", "pagamentos", "stripe", "websockets"
-    ]
+      "backend",
+      "back-end",
+      "nodejs",
+      "node",
+      "express",
+      "api",
+      "rest",
+      "server",
+      "payments",
+      "stripe",
+      "websockets",
+      "authentication"
+    ],
   },
 
   {
     id: "skills-database",
-    category: "Habilidades - Base de Dados",
-    content: `Base de Dados:
+    category: "Skills - Database",
+    content: `Database:
 - MongoDB & Mongoose
 - SQL (PostgreSQL, MySQL)
 - Redis (cache)
 - Prisma ORM
-- Modelagem de dados
-- Otimização de queries`,
+- Data Modeling
+- Query Optimization`,
     keywords: [
-      "database", "base de dados", "sql", "postgresql",
-      "mongodb", "prisma", "redis", "dados", "bd"
-    ]
+      "database",
+      "sql",
+      "postgresql",
+      "mongodb",
+      "prisma",
+      "redis",
+      "data",
+      "db",
+    ],
   },
 
   {
     id: "skills-devops",
-    category: "Habilidades - DevOps & Cloud",
+    category: "Skills - DevOps & Cloud",
     content: `DevOps & Cloud:
 - Vercel & Netlify (deploy)
+- AWS Basics (S3, Lambda, EC2)
+- CI/CD Pipelines (GitHub Actions, GitLab CI)
 - Git & GitHub
-- CMS (Shopify, WordPress, Sanity CMS, Payload CMS)
-- Estratégias de Performance & SEO (Core Web Vitals)`,
+- CMS (Shopify, WordPress, Sanity CMS, Payload CMS)`,
     keywords: [
-      "devops", "cloud", "vercel", "deploy",
-      "git", "github", "cms", "shopify", "wordpress", "performance", "seo", "payload"
-    ]
+      "devops",
+      "cloud",
+      "vercel",
+      "deploy",
+      "git",
+      "github",
+      "cms",
+      "shopify",
+      "wordpress",
+      "performance",
+      "seo",
+      "payload",
+      "sanity",
+      "aws",
+    ],
   },
 
   {
     id: "skills-ai",
-    category: "Habilidades - IA e Machine Learning",
-    content: `Inteligência Artificial:
-- AI Automation (Chatbots e Assistentes Virtuais)
+    category: "Skills - AI and Machine Learning",
+    content: `Artificial Intelligence:
+- AI Automation (Chatbots and Virtual Assistants)
 - Prompt Engineering
-- Integração com APIs de IA (OpenAI, Gemini)`,
+- Natural Language Processing (NLP)
+- Machine Learning Basics
+- Integration with AI APIs (OpenAI, Gemini)`,
     keywords: [
-      "ia", "ai", "inteligência artificial", "chatbot", "openai", "gpt",
-      "gemini", "automação"
-    ]
+      "ia",
+      "ai",
+      "artificial intelligence",
+      "chatbot",
+      "openai",
+      "gpt",
+      "gemini",
+      "automation",
+    ],
   },
 
   {
     id: "project-1",
-    category: "Projeto - Sattis Studio",
-    content: `Sattis Studio: Plataforma Web Full-stack
-Descrição: Desenvolvimento full-stack de uma plataforma web robusta.
-Tecnologias: Next.js, Typescript, Node.js, MongoDB.
+    category: "Project - Sattis Studio",
+    content: `Sattis Studio: Full-stack Web Platform
+Description: Full-stack development of a robust web platform to management appointments + backoffice to admin bookings, services and professionals.
+Technologies: Next.js, Typescript, Node.js, MongoDB, Zod, Framer Motion.
 
-Responsabilidades:
-- Arquitetura e desenvolvimento full-stack
-- Design e implementação de UI/UX
-- Otimização de performance.
+Responsibilities:
+- Full-stack architecture and development
+- UI/UX design and implementation
+- Performance optimization.
+- mobile-first responsive design
+- Integration with third-party APIs (Calendly, payment gateways, google schedule).
 
-Resultados: [+200% de aumento das conversões (marcações online)]
+
+Results: [+200% increase in conversions (online bookings)]
 Link: https://sattis.me
 GitHub: https://github.com/marcuswmc/sattis-nextjs-website`,
     keywords: [
-      "projeto", "portfolio", "sattis", "plataforma", "nextjs", "website",
-      "mongodb"
-    ]
+      "project",
+      "portfolio",
+      "sattis",
+      "platform",
+      "nextjs",
+      "website",
+      "mongodb",
+      "fullstack",
+      "full-stack",
+      "appointments",
+    ],
   },
 
   {
     id: "project-2",
-    category: "Projeto - C Model 2.0",
-    content: `C Model 2.0: Landing Page de Alto Impacto
-Descrição: Criação de um site/landing page de alta performance, focado em conversão e experiência imersiva (Motion Design).
-Tecnologias: Next.js, Tailwind CSS, Typescript, MongoDB.
+    category: "Project - C Model 2.0",
+    content: `C Model 2.0: High-Impact Landing Page
+Description: Creation of a high-performance website/landing page, focused on conversion and immersive experience (Motion Design).
+Technologies: Next.js, Tailwind CSS, Typescript, MongoDB, Zod, Framer Motion.
 
-Responsabilidades:
-- Desenvolvimento front-end com foco em Motion Design (Framer Motion)
-- Integração com APIs de formulários
-- Garantia de Core Web Vitals e SEO Engineering.
+Responsibilities:
+- Front-end development focusing on Motion Design (Framer Motion)
+- Integration with form APIs
+- Ensuring Core Web Vitals and SEO Engineering.
+- Mobile-first responsive design.
 
-Resultados: [Detalhe as conquistas aqui (ex: X% de taxa de conversão)]
+Results: [+35% increase in downloads and inquiries, improved SEO rankings, enhanced user engagement through animations and faster load times.]
 Link: https://www.cmodel.co/
 GitHub: https://github.com/marcuswmc/modelo-c`,
     keywords: [
-      "projeto", "portfolio", "landing page", "tailwind", "conversão",
-      "seo", "performance", "cmodel", "modeloc"
-    ]
+      "project",
+      "portfolio",
+      "landing page",
+      "tailwind",
+      "conversion",
+      "seo",
+      "performance",
+      "cmodel",
+      "modeloc",
+    ],
   },
 
   {
     id: "project-3",
-    category: "Projeto - DeJongh Drones",
-    content: `DeJongh Drones: Web Application
-Descrição: Desenvolvimento de uma aplicação web dinâmica.
-Tecnologias: React, React Router, Styled-components.
+    category: "Project - DeJongh Drones",
+    content: `DeJongh Drones: Website Development
+Description: Development of a modern website for a drone services company.
+Technologies: React, Styled-components, React Router.
+Description: Development of a dynamic web application.
+Technologies: React, React Router, Styled-components.
 
-Responsabilidades:
-- Desenvolvimento do frontend e rotas dinâmicas (React Router)
-- Colaboração com a equipa de design
-- Implementação de testes (Jest/Cypress).
+Responsibilities:
+- Front-end development and dynamic routing (React Router)
+- Collaboration with the design team
+- Implementation of testing (Jest/Cypress).
 
-Resultados: [Detalhe as conquistas aqui (ex: Feedback positivo do cliente, redução de X% em bugs)]
-Link: https://www.doit.com.br/
-GitHub: https://docs.github.com/pt/repositories`,
+Results: [+60% increase in client inquiries and improved online presence, enhanced user experience with a modern design.]
+Link: https://djdrones.com.br/`,
     keywords: [
-      "projeto", "portfolio", "web app", "react", "styled-components",
-      "aplicação"
-    ]
+      "project",
+      "portfolio",
+      "web app",
+      "react",
+      "styled-components",
+      "application",
+      "drone",
+      "dejongh",
+      "djdrones",
+      "website",
+      "development",
+    ],
+  },
+  {
+    id: "project-4",
+    category: "Project - PixelTest Email Testing App",
+    content: `PixelTest: Web Application Development
+Description: Development of a modern web application for Preview and test your HTML emails across all devices and clients. Streamline your quality assurance workflow with pixel-perfect rendering and comprehensive compatibility testing.
+PixelTest is a simple tool for composing, previewing, and sending HTML emails. It provides a live HTML editor, a preview mode, recipient management with validation, and visual feedback via toasts..
+Technologies: React, Nextjs, Shadcn ui, Next API, Typescript, Zod, Framer Motion, Sonner (toasts), react-ace (editor), Nodemailer.
+
+Responsibilities:
+- Front-end development and dynamic routing (App Router)
+- Integration with email sending services (Nodemailer)
+- Implementation of testing (Jest/Cypress).
+- UI/UX design focusing on usability and performance.
+- Mobile-first responsive design.
+- Ensuring Core Web Vitals and SEO Engineering.
+
+Results: [+500 active users, improved email testing efficiency, enhanced user engagement through intuitive design and faster load times.]
+Link: https://pixeltest.me/
+GitHub: https://github.com/marcuswmc/pixeltest-nextjs`,
+    keywords: [
+      "project",
+      "portfolio",
+      "web app",
+      "react",
+      "nextjs",
+      "email",
+      "html",
+      "pixeltest",
+      "testing",
+      "development",
+    ],
   },
 
   {
     id: "experience-current",
-    category: "Experiência - Innovagency",
-    content: `Creative Developer - Frondend @ Innovagency
-Período: 2023 - Presente
-Local: Lisboa, Portugal
+    category: "Experience - Innovagency",
+    content: `Creative Developer - Frontend @ Innovagency
+Period: 2023 - Present
+Location: Lisbon, Portugal
 
-Responsabilidades:
-- Design, desenvolvimento e manutenção web para páginas de marcas (Purina, El Corte Inglés, Cupra).
-- Criação de landing pages e páginas de anúncios para campanhas de promoção e registo de eventos.
-- Desenvolvimento de projetos full-stack no ecossistema React/Next.js e CMS (Shopify, WordPress, Sanity).
+Responsibilities:
+- Design, development, and web maintenance for brand pages (Purina, El Corte Inglés, Cupra).
+- Creation of landing pages and announcement pages for promotional campaigns and event registration.
+- Development of full-stack projects within the React/Next.js ecosystem and CMS (Shopify, WordPress, Sanity).
 
 Stack: Next.js, ReactJS, TypeScript, Node.js, Prisma, MongoDB, Stripe, TailwindCSS, Framer Motion.`,
     keywords: [
-      "experiência", "trabalho", "empresa", "cargo", "atual", "innovagency",
-      "profissional", "lisboa", "creative developer"
-    ]
+      "experience",
+      "work",
+      "company",
+      "role",
+      "current",
+      "innovagency",
+      "professional",
+      "lisbon",
+      "creative developer",
+    ],
   },
 
   {
     id: "experience-previous",
-    category: "Experiência - Anca Design Studio",
+    category: "Experience - Anca Design Studio",
     content: `Full Stack Developer @ Anca Design Studio
-Período: 2022 - 2023
-Local: Penafiel, Portugal
+Period: 2022 - 2023
+Location: Penafiel, Portugal
 
-Responsabilidades:
-- Desenvolvimento full-stack e design de websites corporativos, plataformas de e-commerce, blogs e aplicações web.
-- Trabalho nos ecossistemas React, Shopify e WordPress.
-- Colaboração direta com a equipa de design para a implementação pixel-perfect.
+Responsibilities:
+- Full-stack development and design of corporate websites, e-commerce platforms, blogs, and web applications.
+- Work within the React, Shopify, and WordPress ecosystems.
+- Direct collaboration with the design team for pixel-perfect implementation.
 
 Stack: ReactJS, Next.js, TypeScript, Node.js, MongoDB, Shopify, WordPress, Sanity CMS.`,
     keywords: [
-      "experiência", "trabalho", "empresa", "anterior", "anca design studio",
-      "full stack", "penafiel"
-    ]
+      "experience",
+      "work",
+      "company",
+      "previous",
+      "anca design studio",
+      "full stack",
+      "penafiel",
+    ],
   },
 
   {
     id: "education",
-    category: "Formação Académica",
-    content: `Bacharelado em Análise e Desenvolvimento de Sistemas (em curso)
-Universidade: FIAP
-Período: [Atual]
-Localização: [Online/São Paulo, Brasil - Pode detalhar mais]
+    category: "Academic Background",
+    content: `Bachelor's Degree in Systems Analysis and Development (Ongoing)
+University: Cruzeiro do Sul University (Brazil)
+Period: [Current]
+Location: [Online/São Paulo, Brazil - Can detail further]
 
-Outras Formações:
+Other Training:
 - Full Stack Web Development (EDIT School)
-- Bacharelado em Publicidade e Comunicação Social (FAPCOM)
+- Bachelor's Degree in Advertising and Social Communication (FAPCOM)
 - Front-end Development (Rocketseat)
 
-Áreas de foco: Desenvolvimento de Software, Algoritmos, Base de Dados, UI/UX Design.`,
+Focus Areas: Software Development, Algorithms, Database, UI/UX Design.`,
     keywords: [
-      "formação", "educação", "universidade", "curso", "licenciatura",
-      "certificação", "estudo", "académica", "fiap", "edit school"
-    ]
+      "training",
+      "education",
+      "university",
+      "course",
+      "degree",
+      "certification",
+      "study",
+      "academic",
+      "fiap",
+      "edit school",
+    ],
   },
 
   {
     id: "contact",
-    category: "Informações de Contato",
-    content: `Formas de Contato:
+    category: "Contact Information",
+    content: `Contact Methods:
 
 📧 Email: marcus.relation@gmail.com
 💼 LinkedIn: https://www.linkedin.com/in/mvinicius-dev/
 🐙 GitHub: https://github.com/mvinicius-dev
 🌐 Portfolio: https://marcusdev.me
-📱 Telefone: +351 912 981 585 (disponível via WhatsApp)
+📱 Phone: +351 912 981 585 (available via WhatsApp)
 
-📍 Localização: Porto, Portugal (Trabalho em Lisboa)
-🌍 Disponibilidade: Projetos remotos e presenciais
-⏰ Fuso horário: GMT+0 (WET/WEST)`,
+📍 Location: Porto, Portugal (Working in Lisbon)
+🌍 Availability: Remote and on-site projects
+⏰ Time zone: GMT+0 (WET/WEST)`,
     keywords: [
-      "contato", "contacto", "email", "linkedin", "github", "telefone",
-      "portfolio", "site", "localização", "porto", "lisboa"
-    ]
+      "contact",
+      "email",
+      "linkedin",
+      "github",
+      "phone",
+      "portfolio",
+      "site",
+      "location",
+      "porto",
+      "lisbon",
+    ],
   },
 
   {
     id: "availability",
-    category: "Disponibilidade e Interesses",
-    content: `Status Atual: Empregado (Creative Developer - Innovagency) e Aberto a novas oportunidades desafiadoras.
+    category: "Availability and Interests",
+    content: `Current Status: Employed (Creative Developer - Innovagency) and Open to new challenging opportunities.
 
-Procuro por:
-- Projetos de Full-stack com React/Next.js e arquitetura limpa.
-- Oportunidades em IA (Automação, Chatbots) e Machine Learning.
-- Desenvolvimento de Aplicações SaaS escaláveis e de alto impacto.
-- Trabalho remoto ou híbrido.
+Seeking:
+- Full-stack projects with React/Next.js and clean architecture.
+- Opportunities in AI (Automation, Chatbots) and Machine Learning.
+- Development of scalable, high-impact SaaS applications.
+- Remote or hybrid work.
 
-Áreas de Interesse:
+Areas of Interest:
 - Developer Experience & Tools
-- UI/UX Design e Motion Design
-- Contribuições Open Source`,
+- UI/UX Design and Motion Design
+- Open Source Contributions`,
     keywords: [
-      "disponibilidade", "disponível", "procuro", "interesse", "oportunidade",
-      "vaga", "emprego", "trabalho", "híbrido", "saas"
-    ]
-  }
+      "availability",
+      "available",
+      "seeking",
+      "interest",
+      "opportunity",
+      "vacancy",
+      "job",
+      "work",
+      "hybrid",
+      "saas",
+    ],
+  },
 ];
 
 // ==========================================
-// 🔍 FUNÇÃO DE BUSCA RAG (mantida original)
+// 🔍 RAG SEARCH FUNCTION (Logic maintained in original language for structural clarity)
 // ==========================================
 
-export function searchRelevantInfo(query: string, topK: number = 3): ProfessionalInfo[] {
+export function searchRelevantInfo(
+  query: string,
+  topK: number = 3
+): ProfessionalInfo[] {
   const queryLower = query.toLowerCase();
 
-  // Remove acentos e caracteres especiais para melhor matching
+  // Remove accents and special characters for better matching
   const normalizeText = (text: string) =>
-    text.toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '');
+    text
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "");
 
   const normalizedQuery = normalizeText(queryLower);
-  const queryWords = normalizedQuery.split(/\s+/).filter(w => w.length > 2);
+  const queryWords = normalizedQuery.split(/\s+/).filter((w) => w.length > 2);
 
-  const scored = professionalData.map(info => {
+  const scored = professionalData.map((info) => {
     let score = 0;
     const normalizedContent = normalizeText(info.content);
 
-    // 1. Score por match exato de keywords (peso 5)
-    info.keywords.forEach(keyword => {
+    // 1. Score for exact keyword match (weight 5)
+    info.keywords.forEach((keyword) => {
       const normalizedKeyword = normalizeText(keyword);
       if (normalizedQuery.includes(normalizedKeyword)) {
         score += 5;
       }
     });
 
-    // 2. Score por palavras da query no conteúdo (peso 2)
-    queryWords.forEach(word => {
+    // 2. Score for query words in content (weight 2)
+    queryWords.forEach((word) => {
       if (normalizedContent.includes(word)) {
         score += 2;
       }
     });
 
-    // 3. Score por palavras da query no título da categoria (peso 3)
+    // 3. Score for query words in category title (weight 3)
     const normalizedCategory = normalizeText(info.category);
-    queryWords.forEach(word => {
+    queryWords.forEach((word) => {
       if (normalizedCategory.includes(word)) {
         score += 3;
       }
     });
 
-    // 4. Bonus: match de frases completas (peso 8)
+    // 4. Bonus: complete phrase match (weight 8)
     if (normalizedContent.includes(normalizedQuery)) {
       score += 8;
     }
@@ -311,33 +489,37 @@ export function searchRelevantInfo(query: string, topK: number = 3): Professiona
     return { ...info, score };
   });
 
-  // Filtra e ordena por relevância
+  // Filter and sort by relevance
   const results = scored
-    .filter(item => item.score > 0)
+    .filter((item) => item.score > 0)
     .sort((a, b) => b.score - a.score)
     .slice(0, topK);
 
-  // Log para debug
-  console.log('🔍 Busca RAG:', {
+  // Log for debug
+  console.log("🔍 RAG Search:", {
     query: queryLower,
     results: results.length,
-    topScores: results.map(r => ({ category: r.category, score: r.score }))
+    topScores: results.map((r) => ({ category: r.category, score: r.score })),
   });
 
   return results;
 }
 
 // ==========================================
-// 📊 ESTATÍSTICAS DA BASE DE CONHECIMENTO (mantida original)
+// 📊 KNOWLEDGE BASE STATISTICS (Logic maintained in original language for structural clarity)
 // ==========================================
 
 export function getKnowledgeBaseStats() {
   return {
     totalEntries: professionalData.length,
-    categories: [...new Set(professionalData.map(d => d.category))],
-    totalKeywords: professionalData.reduce((sum, d) => sum + d.keywords.length, 0),
+    categories: [...new Set(professionalData.map((d) => d.category))],
+    totalKeywords: professionalData.reduce(
+      (sum, d) => sum + d.keywords.length,
+      0
+    ),
     averageContentLength: Math.round(
-      professionalData.reduce((sum, d) => sum + d.content.length, 0) / professionalData.length
-    )
+      professionalData.reduce((sum, d) => sum + d.content.length, 0) /
+        professionalData.length
+    ),
   };
 }
