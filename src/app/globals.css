@@ -186,3 +186,11 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+a[data-streamdown="link"] {
+    color: var(--color-gray-500); 
+}
+
+a[data-streamdown="link"]:hover {
+    opacity: 0.8;
+}
