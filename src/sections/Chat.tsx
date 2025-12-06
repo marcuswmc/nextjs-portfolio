@@ -191,9 +191,8 @@ export function Chat() {
     <Fragment>
       <div
         ref={chatRef}
-        className="chat-initial fixed top-0 right-0 z-[1000] flex flex-col w-full h-full md:px-10 lg:px-12 bg-black text-white/80 border-l border-gray-800 py-8 px-8 md:w-1/2"
+        className="chat-initial fixed top-0 right-0 z-[1000] flex flex-col w-full h-full md:px-10 lg:px-12 bg-black text-white/80 border-l border-gray-800 py-8 px-4 md:w-1/2"
       >
-        {/* Botão de fechar */}
         <button
           onClick={closeChat}
           className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-800 transition-colors duration-200 group"
@@ -352,7 +351,7 @@ export function Chat() {
 
       {!isOpen && (
         <div
-          className="fixed z-[1001] flex items-center justify-center transition-all duration-300 bg-primary rounded-full cursor-pointer w-18 h-18 md:w-20 md:h-20 bottom-4 right-10 hover:rotate-180 shadow-md"
+          className="fixed z-[1001] flex items-center justify-center transition-all duration-300 bg-primary rounded-full cursor-pointer w-18 h-18 md:w-20 md:h-20 bottom-14 right-10 hover:rotate-180 shadow-md"
           onClick={toggleChat}
         >
           <div
