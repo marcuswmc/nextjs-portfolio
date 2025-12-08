@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     const promptSystem = systemPrompt();
 
     const result = streamText({
-      model: google("gemini-2.5-flash"),
+      model: google("gemini-2.5-flash-lite"),
       system: promptSystem,
       messages: convertToModelMessages(messages),
       temperature: 0.7,

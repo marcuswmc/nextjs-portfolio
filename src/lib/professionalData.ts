@@ -514,7 +514,7 @@ Focus Areas: Software Development, Algorithms, Database, UI/UX Design.`,
 
 Download my CV in PDF format for a comprehensive overview of my professional experience, skills, and academic background.
 
-[Download CV PDF](https://marcusdev.me/marcus-vinicius-cv-en.pdf)`,
+[Download CV PDF](https://marcusdev.me/resume/marcus-vinicius-cv-en.pdf)`,
     keywords: [
       "cv",
       "curriculum",
