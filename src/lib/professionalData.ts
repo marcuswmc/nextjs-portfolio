@@ -13,7 +13,38 @@ export const professionalData: ProfessionalInfo[] = [
     
 I specialize in creating scalable and performant applications with clean architecture, using technologies like React, Next.js, TypeScript, and Node.js. I am passionate about merging design and technology (UI/UX and Motion Design) to solve complex problems and build exceptional user experiences.
 
-Based in Porto, Portugal (working in Lisbon), I collaborate on remote and on-site projects, delivering high-quality solutions, from pixel-perfect UI/UX to robust full-stack solutions.`,
+Based in Porto, Portugal (working in Lisbon), I collaborate on remote and on-site projects, delivering high-quality solutions, from pixel-perfect UI/UX to robust full-stack solutions.
+
+---
+
+**Professional Chronology:**
+
+My professional journey began in São Paulo, Brazil. At 16, I started as a printer at **RM Comunicações Visuais**, operating offset machines for large-format printing (packaging, billboards, facades, stickers). By 17, I transitioned to Graphic Design within the same company (now defunct).
+
+Following this, I worked as a Packaging and Manuals Designer at **Kitec Equipamentos Automotivos** (an electronics company)[https://www.kitec.ind.br/], where I was responsible for the design of packaging for products like autotransformers, line filters, testers, and battery chargers.
+
+At 18, during my first semester of Advertising and Propaganda college, I began an internship in web development at **A Essencis Soluções Ambientais** (part of Grupo Solví, a leader in the Brazilian environmental sector). Here, I focused on redesigning and developing new websites for the group's companies. After six months, I was promoted to Communication Analyst, responsible for the maintenance and design of five websites for the **SSI** (Solvi Soluções Industriais) sub-group.[https://www.solvi.com/]
+
+After several years and various projects focusing on web experience solutions, my last role in Brazil was as a UX/UI Designer at the startup **ByBnd** (By business and Dreams), specializing in mobile application development with Flutter.[https://bybnd.com.br/]
+
+Upon moving to Porto, Portugal, I worked as a Full Stack Web Developer at **Anca Design Studio** [https://ancadesignstudio.com/], handling everything from interface design to deployment and maintenance for websites and e-commerce platforms (e.g., [samarraspeixoto.pt](https://samarraspeixoto.pt/)). I also contributed to projects for McDonald's (donation campaigns) and developed the website for the Portuguese singer Claudia Pascoal ([claudiapascoal.com](https://claudiapascoal.com/)).
+
+**Current Role:**
+
+**Creative Developer at Innovagency** (Period: 2023 - Present | Location: Full Remote from Porto, Portugal)
+- Collaboration with designers and marketing teams to create engaging web experiences.
+- Design and development of promotional campaigns (Google Ads).
+- Analysis and optimization of web performance, accessibility, and SEO.
+- Design and development of interactive UI components.
+- Development of e-commerce solutions and integrations.
+- Design, development, and web maintenance for brand pages.
+- Implementation of motion design and animations to enhance user experience.
+- Design and development of reusable components and design systems.
+- Design and development of email marketing templates.
+- Creation of landing pages and announcement pages for promotional campaigns and event registration.
+- Development of full-stack projects within the React/Next.js ecosystem and CMS (Shopify, WordPress, Sanity).
+- Key Clients: Purina Portugal, Purina Felix, El Corte Inglés, Cupra, Seat, KiK, Easyfarma, Synlab Analises Clinicas, Aldi, Oceanario de Lisboa.
+    `,
     keywords: [
       "about",
       "who",
@@ -34,9 +65,19 @@ Based in Porto, Portugal (working in Lisbon), I collaborate on remote and on-sit
       "remote",
       "onsite",
       "summary",
+      "graphic design",
+      "packaging",
+      "web development",
+      "analyst",
+      "UX/UI",
+      "creative developer",
+      "innovagency",
+      "anca design studio",
+      "essencis",
+      "kitec",
+      "bybnd"
     ],
   },
-
   {
     id: "skills-frontend",
     category: "Skills - Front-end",
@@ -100,7 +141,7 @@ Based in Porto, Portugal (working in Lisbon), I collaborate on remote and on-sit
       "payments",
       "stripe",
       "websockets",
-      "authentication"
+      "authentication",
     ],
   },
 
@@ -303,14 +344,26 @@ GitHub: https://github.com/marcuswmc/pixeltest-nextjs`,
     category: "Experience - Innovagency",
     content: `Creative Developer - Frontend @ Innovagency
 Period: 2023 - Present
-Location: Lisbon, Portugal
+Location: Full Remote from Porto, Portugal
+website: https://innovagency.com/
 
 Responsibilities:
-- Design, development, and web maintenance for brand pages (Purina, El Corte Inglés, Cupra).
+- Collaboration with designers and marketing teams to create engaging web experiences.
+- Design and development of promotional campaigns (Google Ads).
+- Analysis and optimization of web performance, accessibility and SEO.
+- Design and development of interactive UI components.
+- Development of e-commerce solutions and integrations.
+- Design, development, and web maintenance for brand pages.
+- Implementation of motion design and animations to enhance user experience.
+- Design and development of reusable components and design systems.
+- Design and development of email marketing templates.
 - Creation of landing pages and announcement pages for promotional campaigns and event registration.
 - Development of full-stack projects within the React/Next.js ecosystem and CMS (Shopify, WordPress, Sanity).
 
-Stack: Next.js, ReactJS, TypeScript, Node.js, Prisma, MongoDB, Stripe, TailwindCSS, Framer Motion.`,
+Clients: Purina Portugal, Purina Felix, El Corte Inglés, Cupra, Seat, KiK, Easyfarma, Synlab Analises Clinicas, Aldi, Oceanario de Lisboa.
+
+Stack: Next.js, ReactJS, TypeScript, Node.js, Prisma, MongoDB, Stripe, TailwindCSS, Framer Motion, Shopify, WordPress, Sanity CMS.
+Design Tools: Figma, Adobe XD, Photoshop, Illustrator, After Effects, Premiere Pro, AI Tools (Midjourney, DALL·E, RunwayML, Nano Banana, Replit, v0, Envato).`,
     keywords: [
       "experience",
       "work",
@@ -321,6 +374,22 @@ Stack: Next.js, ReactJS, TypeScript, Node.js, Prisma, MongoDB, Stripe, TailwindC
       "professional",
       "lisbon",
       "creative developer",
+      "frontend",
+      "porto",
+      "remote",
+      "full stack",
+      "Clients",
+      "purina",
+      "el corte ingles",
+      "cupra",
+      "kik",
+      "easyfarma",
+      "synlab",
+      "aldi",
+      "oceanario",
+      "design",
+      "marketing",
+      "ecommerce",
     ],
   },
 
@@ -328,15 +397,29 @@ Stack: Next.js, ReactJS, TypeScript, Node.js, Prisma, MongoDB, Stripe, TailwindC
     id: "experience-previous",
     category: "Experience - Anca Design Studio",
     content: `Full Stack Developer @ Anca Design Studio
-Period: 2022 - 2023
+Period: 2021 - 2023
 Location: Penafiel, Portugal
+website: https://ancadesignstudio.com/
 
 Responsibilities:
-- Full-stack development and design of corporate websites, e-commerce platforms, blogs, and web applications.
+- Full-stack development and design of corporate websites, ecommerce platforms, blogs, and web applications.
+- Implementation of responsive design and mobile-first strategies.
+- Performance optimization and SEO best practices.
+- Integration with third-party APIs and services.
+- Development of custom themes and plugins for WordPress and Shopify.
+- Maintenance and updates of existing web projects.
+- Web development consulting and technical support.
+- Design of user interfaces and user experiences.
+- Design and development of interactive UI components.
 - Work within the React, Shopify, and WordPress ecosystems.
+- Client communication and project management.
+- Client training on CMS usage and best practices.
 - Direct collaboration with the design team for pixel-perfect implementation.
 
-Stack: ReactJS, Next.js, TypeScript, Node.js, MongoDB, Shopify, WordPress, Sanity CMS.`,
+Clients: Mc Donalds, Cantora portuguesa Claudia Pascoal, Osteo Performance 360, BeOcean, Hidroplanalto, 360 Store, Munchie BK restaurante, VBL Construções, Playlife Fitness Center, Ella Montcordova, ElectroDc, Samarras Peixoto, Bravery Globe, Blatt Concept.
+
+Stack: ReactJS, Next.js, TypeScript, Node.js, MongoDB, mySQL, myPHPadmin, PHP, Shopify, WordPress, TailwindCSS, Elementor.
+Design Tools: Figma, Adobe XD, Photoshop, Illustrator.`,
     keywords: [
       "experience",
       "work",
@@ -345,6 +428,26 @@ Stack: ReactJS, Next.js, TypeScript, Node.js, MongoDB, Shopify, WordPress, Sanit
       "anca design studio",
       "full stack",
       "penafiel",
+      "react",
+      "shopify",
+      "wordpress",
+      "clients",
+      "mcdonalds",
+      "claudia pascoal",
+      "osteoperformance360",
+      "beocean",
+      "hidroplanalto",
+      "360store",
+      "munchiebk",
+      "vbl construcoes",
+      "playlife",
+      "ellamontcordova",
+      "electrodc",
+      "samarraspeixoto",
+      "braveryglobe",
+      "blattconcept",
+      "design",
+      "ecommerce",
     ],
   },
 
@@ -353,13 +456,13 @@ Stack: ReactJS, Next.js, TypeScript, Node.js, MongoDB, Shopify, WordPress, Sanit
     category: "Academic Background",
     content: `Bachelor's Degree in Systems Analysis and Development (Ongoing)
 University: Cruzeiro do Sul University (Brazil)
-Period: [Current]
-Location: [Online/São Paulo, Brazil - Can detail further]
+Period: [Current] - Expected Completion: 2027
+Location: Remote / São Paulo, Brazil
 
 Other Training:
-- Full Stack Web Development (EDIT School)
-- Bachelor's Degree in Advertising and Social Communication (FAPCOM)
-- Front-end Development (Rocketseat)
+- Full Stack Web Development (EDIT School - Porto, Portugal)
+- Bachelor's Degree in Advertising and Social Communication (FAPCOM - São Paulo, Brazil)
+- Front-end Development (Rocketseat, Brazil)
 
 Focus Areas: Software Development, Algorithms, Database, UI/UX Design.`,
     keywords: [
@@ -373,6 +476,58 @@ Focus Areas: Software Development, Algorithms, Database, UI/UX Design.`,
       "academic",
       "fiap",
       "edit school",
+      "cruzeiro do sul",
+      "advertising",
+      "communication",
+      "development",
+      "full stack",
+      "frontend",
+      "portugal",
+      "brazil",
+      "saopaulo",
+    ],
+  },
+
+  {
+    id: "languages",
+    category: "Languages",
+    content: `Languages:
+- Portuguese: Native (from Brazil)
+- English: Advanced (C1)
+- Spanish: Intermediate (B1)`,
+    keywords: [
+      "languages",
+      "language",
+      "portuguese",
+      "english",
+      "spanish",
+      "brazilian",
+      "c1",
+      "b1",
+    ],
+  },
+
+  {
+    id: "CurriculumVitae",
+    category: "Curriculum Vitae",
+    content: `Curriculum Vitae (CV) - Marcus Vinicius
+
+Download my CV in PDF format for a comprehensive overview of my professional experience, skills, and academic background.
+
+[Download CV PDF](https://marcusdev.me/marcus-vinicius-cv-en.pdf)`,
+    keywords: [
+      "cv",
+      "curriculum",
+      "curriculum vitae",
+      "resume",
+      "pdf",
+      "download",
+      "document",
+      "file",
+      "professional",
+      "experience",
+      "skills",
+      "background",
     ],
   },
 
@@ -388,7 +543,7 @@ Focus Areas: Software Development, Algorithms, Database, UI/UX Design.`,
 📱 Phone: +351 912 981 585 (available via WhatsApp)
 
 📍 Location: Porto, Portugal (Working in Lisbon)
-🌍 Availability: Remote and on-site projects
+🌍 Availability: Remote and hybrid projects
 ⏰ Time zone: GMT+0 (WET/WEST)`,
     keywords: [
       "contact",
@@ -401,22 +556,60 @@ Focus Areas: Software Development, Algorithms, Database, UI/UX Design.`,
       "location",
       "porto",
       "lisbon",
+      "remote",
+      "hybrid",
+      "whatsapp",
+      "time zone",
+      "gmt",
+      "wET",
+      "wEST",
+      "marcus",
+      "vinicius",
+      "mvinicius-dev",
     ],
   },
 
   {
     id: "availability",
     category: "Availability and Interests",
-    content: `Current Status: Employed (Creative Developer - Innovagency) and Open to new challenging opportunities.
+    content: `Current Status: Employed (Creative Developer - Innovagency) and open to new challenging opportunities.
 
 Seeking:
 - Full-stack projects with React/Next.js and clean architecture.
+- Design and development roles merging UI/UX and Motion Design.
+- Collaborative teams focused on high-quality, scalable solutions.
+- Deep tech projects with modern technologies.
+- Design-driven development environments.
+- Design systems and reusable component libraries.
+- Projects emphasizing performance optimization and SEO.
+- E-commerce development and integrations.
+- Integration with AI technologies.
+- Innovative projects leveraging AI and Machine Learning.
+- Wordpress Plugins and Themes Development.
+- Redesign and modernization of existing web applications.
+
+Interested In:
 - Opportunities in AI (Automation, Chatbots) and Machine Learning.
 - Development of scalable, high-impact SaaS applications.
+- Contributing to open source projects.
+- Collaborating on cutting-edge web technologies.
+- Projects with a strong focus on user experience and design.
+- React and Next.js ecosystems.
+- Building and optimizing e-commerce platforms.
+- Working with CMS solutions (Payloadcms,Shopify, WordPress, Sanity).
+- Projects involving performance optimization and SEO best practices.
+- Engaging in communities focused on developer experience and tools.
+- Learning and applying new technologies and frameworks.
 - Remote or hybrid work.
 
 Areas of Interest:
 - Developer Experience & Tools
+- Full-Stack Development with React/Next.js
+- Performance Optimization & SEO
+- E-commerce Development
+- AI and Machine Learning Applications
+- Integration with CMS Platforms
+- Design Systems and Component Libraries
 - UI/UX Design and Motion Design
 - Open Source Contributions`,
     keywords: [
@@ -430,6 +623,34 @@ Areas of Interest:
       "work",
       "hybrid",
       "saas",
+      "ecommerce",
+      "cms",
+      "payloadcms",
+      "shopify",
+      "wordpress",
+      "sanity",
+      "ai",
+      "machine learning",
+      "performance",
+      "seo",
+      "design",
+      "ux",
+      "ui",
+      "developer experience",
+      "full stack",
+      "react",
+      "nextjs",
+      "next.js",
+      "open source",
+      "remote",
+      "developer tools",
+      "motion design",
+      "component libraries",
+      "design systems",
+      "modernization",
+      "redesign",
+      "plugins",
+      "themes",
     ],
   },
 ];
