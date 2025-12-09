@@ -29,9 +29,7 @@ import {
   PromptInputSpeechButton,
 } from "@/components/ai-elements/prompt-input";
 import {
-  Circle,
   CopyIcon,
-  MessageCircle,
   RefreshCcwIcon,
   SearchIcon,
   XIcon,
@@ -39,11 +37,18 @@ import {
 import { Suggestion, Suggestions } from "@/components/ai-elements/suggestion";
 import { nanoid } from "nanoid";
 import { Shimmer } from "@/components/ai-elements/shimmer";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import { ModelSelector, ModelSelectorLogo, ModelSelectorName, ModelSelectorTrigger } from "@/components/ai-elements/model-selector";
+import { Button } from "@/components/ui/button";
 
 const suggestions: { key: string; value: string }[] = [
   { key: nanoid(), value: "A brief summary about Marcus" },
   { key: nanoid(), value: "Does Marcus have experience with Next.js?" },
-  { key: nanoid(), value: "What are Marcus's qualifications?" },
+  { key: nanoid(), value: "What are Marcus' skills?" },
 ];
 
 export function Chat() {
@@ -58,6 +63,14 @@ export function Chat() {
 
   const [text, setText] = useState<string>("");
   const { messages, sendMessage, status, regenerate } = useChat();
+
+  const models = {
+    id: "gemini-2.0-flash-exp",
+    name: "Gemini 2.0 Flash",
+    chef: "Google",
+    chefSlug: "google",
+    providers: ["google", "google-vertex"],
+  }
 
   useGSAP(() => {
     const chatEl = chatRef.current;
@@ -191,7 +204,7 @@ export function Chat() {
     <Fragment>
       <div
         ref={chatRef}
-        className="chat-initial fixed top-0 right-0 z-[1000] flex flex-col w-full h-full md:px-10 lg:px-12 bg-black text-white/80 border-l border-gray-800 py-8 px-4 md:w-1/2"
+        className="chat-initial fixed top-0 right-0 z-[1000] flex flex-col w-full h-full md:px-10 lg:px-12 bg-black text-white/80 py-8 px-4 md:w-1/2"
       >
         <button
           onClick={closeChat}
@@ -214,19 +227,17 @@ export function Chat() {
               {messages.length === 0 ? (
                 <ConversationEmptyState
                   icon={
-                    <div
-                      className="flex items-center justify-center transition-all duration-300 bg-primary rounded-full w-14 h-14 md:w-20 md:h-20 bottom-4 right-10 hover:rotate-180 animate-pulse shadow-md"
-                    >
+                    <div className="flex items-center justify-center transition-all duration-300 rounded-full w-14 h-14 md:w-20 md:h-20 bottom-4 right-10 hover:rotate-180 shadow-md">
                       <div
                         ref={iconRef}
-                        className="p-[4px] rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"
+                        className="p-[3px] rounded-full hover:rotate-180 transition-all duration-300 bg-gradient-to-tr from-[#EFD492] to-[#401702]"
                       >
-                        <div className="flex items-center justify-center w-8 h-8 md:w-12 md:h-12 bg-primary rounded-full"></div>
+                        <div className="flex items-center justify-center w-8 h-8 md:w-12 md:h-12 bg-black rounded-full"></div>
                       </div>
                     </div>
                   }
                   title="Marcus AI Chat"
-                  description="Ask about Marcus Silva's experience, projects, or skills."
+                  description="Ask about Marcus Silva's experience, projects, links or skills."
                 />
               ) : (
                 messages.map((message) => {
@@ -271,7 +282,7 @@ export function Chat() {
                           </MessageContent>
                         )}
                       </Message>
-                      {message.role === "assistant" && (
+                      {message.role === "assistant" && !isThinking && (
                         <MessageActions
                           className={`ml-1.5 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-opacity duration-150 pointer-events-none group-hover:pointer-events-auto mb-2 ${
                             isLastMessage && "opacity-100 visible"
@@ -333,34 +344,50 @@ export function Chat() {
               onChange={(e) => setText(e.target.value)}
               ref={textareaRef}
               value={text}
-              placeholder="Ask about Marcus Silva's experience, projects, or skills..."
-              className="text-white bg-black placeholder:text-gray-500 focus:ring-1 focus:ring-primary"
+              placeholder="Ask about Marcus' experience, projects, links or skills..."
+              className="text-white bg-black placeholder:text-white/60 focus:ring-1 focus:ring-primary"
             />
             <PromptInputFooter>
               <PromptInputTools>
-                <PromptInputSpeechButton
-                  onTranscriptionChange={(text) => setText(text)}
-                  textareaRef={textareaRef}
-                />
+                <ModelSelector>
+                  <ModelSelectorTrigger asChild>
+                    <Button className="justify-between" variant={"outline"} size={"sm"}>
+                      <ModelSelectorLogo provider={models.chefSlug}/>
+                      <ModelSelectorName>{models.name}</ModelSelectorName>
+                    </Button>
+                  </ModelSelectorTrigger>
+                </ModelSelector>
               </PromptInputTools>
-              <PromptInputSubmit disabled={!text.trim()} status={status} />
+             
+              <PromptInputSubmit disabled={!text.trim()} status={status}/>
             </PromptInputFooter>
           </PromptInput>
         </div>
       </div>
 
       {!isOpen && (
-        <div
-          className="fixed z-[1001] flex items-center justify-center transition-all duration-300 bg-primary rounded-full cursor-pointer w-18 h-18 md:w-20 md:h-20 bottom-14 right-10 hover:rotate-180 shadow-md"
-          onClick={toggleChat}
-        >
-          <div
-            ref={iconRef}
-            className="p-[4px] rounded-full bg-gradient-to-r from-cyan-500 to-blue-500"
-          >
-            <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-primary rounded-full"></div>
-          </div>
-        </div>
+        <>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <div
+                className="fixed z-[1001] flex items-center justify-center transition-all duration-300 bg-black rounded-full cursor-pointer w-16 h-16 md:w-20 md:h-20 bottom-14 right-10 hover:rotate-180 shadow-md"
+                onClick={toggleChat}
+              >
+                <div
+                  ref={iconRef}
+                  className="p-[3px] rounded-full bg-gradient-to-tr from-[#EFD492] to-[#401702]"
+                >
+                  <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black rounded-full">
+                  </div>
+                </div>
+              </div>
+            </TooltipTrigger>
+
+            <TooltipContent>
+              <p>Marcus AI Chat</p>
+            </TooltipContent>
+          </Tooltip>
+        </>
       )}
     </Fragment>
   );

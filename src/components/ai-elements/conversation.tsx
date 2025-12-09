@@ -6,6 +6,7 @@ import { ArrowDownIcon } from "lucide-react";
 import type { ComponentProps } from "react";
 import { useCallback } from "react";
 import { StickToBottom, useStickToBottomContext } from "use-stick-to-bottom";
+import { Shimmer } from "./shimmer";
 
 export type ConversationProps = ComponentProps<typeof StickToBottom>;
 
@@ -58,9 +59,9 @@ export const ConversationEmptyState = ({
       <>
         {icon && <div className="text-muted-foreground">{icon}</div>}
         <div className="space-y-1">
-          <h3 className="font-medium text-sm">{title}</h3>
+          <Shimmer as={"h3"} className="font-medium text-lg text-white/50">{title}</Shimmer>
           {description && (
-            <p className="text-muted-foreground text-sm">{description}</p>
+            <p className="text-white/60 text-sm">{description}</p>
           )}
         </div>
       </>
