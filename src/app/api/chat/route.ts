@@ -47,7 +47,7 @@ export async function POST(req: Request) {
                         }`
                     )
                     .join("\n\n---\n\n")
-                : "No specific information found. Be general and suggest direct contact.";
+                : "No specific information found. Be general and suggest direct contact on footer of the website.";
 
             return ragContext;
           },

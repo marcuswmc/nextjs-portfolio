@@ -65,8 +65,8 @@ export function Chat() {
   const { messages, sendMessage, status, regenerate } = useChat();
 
   const models = {
-    id: "gemini-2.0-flash-exp",
-    name: "Gemini 2.0 Flash",
+    id: "gemini-2.5-flash-exp",
+    name: "Gemini 2.5",
     chef: "Google",
     chefSlug: "google",
     providers: ["google", "google-vertex"],
@@ -345,7 +345,7 @@ export function Chat() {
               ref={textareaRef}
               value={text}
               placeholder="Ask about Marcus' experience, projects, links or skills..."
-              className="text-white bg-black placeholder:text-white/60 focus:ring-1 focus:ring-primary"
+              className="text-white bg-black placeholder:text-white/60"
             />
             <PromptInputFooter>
               <PromptInputTools>
