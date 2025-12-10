@@ -35,8 +35,7 @@ export async function POST(req: Request) {
               ),
           }),
           execute: async ({ query }) => {
-            const userQuery = query;
-            const relevantInfo = searchRelevantInfo(userQuery, 3);
+            const relevantInfo = searchRelevantInfo(query, 3);
             const ragContext =
               relevantInfo.length > 0
                 ? relevantInfo

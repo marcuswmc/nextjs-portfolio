@@ -66,7 +66,7 @@ export function Chat() {
 
   const models = {
     id: "gemini-2.5-flash-exp",
-    name: "Gemini 2.5",
+    name: "i'm feeling lucky",
     chef: "Google",
     chefSlug: "google",
     providers: ["google", "google-vertex"],
@@ -351,7 +351,7 @@ export function Chat() {
               <PromptInputTools>
                 <ModelSelector>
                   <ModelSelectorTrigger asChild>
-                    <Button className="justify-between" variant={"outline"} size={"sm"}>
+                    <Button className="justify-between dark" variant={"secondary"} size={"sm"}>
                       <ModelSelectorLogo provider={models.chefSlug}/>
                       <ModelSelectorName>{models.name}</ModelSelectorName>
                     </Button>

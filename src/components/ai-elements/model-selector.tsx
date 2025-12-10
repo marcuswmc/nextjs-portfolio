@@ -169,7 +169,10 @@ export const ModelSelectorLogo = ({
   provider,
   className,
   ...props
-}: ModelSelectorLogoProps) => (
+}: ModelSelectorLogoProps) => { 
+  const isGemini = provider === "google" || provider === "google-vertex"
+  
+  return (
   <img
     {...props}
     alt={`${provider} logo`}
@@ -178,7 +181,8 @@ export const ModelSelectorLogo = ({
     src={`https://models.dev/logos/${provider}.svg`}
     width={12}
   />
-);
+
+)};
 
 export type ModelSelectorLogoGroupProps = ComponentProps<"div">;
 
