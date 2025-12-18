@@ -30,6 +30,7 @@ import {
 } from "@/components/ai-elements/prompt-input";
 import {
   CopyIcon,
+  PlusIcon,
   RefreshCcwIcon,
   SearchIcon,
   XIcon,
@@ -42,14 +43,20 @@ import {
   TooltipContent,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { ModelSelector, ModelSelectorLogo, ModelSelectorName, ModelSelectorTrigger } from "@/components/ai-elements/model-selector";
+import { ModelSelectorLogo } from "@/components/ai-elements/model-selector";
 import { Button } from "@/components/ui/button";
+
+import { professionalQuestions } from "@/constants/randomQuestions";
 
 const suggestions: { key: string; value: string }[] = [
   { key: nanoid(), value: "A brief summary about Marcus" },
   { key: nanoid(), value: "Does Marcus have experience with Next.js?" },
   { key: nanoid(), value: "What are Marcus' skills?" },
 ];
+
+const chefSlug = {
+  chef: "google",
+};
 
 export function Chat() {
   const chatRef = useRef<HTMLDivElement | null>(null);
@@ -62,15 +69,14 @@ export function Chat() {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const [text, setText] = useState<string>("");
-  const { messages, sendMessage, status, regenerate } = useChat();
 
-  const models = {
-    id: "gemini-2.5-flash-exp",
-    name: "i'm feeling lucky",
-    chef: "Google",
-    chefSlug: "google",
-    providers: ["google", "google-vertex"],
-  }
+  const { messages, sendMessage, status, regenerate, setMessages, stop } =
+    useChat();
+
+  const handleFeelingLucky = () => {
+    const randomQuestion = professionalQuestions[Math.floor(Math.random() * professionalQuestions.length)]
+    setText(randomQuestion)
+  };
 
   useGSAP(() => {
     const chatEl = chatRef.current;
@@ -200,19 +206,39 @@ export function Chat() {
     }
   };
 
+  const newChat = () => {
+    stop();
+    setMessages([]);
+    setText("");
+  };
+
   return (
     <Fragment>
       <div
         ref={chatRef}
         className="chat-initial fixed top-0 right-0 z-[1000] flex flex-col w-full h-full md:px-10 lg:px-12 bg-black text-white/80 py-8 px-4 md:w-1/2"
       >
-        <button
-          onClick={closeChat}
-          className="absolute top-4 right-4 p-2 rounded-full hover:bg-gray-800 transition-colors duration-200 group"
-          aria-label="Close chat"
-        >
-          <XIcon className="w-5 h-5 text-gray-400 group-hover:text-white" />
-        </button>
+        <div className="flex justify-between">
+          <div>
+            <Button
+              onClick={() => newChat()}
+              variant="outline"
+              aria-label="New chat"
+              className="dark p-2 rounded-full border-input bg-black hover:bg-white transition-colors duration-200 group"
+            >
+              {" "}
+              <PlusIcon className="w-5 h-5 text-white group-hover:text-black" />{" "}
+            </Button>
+          </div>
+          <Button
+            onClick={closeChat}
+            variant="outline"
+            aria-label="Close chat"
+            className="dark p-2 rounded-full border-input bg-black hover:bg-white transition-colors duration-200 group"
+          >
+            <XIcon className="w-5 h-5 text-white group-hover:text-black" />
+          </Button>
+        </div>
 
         <div
           ref={messagesRef}
@@ -333,13 +359,15 @@ export function Chat() {
                 key={suggestion.key}
                 onClick={handleSuggestionClick}
                 suggestion={suggestion.value}
-                className="bg-back text-white/80 trasition-colors"
+                className="dark bg-black text-white/60 hover:bg-white hover:text-black trasition-colors"
+                onWheel={(e) => e.stopPropagation()}
+                onTouchMove={(e) => e.stopPropagation()}
               />
             ))}
           </Suggestions>
         </div>
         <div ref={inputRef} className="pb-8">
-          <PromptInput onSubmit={handleSubmit} className="mt-4">
+          <PromptInput onSubmit={handleSubmit} className="mt-4 dark bg-black">
             <PromptInputTextarea
               onChange={(e) => setText(e.target.value)}
               ref={textareaRef}
@@ -348,18 +376,20 @@ export function Chat() {
               className="text-white bg-black placeholder:text-white/60"
             />
             <PromptInputFooter>
-              <PromptInputTools>
-                <ModelSelector>
-                  <ModelSelectorTrigger asChild>
-                    <Button className="justify-between dark" variant={"secondary"} size={"sm"}>
-                      <ModelSelectorLogo provider={models.chefSlug}/>
-                      <ModelSelectorName>{models.name}</ModelSelectorName>
-                    </Button>
-                  </ModelSelectorTrigger>
-                </ModelSelector>
-              </PromptInputTools>
-             
-              <PromptInputSubmit disabled={!text.trim()} status={status}/>
+              <Button
+                className="justify-between dark"
+                variant="outline"
+                size={"sm"}
+                aria-label="I'm feeling lucky"
+                type="button"
+                disabled={status === "streaming"}
+                onClick={handleFeelingLucky}
+              >
+                <ModelSelectorLogo provider={chefSlug.chef} />
+                <p>I'm feeling lucky</p>
+              </Button>
+
+              <PromptInputSubmit disabled={!text.trim()} status={status} />
             </PromptInputFooter>
           </PromptInput>
         </div>
@@ -377,8 +407,7 @@ export function Chat() {
                   ref={iconRef}
                   className="p-[3px] rounded-full bg-gradient-to-tr from-[#EFD492] to-[#401702]"
                 >
-                  <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black rounded-full">
-                  </div>
+                  <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 bg-black rounded-full"></div>
                 </div>
               </div>
             </TooltipTrigger>
