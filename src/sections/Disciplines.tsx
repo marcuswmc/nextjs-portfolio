@@ -35,23 +35,39 @@ export default function Disciplines() {
     return () => clearTimeout(id);
   }, []);
 
-  // Only create the WebGL context when the section is on screen
+  // Set the scene up ahead of arrival: once the visitor starts interacting (first scroll, touch
+  // or key) and the section is within ~1.5 viewports. Page load itself stays free of WebGL work,
+  // and by the time the section is reached the planet is already rendered.
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
+    let near = false;
+    let interacted = false;
+    const tryMount = () => {
+      if (near && interacted) {
+        setMountCanvas(true);
+        cleanup();
+      }
+    };
+    const onInteract = () => {
+      interacted = true;
+      tryMount();
+    };
+    const events = ["scroll", "wheel", "touchstart", "pointerdown", "keydown"] as const;
+    events.forEach((type) => window.addEventListener(type, onInteract, { passive: true, once: true }));
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setMountCanvas(true);
-          observer.disconnect();
-        }
+        near = entry.isIntersecting;
+        tryMount();
       },
-      // Mount once the section is well inside the viewport (not at page load on short heros);
-      // WebGL setup is the heaviest main-thread work on the page
-      { rootMargin: "0px 0px -20% 0px" }
+      { rootMargin: "150% 0px" }
     );
     observer.observe(el);
-    return () => observer.disconnect();
+    function cleanup() {
+      observer.disconnect();
+      events.forEach((type) => window.removeEventListener(type, onInteract));
+    }
+    return cleanup;
   }, []);
 
   useGSAP(
@@ -145,7 +161,7 @@ export default function Disciplines() {
       <div className="sticky top-0 overflow-hidden h-svh">
         <div className="absolute inset-0 -z-10">
           {mountCanvas && (
-            <div className="absolute inset-0 duration-1000 animate-in fade-in">
+            <div className="absolute inset-0 duration-500 animate-in fade-in">
               <PlanetScene state={planetState} idle={!reduced} />
             </div>
           )}
