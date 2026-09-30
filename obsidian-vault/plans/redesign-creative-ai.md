@@ -94,7 +94,8 @@ Notas da implementação (30-09-2026):
 - **Como adicionar um item:** nova entrada em `aiItems`; listagem, filtros e página de detalhe são automáticos.
 
 ### Fase 4: Acabamento (concluída 30-09-2026)
-- [x] Transição entre páginas: cortina (`PageTransition`) com o nome do destino; `NavLink` usa para rotas diferentes; voltar/avançar do navegador é instantâneo; respeita reduced motion.
+- [x] ~~Transição entre páginas (cortina)~~ — implementada e **removida a pedido** do Marcus.
+- [x] Filtros (Lab, AI, Work): Flip compartilhado em `src/lib/flip.ts` segura o tamanho do container (`minHeight`) durante a animação — o footer não sobe mais para a área dos cards.
 - [x] SEO: `metadataBase` = `NEXT_PUBLIC_SITE_URL` ou **https://marcussilva.dev**, canonical por página, Open Graph/Twitter, imagens OG geradas (`opengraph-image.tsx` por rota e por item), `sitemap.ts`, `robots.ts`, JSON-LD Person na home.
 - [x] Performance: bundle da home 471 kB → 195 kB (estado do planeta em módulo sem three.js; chat fora do layout); só 3 fontes Amiamie (regular, light, light italic); `next/image` no /work; canvas do planeta monta só com a seção 20% na tela, chunk aquecido no idle; deps removidas (`react-responsive`, `maath`).
 - [x] Acessibilidade: SplitText com `aria: "none"` + cópia `sr-only` (fim do aria-label proibido em span/p); textos secundários com opacidade ≥ 60–65% (contraste AA); link "Skip to content"; página 404 no estilo.

@@ -5,7 +5,8 @@ import { CopyButton } from "@/components/motion/CopyButton";
 import { DownloadButton } from "@/components/ai/DownloadButton";
 import { NavLink } from "@/components/navigation/NavLink";
 import { aiTypeDescriptions, aiTypes, copyLabel, type AiItem, type AiItemType } from "@/content/ai";
-import { Flip, gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { captureFlip, playFlip, type FlipSnapshot } from "@/lib/flip";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
 
@@ -16,7 +17,8 @@ type TypeFilter = "All" | AiItemType;
 /** Filterable grid of AI Lab items with quick copy / download actions. */
 export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const flipState = useRef<Flip.FlipState | null>(null);
+  const flipSnapshot = useRef<FlipSnapshot | null>(null);
+  const listRef = useRef<HTMLElement | null>(null);
   const [type, setType] = useState<TypeFilter>("All");
   const [tool, setTool] = useState("All");
   const reduced = useReducedMotion();
@@ -37,21 +39,16 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
     { scope: rootRef, dependencies: [reduced] }
   );
 
+  // Animate layout changes from the captured snapshot (height locked so the footer stays put)
   useLayoutEffect(() => {
-    if (!flipState.current) return;
-    const state = flipState.current;
-    flipState.current = null;
-    Flip.from(state, {
-      duration: reduced ? 0 : 0.8,
-      ease: "power3.inOut",
-      absolute: true,
-      onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.5, delay: 0.25 }),
-      onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.94, duration: 0.3 }),
-    });
+    if (!flipSnapshot.current) return;
+    const snapshot = flipSnapshot.current;
+    flipSnapshot.current = null;
+    playFlip(snapshot, listRef.current, { reduced, duration: 0.8, stagger: 0 });
   }, [type, tool, reduced]);
 
   const capture = (update: () => void) => {
-    flipState.current = Flip.getState("[data-ai-card]", { props: "opacity" });
+    flipSnapshot.current = captureFlip("[data-ai-card]", listRef.current);
     update();
   };
 
@@ -104,7 +101,7 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
       </p>
 
       {/* Cards */}
-      <ul className="grid gap-4 px-8 mt-6 md:px-10 md:grid-cols-2">
+      <ul ref={(el) => { listRef.current = el; }} className="grid gap-4 px-8 mt-6 md:px-10 md:grid-cols-2">
         {entries.map((entry, index) => {
           const { item, primary } = entry;
           const primaryFile = item.files[0];

@@ -7,7 +7,6 @@ import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { SiteFooter } from "@/components/navigation/SiteFooter";
 import { HashScroll } from "@/components/navigation/HashScroll";
-import { PageTransition } from "@/components/navigation/PageTransition";
 import { Navbar } from "@/sections/Navbar";
 
 export const metadata: Metadata = {
@@ -36,21 +35,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         className={`${amiamieRegular.variable} ${amiamieLight.variable} ${amiamieLightItalic.variable} antialiased`}
       >
         <SmoothScroll>
-          <PageTransition>
-            <a
-              href="#main"
-              className="fixed z-[4000] px-4 py-2 text-sm -translate-y-24 rounded-full top-4 left-4 bg-ink text-canvas focus:translate-y-0"
-            >
-              Skip to content
-            </a>
-            <SiteHeader />
-            <Navbar />
-            <HashScroll />
-            <main id="main" className="relative w-full min-h-screen overflow-x-clip">
-              {children}
-            </main>
-            <SiteFooter />
-          </PageTransition>
+          <a
+            href="#main"
+            className="fixed z-[4000] px-4 py-2 text-sm -translate-y-24 rounded-full top-4 left-4 bg-ink text-canvas focus:translate-y-0"
+          >
+            Skip to content
+          </a>
+          <SiteHeader />
+          <Navbar />
+          <HashScroll />
+          <main id="main" className="relative w-full min-h-screen overflow-x-clip">
+            {children}
+          </main>
+          <SiteFooter />
         </SmoothScroll>
         <Analytics />
       </body>

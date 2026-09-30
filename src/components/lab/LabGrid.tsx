@@ -3,7 +3,8 @@
 import { useLayoutEffect, useRef, useState } from "react";
 import { LabCard } from "@/components/lab/LabCard";
 import { labCategories, type LabItem } from "@/content/lab/registry";
-import { Flip, gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { captureFlip, playFlip, type FlipSnapshot } from "@/lib/flip";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
 
@@ -12,7 +13,8 @@ type Filter = "All" | (typeof labCategories)[number];
 /** Filterable grid of live lab previews. */
 export function LabGrid({ items }: { items: LabItem[] }) {
   const rootRef = useRef<HTMLDivElement | null>(null);
-  const flipState = useRef<Flip.FlipState | null>(null);
+  const flipSnapshot = useRef<FlipSnapshot | null>(null);
+  const listRef = useRef<HTMLElement | null>(null);
   const [filter, setFilter] = useState<Filter>("All");
   const reduced = useReducedMotion();
 
@@ -36,22 +38,17 @@ export function LabGrid({ items }: { items: LabItem[] }) {
     { scope: rootRef, dependencies: [reduced] }
   );
 
+  // Animate layout changes from the captured snapshot (height locked so the footer stays put)
   useLayoutEffect(() => {
-    if (!flipState.current) return;
-    const state = flipState.current;
-    flipState.current = null;
-    Flip.from(state, {
-      duration: reduced ? 0 : 0.8,
-      ease: "power3.inOut",
-      absolute: true,
-      onEnter: (els) => gsap.fromTo(els, { autoAlpha: 0, scale: 0.94 }, { autoAlpha: 1, scale: 1, duration: 0.5, delay: 0.25 }),
-      onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.94, duration: 0.3 }),
-    });
+    if (!flipSnapshot.current) return;
+    const snapshot = flipSnapshot.current;
+    flipSnapshot.current = null;
+    playFlip(snapshot, listRef.current, { reduced, duration: 0.8, stagger: 0 });
   }, [filter, reduced]);
 
   const choose = (next: Filter) => {
     if (next === filter) return;
-    flipState.current = Flip.getState("[data-lab-card]", { props: "opacity" });
+    flipSnapshot.current = captureFlip("[data-lab-card]", listRef.current);
     setFilter(next);
   };
 
@@ -83,7 +80,7 @@ export function LabGrid({ items }: { items: LabItem[] }) {
         </ul>
       </div>
 
-      <ul className="grid mx-8 mt-8 border-t border-l md:mx-10 sm:grid-cols-2 lg:grid-cols-3 border-ink/20">
+      <ul ref={(el) => { listRef.current = el; }} className="grid mx-8 mt-8 border-t border-l md:mx-10 sm:grid-cols-2 lg:grid-cols-3 border-ink/20">
         {items.map((item, index) => (
           <LabCard
             key={item.slug}

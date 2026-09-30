@@ -5,7 +5,8 @@ import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { projects, projectStack } from "@/constants";
-import { Flip, gsap, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { captureFlip, playFlip, type FlipSnapshot } from "@/lib/flip";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { useFinePointer } from "@/hooks/useFinePointer";
 import { cn } from "@/lib/utils";
@@ -17,7 +18,8 @@ const filters = ["All", ...Array.from(new Set(projects.map(projectStack)))];
 export default function Works() {
   const sectionRef = useRef<HTMLElement | null>(null);
   const previewRef = useRef<HTMLDivElement | null>(null);
-  const flipState = useRef<Flip.FlipState | null>(null);
+  const flipSnapshot = useRef<FlipSnapshot | null>(null);
+  const listRef = useRef<HTMLElement | null>(null);
   const [view, setView] = useState<View>("list");
   const [filter, setFilter] = useState("All");
   const [hovered, setHovered] = useState<number | null>(null);
@@ -50,23 +52,16 @@ export default function Works() {
   );
 
   // Animate layout changes (view toggle / filter) from the captured state
+  // Animate layout changes from the captured snapshot (height locked so the footer stays put)
   useLayoutEffect(() => {
-    if (!flipState.current) return;
-    const state = flipState.current;
-    flipState.current = null;
-    Flip.from(state, {
-      duration: reduced ? 0 : 0.9,
-      ease: "power3.inOut",
-      absolute: true,
-      stagger: 0.03,
-      onEnter: (els) =>
-        gsap.fromTo(els, { autoAlpha: 0, scale: 0.9 }, { autoAlpha: 1, scale: 1, duration: 0.6, delay: 0.3 }),
-      onLeave: (els) => gsap.to(els, { autoAlpha: 0, scale: 0.9, duration: 0.4 }),
-    });
+    if (!flipSnapshot.current) return;
+    const snapshot = flipSnapshot.current;
+    flipSnapshot.current = null;
+    playFlip(snapshot, listRef.current, { reduced, duration: 0.9, stagger: 0.03 });
   }, [view, filter, reduced]);
 
   const captureThen = (update: () => void) => {
-    flipState.current = Flip.getState("[data-work-item]", { props: "opacity" });
+    flipSnapshot.current = captureFlip("[data-work-item]", listRef.current);
     update();
   };
 
@@ -141,6 +136,7 @@ export default function Works() {
       </p>
 
       <div
+        ref={(el) => { listRef.current = el; }}
         data-work-list
         onMouseMove={handleMouseMove}
         className={cn(
