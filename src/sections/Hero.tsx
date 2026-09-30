@@ -1,7 +1,8 @@
 "use client";
 
 import { useRef } from "react";
-import { gsap, SplitText, useGSAP } from "@/lib/gsap";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { KineticTitle } from "@/components/motion/KineticTitle";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { NavLink } from "@/components/navigation/NavLink";
 
@@ -12,28 +13,11 @@ const disciplines = [
 
 export function Hero() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const titleRef = useRef<HTMLHeadingElement | null>(null);
   const reduced = useReducedMotion();
 
   useGSAP(
     () => {
-      if (reduced || !titleRef.current) return;
-
-      const split = SplitText.create(titleRef.current.querySelectorAll("[data-line]"), {
-        type: "chars",
-        mask: "chars",
-        autoSplit: true,
-        onSplit(self) {
-          return gsap.from(self.chars, {
-            yPercent: 115,
-            duration: 1.4,
-            ease: "expo.out",
-            stagger: 0.035,
-            delay: 0.2,
-          });
-        },
-      });
-
+      if (reduced) return;
       gsap.from("[data-hero-meta]", {
         autoAlpha: 0,
         y: 20,
@@ -42,23 +26,6 @@ export function Hero() {
         stagger: 0.1,
         delay: 0.8,
       });
-
-      // Lines drift apart as the hero scrolls away
-      const drift = [-12, 14, -6];
-      gsap.utils.toArray<HTMLElement>("[data-line]").forEach((line, i) => {
-        gsap.to(line, {
-          xPercent: drift[i],
-          ease: "none",
-          scrollTrigger: {
-            trigger: sectionRef.current,
-            start: "top top",
-            end: "bottom top",
-            scrub: true,
-          },
-        });
-      });
-
-      return () => split.revert();
     },
     { scope: sectionRef, dependencies: [reduced] }
   );
@@ -85,20 +52,22 @@ export function Hero() {
         </p>
       </div>
 
-      <h1
-        ref={titleRef}
-        className="uppercase leading-[0.82] tracking-[-0.045em] text-[clamp(3.6rem,min(14vw,24svh),17rem)]"
-      >
-        <span data-line className="block">
-          Creative
-        </span>
-        <span data-line className="block text-right">
-          <span className="font-light-italic normal-case text-gold">&amp;</span> AI
-        </span>
-        <span data-line className="block">
-          Developer
-        </span>
-      </h1>
+      <KineticTitle
+        className="text-[clamp(3.6rem,min(14vw,24svh),17rem)]"
+        driftStart="top 40%"
+        lines={[
+          { content: "Creative" },
+          {
+            content: (
+              <>
+                <span className="font-light-italic normal-case text-gold">&amp;</span> AI
+              </>
+            ),
+            align: "right",
+          },
+          { content: "Developer" },
+        ]}
+      />
 
       <div className="grid grid-cols-2 gap-6 text-sm md:grid-cols-12">
         {disciplines.map((item) => (

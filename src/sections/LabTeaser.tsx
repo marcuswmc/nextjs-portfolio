@@ -8,10 +8,11 @@ import { RevealText } from "@/components/motion/RevealText";
 import { ScrambleText } from "@/components/motion/ScrambleText";
 import { NavLink } from "@/components/navigation/NavLink";
 
-type Demo = { title: string; hint: string; preview: ReactNode };
+type Demo = { slug: string; title: string; hint: string; preview: ReactNode };
 
 const demos: Demo[] = [
   {
+    slug: "text-scramble",
     title: "Text Scramble",
     hint: "Hover",
     preview: (
@@ -22,6 +23,7 @@ const demos: Demo[] = [
     ),
   },
   {
+    slug: "magnetic",
     title: "Magnetic Button",
     hint: "Move closer",
     preview: (
@@ -33,6 +35,7 @@ const demos: Demo[] = [
     ),
   },
   {
+    slug: "line-reveal",
     title: "Line Reveal",
     hint: "On scroll",
     preview: (
@@ -42,6 +45,7 @@ const demos: Demo[] = [
     ),
   },
   {
+    slug: "copy-button",
     title: "Copy Feedback",
     hint: "Click",
     preview: (
@@ -80,7 +84,7 @@ export default function LabTeaser() {
               <span className="opacity-50">{demo.hint}</span>
             </div>
             <div className="flex items-center justify-center flex-1">{demo.preview}</div>
-            <NavLink href="/lab" className="self-start text-sm link-underline">
+            <NavLink href={`/lab/${demo.slug}`} className="self-start text-sm link-underline">
               View in Lab →
             </NavLink>
           </div>

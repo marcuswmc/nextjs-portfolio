@@ -61,11 +61,19 @@ Notas da implementação (30-09-2026):
 - Lição: não usar `transition-transform` (CSS) no mesmo elemento que o GSAP anima — trava o transform. Separar em wrapper.
 
 ### Fase 2: Página /lab (biblioteca de componentes)
-- [ ] **Registry tipado** em `src/content/lab/`: `slug`, título, categoria (Components, Heros, Sections, Text Animations, 3D), tags, dependências, preview (carregado com `next/dynamic`), código-fonte e props.
-- [ ] **Listagem:** filtro por categoria, busca, cards com preview ao vivo que só roda quando está visível (IntersectionObserver). Os previews 3D usam **um único canvas compartilhado** (`View` do drei) para não abrir vários contextos WebGL.
-- [ ] **Página de detalhe `/lab/[slug]`:** preview grande e interativo, controles de props, abas Preview/Code, código com syntax highlight (shiki) e botão copiar.
-- [ ] Conteúdo inicial, extraído do próprio site: AnimatedTextLines, Works hover preview, MagneticButton, TextScramble, Planet 3D.
+- [x] **Registry tipado** em `src/content/lab/`: `slug`, título, categoria (Components, Heros, Sections, Text Animations, 3D), tags, dependências, preview (carregado com `next/dynamic`), código-fonte e props.
+- [x] **Listagem:** filtro por categoria, busca, cards com preview ao vivo que só roda quando está visível (IntersectionObserver). Os previews 3D usam **um único canvas compartilhado** (`View` do drei) para não abrir vários contextos WebGL.
+- [x] **Página de detalhe `/lab/[slug]`:** preview grande e interativo, controles de props, abas Preview/Code, código com syntax highlight (shiki) e botão copiar.
+- [x] Conteúdo inicial, extraído do próprio site: AnimatedTextLines, Works hover preview, MagneticButton, TextScramble, Planet 3D.
 - [ ] ~~Instalação via CLI com registry shadcn~~ → adiado para próxima edição.
+
+Notas da implementação (30-09-2026):
+- Registry em `src/content/lab/registry.ts` (metadados + `sourcePath`, `usage`, `controls`) e previews em `src/content/lab/previews.tsx` (next/dynamic, opções **inline** — o Next exige objeto literal). Demos em `src/components/lab/demos/`.
+- Detalhe `/lab/[slug]` é SSG (`dynamicParams = false`): lê o arquivo-fonte com `fs` no build e destaca com shiki (tema claro/escuro via CSS).
+- Previews do grid montam só perto da viewport (`InView`); com um só item 3D, o canvas compartilhado (`View` do drei) não foi necessário ainda.
+- 7 itens: Kinetic Title (extraído do Hero), Text Scramble, Line Reveal, Magnetic, Copy Button, Section Header, Orbit Planet.
+- R3F atualizado 9.2 → 9.8.1: a 9.2 perdia o contexto WebGL no dev (StrictMode do React 19).
+- **Como adicionar um item:** entrada no registry + demo em `components/lab/demos/` + linha em `previews.tsx`.
 
 ### Fase 3: Página /ai (AI Creative Solutions)
 - [ ] **Registry tipado** em `src/content/ai/`: tipo (Prompt, Skill, Plugin, Automation, MCP), título, descrição, ferramentas compatíveis (Claude, ChatGPT, n8n…), conteúdo em markdown, arquivos para download e link do GitHub.
@@ -86,4 +94,4 @@ Notas da implementação (30-09-2026):
 - **Escopo grande:** entregar por fase, cada uma revisável no preview (commits separados).
 
 ## Status
-Fases 0 e 1 concluídas (30-09-2026). Próximo: Fase 2 (/lab).
+Fases 0, 1 e 2 concluídas (30-09-2026). Próximo: Fase 3 (/ai).

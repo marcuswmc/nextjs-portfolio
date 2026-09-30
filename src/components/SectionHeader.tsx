@@ -16,6 +16,8 @@ type SectionHeaderProps = {
   count?: number;
   /** Play on mount instead of when scrolled into view. */
   immediate?: boolean;
+  /** "lg" suits longer titles (detail pages). */
+  size?: "xl" | "lg";
   className?: string;
 };
 
@@ -27,6 +29,7 @@ export function SectionHeader({
   aside,
   count,
   immediate = false,
+  size = "xl",
   className,
 }: SectionHeaderProps) {
   const rootRef = useRef<HTMLDivElement | null>(null);
@@ -98,7 +101,10 @@ export function SectionHeader({
 
       <h2
         ref={titleRef}
-        className="mt-6 text-[clamp(3.5rem,13vw,12rem)] leading-[0.85] tracking-[-0.04em] uppercase"
+        className={cn(
+          "mt-6 leading-[0.85] tracking-[-0.04em] uppercase",
+          size === "xl" ? "text-[clamp(3.5rem,13vw,12rem)]" : "text-[clamp(2.75rem,8vw,8rem)]"
+        )}
       >
         {title}
         {count !== undefined && (

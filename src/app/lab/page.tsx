@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
 import { SectionHeader } from "@/components/SectionHeader";
+import { LabGrid } from "@/components/lab/LabGrid";
+import { labItems } from "@/content/lab/registry";
 
 export const metadata: Metadata = {
   title: "Lab",
   description:
-    "A library of components, heros, sections and 3D text animations crafted by Marcus Vinicius.",
+    "A library of components, heros, sections, text animations and 3D experiments by Marcus Vinicius — live previews and copyable code.",
 };
 
 export default function LabPage() {
   return (
-    <section className="min-h-[70vh] pt-16">
+    <section className="pt-16 pb-24">
       <SectionHeader
         index="01"
         label="Creative Developer · Library"
         title="Lab"
-        aside="Components, heros, sections and 3D experiments — ready to preview and copy."
+        count={labItems.length}
+        aside="Components, heros, sections and 3D experiments I build and use — live, interactive and ready to copy into your project."
         immediate
       />
-      <p className="px-8 mt-10 text-sm tracking-[0.3rem] uppercase md:px-10 text-ink/60">
-        In progress
-      </p>
+      <LabGrid items={labItems} />
     </section>
   );
 }
