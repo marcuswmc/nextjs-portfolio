@@ -52,6 +52,11 @@ const suggestions: { key: string; value: string }[] = [
   { key: nanoid(), value: "A brief summary about Marcus" },
   { key: nanoid(), value: "Does Marcus have experience with Next.js?" },
   { key: nanoid(), value: "What are Marcus' skills?" },
+  { key: nanoid(), value: "Which projects is Marcus most proud of?" },
+  { key: nanoid(), value: "Can Marcus share his portfolio links?" },
+  { key: nanoid(), value: "How can I contact Marcus Silva?" },
+  { key: nanoid(), value: "What industries has Marcus worked in?" },
+  { key: nanoid(), value: "What technologies does Marcus enjoy using?" },
 ];
 
 const chefSlug = {
