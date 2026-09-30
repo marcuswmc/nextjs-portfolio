@@ -11,7 +11,7 @@ Portfólio pessoal de Marcus Vinicius (Full Stack Developer com foco em frontend
 | Animação | GSAP + @gsap/react, motion, Lenis (smooth scroll) |
 | 3D | three, @react-three/fiber, @react-three/drei, maath |
 | IA / Chat | ai (AI SDK v5), @ai-sdk/google (`gemini-2.5-flash-lite`), @ai-sdk/react, ai-elements, streamdown, zod |
-| Analytics / Deploy | @vercel/analytics (Vercel) |
+| Analytics / Deploy | @vercel/analytics (Vercel), domínio marcussilva.dev |
 
 ## Current State
 
@@ -30,7 +30,7 @@ Portfólio pessoal de Marcus Vinicius (Full Stack Developer com foco em frontend
 - Nada conhecido
 
 ### Focus right now
-- Branch `feat/redesign-creative-ai` — plano em [[plans/redesign-creative-ai]]. Fases 0–3 prontas (home, /work, /lab, /ai). Próximo: Fase 4 (transições de página, SEO/OG/sitemap, performance do bundle ~471 kB na home, decisão sobre o chat IA).
+- Branch `feat/redesign-creative-ai` — plano em [[plans/redesign-creative-ai]]. Fases 0–4 prontas. Pendente: decisão do chat IA (fora do layout), revisão final e PR para `main`.
 
 ## Key Decisions Made
 
