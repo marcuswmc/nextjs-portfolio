@@ -19,7 +19,7 @@ export function SiteHeader() {
         hidden ? "-translate-y-[150%]" : "translate-y-0"
       }`}
     >
-      <NavLink href="/#home" className="self-start justify-self-start">
+      <NavLink href="/" className="self-start justify-self-start">
         Marcus Vinicius
       </NavLink>
 

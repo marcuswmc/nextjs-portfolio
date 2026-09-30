@@ -10,7 +10,7 @@ type NavLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
   href: string;
 };
 
-/** Next Link that smooth-scrolls with Lenis when the target section is on the current page. */
+/** Next Link that smooth-scrolls with Lenis when the target (section or top) is on the current page. */
 export function NavLink({ href, onClick, ...rest }: NavLinkProps) {
   const pathname = usePathname();
   const lenis = useLenis();
@@ -18,7 +18,15 @@ export function NavLink({ href, onClick, ...rest }: NavLinkProps) {
   const handleClick = (e: MouseEvent<HTMLAnchorElement>) => {
     onClick?.(e);
     const [path, hash] = href.split("#");
-    if (!hash || (path || "/") !== pathname) return;
+    if ((path || "/") !== pathname) return;
+
+    // Link to the page you're already on: glide back to the top instead of a no-op
+    if (!hash) {
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(0, { duration: 1.5 });
+      else window.scrollTo({ top: 0, behavior: "smooth" });
+      return;
+    }
 
     e.preventDefault();
     const target = document.getElementById(hash);
