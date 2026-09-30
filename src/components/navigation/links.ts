@@ -4,7 +4,7 @@ export type SiteLink = { label: string; href: string };
 export const menuLinks: SiteLink[] = [
   { label: "Home", href: "/#home" },
   { label: "Services", href: "/#services" },
-  { label: "Work", href: "/#work" },
+  { label: "Work", href: "/work" },
   { label: "Lab", href: "/lab" },
   { label: "AI", href: "/ai" },
   { label: "About", href: "/#about" },
@@ -13,7 +13,7 @@ export const menuLinks: SiteLink[] = [
 
 /** Short list shown in the header. */
 export const headerLinks: SiteLink[] = [
-  { label: "Work", href: "/#work" },
+  { label: "Work", href: "/work" },
   { label: "Lab", href: "/lab" },
   { label: "AI", href: "/ai" },
   { label: "Contact", href: "/#contact" },

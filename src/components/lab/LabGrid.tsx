@@ -1,10 +1,8 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
-import { InView } from "@/components/InView";
-import { NavLink } from "@/components/navigation/NavLink";
-import { controlDefaults, labCategories, type LabItem } from "@/content/lab/registry";
-import { labPreviews } from "@/content/lab/previews";
+import { LabCard } from "@/components/lab/LabCard";
+import { labCategories, type LabItem } from "@/content/lab/registry";
 import { Flip, gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
@@ -86,44 +84,16 @@ export function LabGrid({ items }: { items: LabItem[] }) {
       </div>
 
       <ul className="grid mx-8 mt-8 border-t border-l md:mx-10 sm:grid-cols-2 lg:grid-cols-3 border-ink/20">
-        {items.map((item, index) => {
-          const Preview = labPreviews[item.slug];
-          return (
-            <li
-              key={item.slug}
-              data-lab-card
-              data-flip-id={item.slug}
-              className={cn("flex flex-col border-b border-r border-ink/20 bg-canvas", !visible(item) && "hidden")}
-            >
-              <div className="flex justify-between px-6 pt-5 text-xs tracking-[0.15em] uppercase">
-                <span>
-                  <span className="opacity-50">({String(index + 1).padStart(2, "0")})</span> {item.category}
-                </span>
-                <span className="opacity-50">{item.hint}</span>
-              </div>
-
-              <InView className="relative flex items-center justify-center overflow-hidden aspect-[4/3]">
-                {Preview && <Preview values={controlDefaults(item)} compact />}
-              </InView>
-
-              <div className="flex items-end justify-between gap-4 px-6 pt-4 pb-6 mt-auto border-t border-ink/10">
-                <div>
-                  <h3 className="text-2xl leading-none tracking-tight">{item.title}</h3>
-                  <p className="mt-2 text-xs tracking-wider uppercase opacity-50">
-                    {item.dependencies.length ? item.dependencies.join(" · ") : "No dependencies"}
-                  </p>
-                </div>
-                <NavLink
-                  href={`/lab/${item.slug}`}
-                  className="flex items-center justify-center text-lg transition-colors duration-300 border rounded-full shrink-0 size-11 border-ink/30 hover:bg-ink hover:text-canvas"
-                  aria-label={`Open ${item.title}`}
-                >
-                  →
-                </NavLink>
-              </div>
-            </li>
-          );
-        })}
+        {items.map((item, index) => (
+          <LabCard
+            key={item.slug}
+            item={item}
+            index={index}
+            data-lab-card
+            data-flip-id={item.slug}
+            className={cn("bg-canvas", !visible(item) && "hidden")}
+          />
+        ))}
       </ul>
     </div>
   );

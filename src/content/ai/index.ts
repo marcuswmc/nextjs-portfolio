@@ -26,7 +26,7 @@ export const aiItems: AiItem[] = [
     type: "Prompt",
     title: "Portfolio Assistant",
     description:
-      "The system prompt behind the AI chat on this site: grounded answers through a search tool, no invented facts, replies in the visitor's language.",
+      "The system prompt behind my portfolio assistant: grounded answers through a search tool, no invented facts, replies in the visitor's language.",
     tools: ["Gemini", "AI SDK"],
     content: systemPrompt(),
   },

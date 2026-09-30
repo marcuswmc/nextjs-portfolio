@@ -28,6 +28,8 @@ export type LabItem = {
   controls?: LabControl[];
   /** How to interact with the preview. */
   hint: string;
+  /** The animation plays once (on load or scroll), so cards offer a Replay button. */
+  replayable?: boolean;
 };
 
 export const labItems: LabItem[] = [
@@ -50,7 +52,8 @@ export const labItems: LabItem[] = [
       { name: "first", label: "Line 1", type: "text", default: "Kinetic" },
       { name: "second", label: "Line 2", type: "text", default: "Type" },
     ],
-    hint: "Replay",
+    hint: "On load",
+    replayable: true,
   },
   {
     slug: "text-scramble",
@@ -82,7 +85,8 @@ export const labItems: LabItem[] = [
       { name: "text", label: "Text", type: "text", default: "Lines rise from a mask as they enter the view." },
       { name: "stagger", label: "Stagger (s)", type: "range", default: 0.08, min: 0, max: 0.4, step: 0.02 },
     ],
-    hint: "Replay",
+    hint: "Scroll inside",
+    replayable: true,
   },
   {
     slug: "magnetic",
@@ -128,7 +132,8 @@ export const labItems: LabItem[] = [
   aside="Selected projects crafted with passion."
 />`,
     controls: [{ name: "title", label: "Title", type: "text", default: "Works" }],
-    hint: "Replay",
+    hint: "On load",
+    replayable: true,
   },
   {
     slug: "planet",

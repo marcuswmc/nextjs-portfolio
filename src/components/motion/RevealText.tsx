@@ -14,6 +14,10 @@ type RevealTextProps = {
   trigger?: "inView" | "mount";
   delay?: number;
   stagger?: number;
+  /** Scroll container to observe instead of the page (e.g. a preview box). */
+  scroller?: Element | null;
+  /** Play only the first time (default). When false, scrolling back up reverses it. */
+  once?: boolean;
 };
 
 /** Masked line-by-line reveal (GSAP SplitText), re-splits on resize/font load. */
@@ -24,6 +28,8 @@ export function RevealText({
   trigger = "inView",
   delay = 0,
   stagger = 0.08,
+  scroller,
+  once = true,
 }: RevealTextProps) {
   const ref = useRef<HTMLElement | null>(null);
   const reduced = useReducedMotion();
@@ -45,7 +51,13 @@ export function RevealText({
             delay,
             scrollTrigger:
               trigger === "inView"
-                ? { trigger: ref.current, start: "top 85%", once: true }
+                ? {
+                    trigger: ref.current,
+                    scroller: scroller ?? undefined,
+                    start: "top 85%",
+                    once,
+                    toggleActions: "play none none reverse",
+                  }
                 : undefined,
           });
         },
@@ -53,7 +65,7 @@ export function RevealText({
 
       return () => split.revert();
     },
-    { scope: ref, dependencies: [reduced] }
+    { scope: ref, dependencies: [reduced, scroller] }
   );
 
   return createElement(Tag, { ref, className }, children);

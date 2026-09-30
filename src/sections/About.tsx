@@ -76,7 +76,7 @@ export default function About() {
       ref={sectionRef}
       className="relative pb-24 bg-contrast text-on-contrast rounded-b-4xl"
     >
-      <SectionHeader index="06" label="Code with purpose, built to scale" title="About" />
+      <SectionHeader index="05" label="Code with purpose, built to scale" title="About" />
 
       <div className="grid gap-12 px-8 mt-12 md:px-10 lg:grid-cols-12">
         <div className="lg:col-span-5">
@@ -139,7 +139,7 @@ export default function About() {
       {/* Brands */}
       <div className="px-8 mt-32 md:px-10">
         <p className="text-xs tracking-[0.2em] uppercase">
-          <span className="opacity-50">(07)</span> Brands I&apos;ve worked with
+          <span className="opacity-50">(06)</span> Brands I&apos;ve worked with
         </p>
         <ul
           data-brands

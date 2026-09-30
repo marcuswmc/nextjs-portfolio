@@ -41,7 +41,8 @@ export default function Works() {
         duration: 1,
         ease: "power3.out",
         stagger: 0.12,
-        scrollTrigger: { trigger: "[data-work-list]", start: "top 80%", once: true },
+        delay: 0.5,
+        scrollTrigger: { trigger: "[data-work-list]", start: "top 95%", once: true },
       });
     },
     { scope: sectionRef, dependencies: [reduced] }
@@ -84,9 +85,10 @@ export default function Works() {
   };
 
   return (
-    <section id="work" ref={sectionRef} className="relative flex flex-col pb-24">
+    <section id="work" ref={sectionRef} className="relative flex flex-col pt-16 pb-24">
       <SectionHeader
-        index="03"
+        index="01"
+        immediate
         label="Logic meets aesthetics, seamlessly"
         title="Works"
         count={projects.length}

@@ -1,7 +1,6 @@
 import { Hero } from "@/sections/Hero";
 import Disciplines from "@/sections/Disciplines";
 import Services from "@/sections/Services";
-import Works from "@/sections/Works";
 import LabTeaser from "@/sections/LabTeaser";
 import AiTeaser from "@/sections/AiTeaser";
 import About from "@/sections/About";
@@ -13,7 +12,6 @@ export default function Home() {
       <Hero />
       <Disciplines />
       <Services />
-      <Works />
       <LabTeaser />
       <AiTeaser />
       <About />

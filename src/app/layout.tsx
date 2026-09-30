@@ -17,7 +17,6 @@ import { SiteHeader } from "@/components/navigation/SiteHeader";
 import { SiteFooter } from "@/components/navigation/SiteFooter";
 import { HashScroll } from "@/components/navigation/HashScroll";
 import { Navbar } from "@/sections/Navbar";
-import { Chat } from "@/sections/Chat";
 
 export const metadata: Metadata = {
   title: {
@@ -51,7 +50,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <HashScroll />
           <main className="relative w-full min-h-screen overflow-x-clip">{children}</main>
           <SiteFooter />
-          <Chat />
         </SmoothScroll>
         <Analytics />
       </body>

@@ -10,7 +10,7 @@ export default function Contact() {
   return (
     <section id="contact" className="relative pb-24">
       <SectionHeader
-        index="08"
+        index="07"
         label="You dream it, I code it"
         title="Contact"
         aside="Got a question, a brief or a wild idea? I'd love to hear from you and discuss it further."

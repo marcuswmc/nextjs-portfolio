@@ -15,7 +15,7 @@ export default function AiTeaser() {
       className="relative pb-24 bg-contrast text-on-contrast rounded-t-4xl"
     >
       <SectionHeader
-        index="05"
+        index="04"
         label="AI Developer · Solutions"
         title="AI Lab"
         aside="Prompts, skills, plugins and automations I build for my own work — shared openly, free to use in yours."

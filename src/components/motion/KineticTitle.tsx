@@ -51,12 +51,24 @@ export function KineticTitle({
       });
 
       if (drift) {
-        lineEls.forEach((line, i) => {
-          gsap.to(line, {
-            xPercent: drift[i % drift.length],
-            ease: "none",
-            scrollTrigger: { trigger: ref.current, start: driftStart, end: "bottom top", scrub: true },
-          });
+        // Drift lives on wrappers (not the split targets) and always starts from an explicit 0,
+        // so scrolling back — after a resize, re-split or hot reload — lands on the initial layout.
+        gsap.utils.toArray<HTMLElement>("[data-line-wrap]", ref.current).forEach((wrap, i) => {
+          gsap.fromTo(
+            wrap,
+            { xPercent: 0 },
+            {
+              xPercent: drift[i % drift.length],
+              ease: "none",
+              scrollTrigger: {
+                trigger: ref.current,
+                start: `clamp(${driftStart})`,
+                end: "clamp(bottom top)",
+                scrub: true,
+                invalidateOnRefresh: true,
+              },
+            }
+          );
         });
       }
 
@@ -71,14 +83,16 @@ export function KineticTitle({
     lines.map((line, i) => (
       <span
         key={i}
-        data-line
+        data-line-wrap
         className={cn(
           "block",
           line.align === "right" && "text-right",
           line.align === "center" && "text-center"
         )}
       >
-        {line.content}
+        <span data-line className="inline-block">
+          {line.content}
+        </span>
       </span>
     ))
   );

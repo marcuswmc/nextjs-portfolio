@@ -73,6 +73,7 @@ Notas da implementação (30-09-2026):
 - Previews do grid montam só perto da viewport (`InView`); com um só item 3D, o canvas compartilhado (`View` do drei) não foi necessário ainda.
 - 7 itens: Kinetic Title (extraído do Hero), Text Scramble, Line Reveal, Magnetic, Copy Button, Section Header, Orbit Planet.
 - R3F atualizado 9.2 → 9.8.1: a 9.2 perdia o contexto WebGL no dev (StrictMode do React 19).
+- Ajustes pós-Fase 2 (30-09-2026): Works saiu da home e virou a página `/work`; chat IA removido do layout (código e `/api/chat` mantidos para decisão final); cards do Lab (`LabCard`, compartilhado com a home) ganharam botão Replay e demos de scroll rodam num `ScrollStage` interno (`data-lenis-prevent`, `scroller` no ScrollTrigger); drift do `KineticTitle` agora em wrappers com `fromTo` a partir de 0 (volta ao estado inicial ao rolar de volta).
 - **Como adicionar um item:** entrada no registry + demo em `components/lab/demos/` + linha em `previews.tsx`.
 
 ### Fase 3: Página /ai (AI Creative Solutions)

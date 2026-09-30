@@ -6,7 +6,7 @@ import { useLenis } from "lenis/react";
 import type { ComponentProps, MouseEvent } from "react";
 
 type NavLinkProps = Omit<ComponentProps<typeof Link>, "href"> & {
-  /** Route ("/lab") or route + section hash ("/#work"). */
+  /** Route ("/lab") or route + section hash ("/#services"). */
   href: string;
 };
 
