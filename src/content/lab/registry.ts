@@ -85,7 +85,7 @@ export const labItems: LabItem[] = [
       { name: "text", label: "Text", type: "text", default: "Lines rise from a mask as they enter the view." },
       { name: "stagger", label: "Stagger (s)", type: "range", default: 0.08, min: 0, max: 0.4, step: 0.02 },
     ],
-    hint: "Scroll inside",
+    hint: "On scroll",
     replayable: true,
   },
   {

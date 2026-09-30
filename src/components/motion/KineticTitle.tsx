@@ -79,7 +79,11 @@ export function KineticTitle({
 
   return createElement(
     as,
-    { ref, className: cn("uppercase leading-[0.82] tracking-[-0.045em]", className) },
+    {
+      ref,
+      // leading goes last: tailwind-merge drops it when a later text-[size] class appears
+      className: cn("uppercase tracking-[-0.045em]", className, "leading-[0.82]"),
+    },
     lines.map((line, i) => (
       <span
         key={i}
@@ -90,7 +94,7 @@ export function KineticTitle({
           line.align === "center" && "text-center"
         )}
       >
-        <span data-line className="inline-block">
+        <span data-line className="block">
           {line.content}
         </span>
       </span>

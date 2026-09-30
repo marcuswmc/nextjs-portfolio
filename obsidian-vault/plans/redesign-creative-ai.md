@@ -59,6 +59,8 @@ Notas da implementação (30-09-2026):
 - Loader de progresso 3D removido: o canvas do planeta só monta perto da seção.
 - Registry inicial de IA em `src/content/ai/` (1 item real: prompt do assistente do portfólio).
 - Lição: não usar `transition-transform` (CSS) no mesmo elemento que o GSAP anima — trava o transform. Separar em wrapper.
+- Lição: `cn()` (tailwind-merge) descarta `leading-*` que venha **antes** de um `text-[tamanho]` — colocar o leading depois do tamanho.
+- Hero: fonte do título = `min(14vw, (100svh - 340px) / 2.46)`, cabe em qualquer altura de tela.
 
 ### Fase 2: Página /lab (biblioteca de componentes)
 - [x] **Registry tipado** em `src/content/lab/`: `slug`, título, categoria (Components, Heros, Sections, Text Animations, 3D), tags, dependências, preview (carregado com `next/dynamic`), código-fonte e props.
@@ -73,7 +75,7 @@ Notas da implementação (30-09-2026):
 - Previews do grid montam só perto da viewport (`InView`); com um só item 3D, o canvas compartilhado (`View` do drei) não foi necessário ainda.
 - 7 itens: Kinetic Title (extraído do Hero), Text Scramble, Line Reveal, Magnetic, Copy Button, Section Header, Orbit Planet.
 - R3F atualizado 9.2 → 9.8.1: a 9.2 perdia o contexto WebGL no dev (StrictMode do React 19).
-- Ajustes pós-Fase 2 (30-09-2026): Works saiu da home e virou a página `/work`; chat IA removido do layout (código e `/api/chat` mantidos para decisão final); cards do Lab (`LabCard`, compartilhado com a home) ganharam botão Replay e demos de scroll rodam num `ScrollStage` interno (`data-lenis-prevent`, `scroller` no ScrollTrigger); drift do `KineticTitle` agora em wrappers com `fromTo` a partir de 0 (volta ao estado inicial ao rolar de volta).
+- Ajustes pós-Fase 2 (30-09-2026): Works saiu da home e virou a página `/work`; chat IA removido do layout (código e `/api/chat` mantidos para decisão final); cards do Lab (`LabCard`, compartilhado com a home) ganharam botão Replay e previews dos cards montam quando o card entra na tela (animações disparam no scroll) e Replay remonta o preview; o `ScrollStage` interno foi testado e descartado a pedido; drift do `KineticTitle` agora em wrappers com `fromTo` a partir de 0 (volta ao estado inicial ao rolar de volta).
 - **Como adicionar um item:** entrada no registry + demo em `components/lab/demos/` + linha em `previews.tsx`.
 
 ### Fase 3: Página /ai (AI Creative Solutions)

@@ -102,8 +102,9 @@ export function SectionHeader({
       <h2
         ref={titleRef}
         className={cn(
-          "mt-6 leading-[0.85] tracking-[-0.04em] uppercase",
-          size === "xl" ? "text-[clamp(3.5rem,13vw,12rem)]" : "text-[clamp(2.75rem,8vw,8rem)]"
+          "mt-6 tracking-[-0.04em] uppercase",
+          size === "xl" ? "text-[clamp(3.5rem,13vw,12rem)]" : "text-[clamp(2.75rem,8vw,8rem)]",
+          "leading-[0.85]" // after the size: tailwind-merge drops leading that precedes a text size
         )}
       >
         {title}

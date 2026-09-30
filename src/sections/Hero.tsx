@@ -34,7 +34,7 @@ export function Hero() {
     <section
       id="home"
       ref={sectionRef}
-      className="relative flex flex-col justify-end min-h-[82svh] gap-12 md:min-h-svh px-8 pb-8 overflow-hidden pt-28 md:justify-between md:gap-8 md:px-10 md:pt-32"
+      className="relative flex flex-col justify-end min-h-[82svh] gap-12 md:min-h-svh px-8 pb-8 overflow-hidden pt-28 md:justify-between md:gap-6 md:px-10 md:pt-28"
     >
       <div className="grid gap-6 md:grid-cols-12">
         <p data-hero-meta className="max-w-sm text-lg leading-snug md:col-span-5 md:text-xl">
@@ -53,7 +53,7 @@ export function Hero() {
       </div>
 
       <KineticTitle
-        className="text-[clamp(3.6rem,min(14vw,24svh),17rem)]"
+        className="text-[clamp(3rem,min(14vw,calc((100svh_-_340px)/2.46)),17rem)]"
         driftStart="top 40%"
         lines={[
           { content: "Creative" },

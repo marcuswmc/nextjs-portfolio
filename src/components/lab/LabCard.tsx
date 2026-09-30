@@ -37,7 +37,10 @@ export function LabCard({ item, index, className, ...rest }: LabCardProps) {
         )}
       </div>
 
-      <InView className="relative flex items-center justify-center overflow-hidden aspect-[4/3]">
+      <InView
+        rootMargin="0px 0px -20% 0px"
+        className="relative flex items-center justify-center overflow-hidden aspect-[4/3]"
+      >
         {Preview && <Preview key={replayKey} values={controlDefaults(item)} compact />}
       </InView>
 
