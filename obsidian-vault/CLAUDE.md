@@ -30,7 +30,7 @@ Portfólio pessoal de Marcus Vinicius (Full Stack Developer com foco em frontend
 - Nada conhecido
 
 ### Focus right now
-- Branch `feat/redesign-creative-ai` — plano em [[plans/redesign-creative-ai]]. Fases 0, 1 e 2 prontas (home + /lab). Próximo: Fase 3 (/ai: registry de prompts/skills/plugins/automações, filtros, detalhe com copiar/baixar).
+- Branch `feat/redesign-creative-ai` — plano em [[plans/redesign-creative-ai]]. Fases 0–3 prontas (home, /work, /lab, /ai). Próximo: Fase 4 (transições de página, SEO/OG/sitemap, performance do bundle ~471 kB na home, decisão sobre o chat IA).
 
 ## Key Decisions Made
 
@@ -42,6 +42,7 @@ These are settled. Do not reopen them without a good reason (details in `decisio
 - **Cores:** usar tokens `canvas/ink/contrast/on-contrast` (+ `gold`), nunca `bg-black`/`text-white` fixos; dark mode segue o sistema (`prefers-color-scheme`), sem toggle
 - **GSAP:** importar sempre de `@/lib/gsap` (plugins registrados lá)
 - **Navegação:** desktop só header fixo; menu fullscreen apenas no mobile; links via `NavLink`
+- **AI Lab:** adicionar itens em `src/content/ai/index.ts` (`aiItems`)
 - **Lab:** adicionar itens via `src/content/lab/registry.ts` + demo + `previews.tsx` (ver plano)
 - **Planeta 3D:** fora do Hero; vive na seção `Disciplines` (scroll: planeta = Creative, lua = AI)
 
