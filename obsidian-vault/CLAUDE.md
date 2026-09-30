@@ -22,7 +22,7 @@ Portfólio pessoal de Marcus Vinicius (Full Stack Developer com foco em frontend
 ### Working
 - Seções: Navbar, Hero (planeta 3D), ServiceSummary, Services, About, Works, Contact, Chat
 - Loader de progresso (useProgress do drei) antes de exibir a página
-- Chat IA em `/api/chat` com tool `searchTool` → `searchRelevantInfo` (RAG por keywords em `professionalData.ts`)
+- Chat IA em `/api/chat` (removido do layout em 30-09-2026; decisão final no fim do projeto) com tool `searchTool` → `searchRelevantInfo` (RAG por keywords em `professionalData.ts`)
 - Migração JS → TypeScript concluída
 - Skill `interaction-design` instalada no usuário (~/.claude/skills) para microinterações/motion
 
