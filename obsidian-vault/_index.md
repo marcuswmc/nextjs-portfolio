@@ -5,7 +5,7 @@ tags: [claude/index]
 
 # Index
 
-_Generated automatically on 30-09-2026 23:22. Do not edit by hand._
+_Generated automatically on 01-10-2026 00:05. Do not edit by hand._
 
 - [[CLAUDE]] — project context
 - [[00-inbox]] — inbox
