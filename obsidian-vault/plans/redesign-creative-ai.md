@@ -79,10 +79,18 @@ Notas da implementação (30-09-2026):
 - **Como adicionar um item:** entrada no registry + demo em `components/lab/demos/` + linha em `previews.tsx`.
 
 ### Fase 3: Página /ai (AI Creative Solutions)
-- [ ] **Registry tipado** em `src/content/ai/`: tipo (Prompt, Skill, Plugin, Automation, MCP), título, descrição, ferramentas compatíveis (Claude, ChatGPT, n8n…), conteúdo em markdown, arquivos para download e link do GitHub.
-- [ ] **Listagem** com filtros por tipo e ferramenta; cards com ações rápidas (copiar prompt, baixar, instalar).
-- [ ] **Detalhe `/ai/[slug]`:** markdown renderizado com `streamdown` (já instalado), bloco de instalação copiável e arquivos para baixar (em `public/ai/`).
-- [ ] Conteúdo inicial: o assistente RAG do portfólio (system prompt + tool) como primeiro case.
+- [x] **Registry tipado** em `src/content/ai/`: tipo (Prompt, Skill, Plugin, Automation, MCP), título, descrição, ferramentas compatíveis (Claude, ChatGPT, n8n…), conteúdo em markdown, arquivos para download e link do GitHub.
+- [x] **Listagem** com filtros por tipo e ferramenta; cards com ações rápidas (copiar prompt, baixar, instalar).
+- [x] **Detalhe `/ai/[slug]`:** markdown renderizado com `streamdown` (já instalado), bloco de instalação copiável e arquivos para baixar (em `public/ai/`).
+- [x] Conteúdo inicial: o assistente RAG do portfólio (system prompt + tool) como primeiro case.
+
+Notas da implementação (30-09-2026):
+- Registry em `src/content/ai/index.ts`: tipos Prompt, Skill, Plugin, Automation, Tool; arquivos inline ou `sourcePath` (lidos no build, com recorte por marcadores `from`/`to`); `highlights`, `steps`, `url`, `repo`, `license`.
+- `/ai` (filtros por tipo e ferramenta, Flip, copiar/baixar no card, "In the works" para tipos vazios) e `/ai/[slug]` SSG (abas de arquivos com shiki, copiar/baixar, passo a passo, links).
+- Download gerado no navegador (Blob) — sem arquivos em `public/`.
+- Uso de "steps" estruturados no lugar de markdown/streamdown (evita estilos do streamdown).
+- Itens: **Obsidian Memory** (plugin do Marcus — comandos de instalação literais do site, MIT, GitHub), **HPLG Framework** (prompt framework do Marcus — só destaques + link; o texto dos templates não foi copiado para não publicar versão alterada), Portfolio Assistant (prompt do chat), Keyword RAG Chat (rota + busca do chat).
+- **Como adicionar um item:** nova entrada em `aiItems`; listagem, filtros e página de detalhe são automáticos.
 
 ### Fase 4: 3D com scroll + acabamento
 - [ ] **Chat IA:** redesenhar botão (magnético, no estilo novo) e painel (tipografia, estados, tema claro/escuro).
@@ -97,4 +105,4 @@ Notas da implementação (30-09-2026):
 - **Escopo grande:** entregar por fase, cada uma revisável no preview (commits separados).
 
 ## Status
-Fases 0, 1 e 2 concluídas (30-09-2026). Próximo: Fase 3 (/ai).
+Fases 0–3 concluídas (30-09-2026). Próximo: Fase 4 (3D/scroll extra, transições de página, SEO, performance, chat).

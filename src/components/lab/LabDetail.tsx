@@ -66,7 +66,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
       </div>
 
       {tab === "preview" ? (
-        <div className="grid gap-4 mt-6 lg:grid-cols-12">
+        <div className="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-12">
           <div className="relative flex items-center justify-center overflow-hidden border rounded-2xl lg:col-span-9 border-ink/20 min-h-[60svh]">
             <span className="absolute text-xs tracking-[0.15em] uppercase top-5 left-6 opacity-50">
               {item.hint}
@@ -132,12 +132,12 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
       )}
 
       {/* Install + usage */}
-      <div className="grid gap-4 mt-12 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 mt-12 md:grid-cols-2">
         <div className="flex flex-col gap-3">
           <p className="text-xs tracking-[0.2em] uppercase opacity-50">Install</p>
           {install ? (
             <div className="flex items-center justify-between gap-4 px-5 py-4 font-mono text-sm border rounded-2xl border-ink/20">
-              <code className="truncate">{install}</code>
+              <code className="min-w-0 truncate">{install}</code>
               <CopyButton
                 value={install}
                 className="px-3 py-1 text-xs uppercase rounded-full shrink-0 bg-ink text-canvas"

@@ -4,10 +4,11 @@ import { SectionHeader } from "@/components/SectionHeader";
 import { CopyButton } from "@/components/motion/CopyButton";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { NavLink } from "@/components/navigation/NavLink";
-import { aiItems, aiTypes } from "@/content/ai";
+import { aiItems, aiTypeDescriptions, aiTypes, copyLabel } from "@/content/ai";
 
 export default function AiTeaser() {
   const featured = aiItems[0];
+  const featuredContent = featured.files[0]?.content ?? "";
 
   return (
     <section
@@ -33,42 +34,42 @@ export default function AiTeaser() {
             <p className="max-w-md mt-4 text-on-contrast/60">{featured.description}</p>
           </div>
           <pre className="relative p-4 overflow-hidden text-xs leading-relaxed whitespace-pre-wrap rounded-lg max-h-40 bg-on-contrast/5 text-on-contrast/70 font-mono">
-            {featured.content?.slice(0, 420)}…
+            {featuredContent.length > 420 ? `${featuredContent.slice(0, 420)}…` : featuredContent}
             <span className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-contrast to-transparent" />
           </pre>
           <div className="flex items-center gap-4">
-            {featured.content && (
+            {featuredContent && (
               <CopyButton
-                value={featured.content}
-                label="Copy prompt"
+                value={featuredContent}
+                label={copyLabel(featured)}
                 className="px-5 py-2 text-sm uppercase transition-colors rounded-full bg-on-contrast text-contrast hover:bg-gold"
               />
             )}
-            <NavLink href="/ai" className="text-sm link-underline">
-              See all →
+            <NavLink href={`/ai/${featured.slug}`} className="text-sm link-underline">
+              Details →
             </NavLink>
           </div>
         </article>
 
-        {/* Types */}
-        <ul className="grid gap-4 sm:grid-cols-2 lg:col-span-6">
-          {aiTypes.map(({ type, description }, index) => {
+        {/* Types — editorial index */}
+        <ul className="self-start border-t lg:col-span-6 border-on-contrast/20">
+          {aiTypes.map((type, index) => {
             const count = aiItems.filter((item) => item.type === type).length;
             return (
-              <li key={type}>
-                <NavLink
-                  href="/ai"
-                  className="flex flex-col justify-between h-full gap-8 p-6 transition-colors duration-500 border group rounded-2xl border-on-contrast/20 hover:bg-on-contrast hover:text-contrast"
-                >
-                  <div className="flex justify-between text-xs tracking-[0.15em] uppercase">
-                    <span className="opacity-50">({String(index + 1).padStart(2, "0")})</span>
-                    <span className="opacity-60">{count > 0 ? `${count} available` : "Coming soon"}</span>
-                  </div>
-                  <div>
-                    <h3 className="text-3xl tracking-tight">{type}s</h3>
-                    <p className="mt-2 text-sm opacity-60">{description}</p>
-                  </div>
-                  <span className="text-xl transition-transform duration-500 group-hover:translate-x-2">→</span>
+              <li key={type} className="border-b border-on-contrast/20">
+                <NavLink href="/ai" className="grid items-baseline grid-cols-12 gap-4 py-5 group">
+                  <span className="col-span-2 text-sm tabular-nums transition-colors duration-300 text-on-contrast/40 group-hover:text-gold">
+                    ({String(index + 1).padStart(2, "0")})
+                  </span>
+                  <span className="col-span-7">
+                    <span className="block text-3xl tracking-tight transition-transform duration-500 group-hover:translate-x-2">
+                      {type}s
+                    </span>
+                    <span className="block mt-1 text-sm text-on-contrast/50">{aiTypeDescriptions[type]}</span>
+                  </span>
+                  <span className="col-span-3 text-xs tracking-[0.15em] uppercase justify-self-end text-on-contrast/60">
+                    {count > 0 ? `${count} available` : "Coming soon"}
+                  </span>
                 </NavLink>
               </li>
             );

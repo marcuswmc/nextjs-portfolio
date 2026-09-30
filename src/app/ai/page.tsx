@@ -1,25 +1,31 @@
 import type { Metadata } from "next";
 import { SectionHeader } from "@/components/SectionHeader";
+import { AiGrid } from "@/components/ai/AiGrid";
+import { aiItems } from "@/content/ai";
+import { primaryContent } from "@/lib/ai-files";
 
 export const metadata: Metadata = {
-  title: "AI Creative Solutions",
+  title: "AI Lab",
   description:
-    "Prompts, plugins, skills and automations built by Marcus Vinicius, free to use.",
+    "Prompts, skills, plugins, automations and AI building blocks by Marcus Vinicius — free to copy, download and use.",
 };
 
-export default function AiPage() {
+export default async function AiPage() {
+  const entries = await Promise.all(
+    aiItems.map(async (item) => ({ item, primary: await primaryContent(item) }))
+  );
+
   return (
-    <section className="min-h-[70vh] pt-16">
+    <section className="pt-16 pb-24">
       <SectionHeader
         index="01"
         label="AI Developer · Creative Solutions"
         title="AI Lab"
-        aside="Prompts, plugins, skills and automations — free to use in your workflow."
+        count={aiItems.length}
+        aside="Prompts, skills, plugins and automations I build for my own work — shared openly, free to copy, download and use in yours."
         immediate
       />
-      <p className="px-8 mt-10 text-sm tracking-[0.3rem] uppercase md:px-10 text-ink/60">
-        In progress
-      </p>
+      <AiGrid entries={entries} />
     </section>
   );
 }
