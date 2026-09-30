@@ -43,16 +43,22 @@ Deixar o portfólio mais moderno e clean (referências editoriais/suíças: tipo
 - [x] Limpeza: remover dependências sem uso (`npx`, `tsc`, `react-slick`, possivelmente `react-scroll`), arquivos `.DS_Store`.
 
 ### Fase 1: Home redesenhada (seção por seção)
-- [ ] **Hero:** só tipografia — dupla identidade gigante ("CREATIVE / AI — DEVELOPER", troca animada tipo scramble), sem o planeta.
-- [ ] **ServiceSummary → "Two disciplines" com o planeta:** seção fixada (pin) em que o scroll controla o planeta — a esfera grande = Creative, a lua = AI; o anel gira e a câmera se aproxima conforme as palavras-chave de cada vertente entram de um lado e do outro. O planeta também vira item do /lab.
-- [ ] **Services:** mantém os cards empilhados sticky, reorganizados: Creative Development (3D/WebGL, Motion, UI), AI Development (LLM apps, RAG/agentes, automações, MCP/plugins), Full Stack, Performance & SEO. Índices `01/02`, hover que revela detalhes.
-- [ ] **Works:** filtros por categoria + toggle **List / Grid** com transição **GSAP Flip**; lista mantém o preview flutuante no hover; grid com zoom/cor no hover. Contador sobrescrito.
-- [ ] **Novo: Lab teaser** — 3 a 4 componentes em destaque com preview ao vivo → `/lab`.
-- [ ] **Novo: AI Solutions teaser** — cards de prompts/skills em destaque com "copiar" → `/ai`.
-- [ ] **About:** layout editorial mais limpo, foto com reveal, números (anos de experiência, projetos, marcas), texto sem emojis ou com ícones discretos.
-- [ ] **Brands:** reaproveitar `ContactSummary` (hoje fora da página) como grid de logos com bordas finas, estilo "Trusted by".
-- [ ] **Contact + Footer:** e-mail com copiar-para-área-de-transferência + feedback, botões magnéticos, relógio local, nome gigante no rodapé.
-- [ ] **Chat IA:** adaptar ao tema claro/escuro via tokens (sem mudar a lógica).
+- [x] **Hero:** só tipografia — dupla identidade gigante ("CREATIVE / AI — DEVELOPER", troca animada tipo scramble), sem o planeta.
+- [x] **ServiceSummary → "Two disciplines" com o planeta:** seção fixada (pin) em que o scroll controla o planeta — a esfera grande = Creative, a lua = AI; o anel gira e a câmera se aproxima conforme as palavras-chave de cada vertente entram de um lado e do outro. O planeta também vira item do /lab.
+- [x] **Services:** mantém os cards empilhados sticky, reorganizados: Creative Development (3D/WebGL, Motion, UI), AI Development (LLM apps, RAG/agentes, automações, MCP/plugins), Full Stack, Performance & SEO. Índices `01/02`, hover que revela detalhes.
+- [x] **Works:** filtros por categoria + toggle **List / Grid** com transição **GSAP Flip**; lista mantém o preview flutuante no hover; grid com zoom/cor no hover. Contador sobrescrito.
+- [x] **Novo: Lab teaser** — 3 a 4 componentes em destaque com preview ao vivo → `/lab`.
+- [x] **Novo: AI Solutions teaser** — cards de prompts/skills em destaque com "copiar" → `/ai`.
+- [x] **About:** layout editorial mais limpo, foto com reveal, números (anos de experiência, projetos, marcas), texto sem emojis ou com ícones discretos.
+- [x] **Brands:** reaproveitar `ContactSummary` (hoje fora da página) como grid de logos com bordas finas, estilo "Trusted by".
+- [x] **Contact + Footer:** e-mail com copiar-para-área-de-transferência + feedback, botões magnéticos, relógio local, nome gigante no rodapé.
+- [x] **Chat IA:** adaptado ao tema via tokens (redesign completo na Fase 4).
+
+Notas da implementação (30-09-2026):
+- Seções novas: `Disciplines` (planeta com scroll, `components/three/PlanetScene` + `PlanetModel`), `LabTeaser`, `AiTeaser`; `SectionHeader` substitui `AnimatedHeaderSection`; `SiteFooter` e `HashScroll` no layout.
+- Loader de progresso 3D removido: o canvas do planeta só monta perto da seção.
+- Registry inicial de IA em `src/content/ai/` (1 item real: prompt do assistente do portfólio).
+- Lição: não usar `transition-transform` (CSS) no mesmo elemento que o GSAP anima — trava o transform. Separar em wrapper.
 
 ### Fase 2: Página /lab (biblioteca de componentes)
 - [ ] **Registry tipado** em `src/content/lab/`: `slug`, título, categoria (Components, Heros, Sections, Text Animations, 3D), tags, dependências, preview (carregado com `next/dynamic`), código-fonte e props.
@@ -80,4 +86,4 @@ Deixar o portfólio mais moderno e clean (referências editoriais/suíças: tipo
 - **Escopo grande:** entregar por fase, cada uma revisável no preview (commits separados).
 
 ## Status
-Fase 0 concluída (30-09-2026). Próximo: Fase 1.
+Fases 0 e 1 concluídas (30-09-2026). Próximo: Fase 2 (/lab).

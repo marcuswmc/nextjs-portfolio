@@ -14,6 +14,8 @@ import { Analytics } from "@vercel/analytics/next";
 import type { Metadata } from "next";
 import { SmoothScroll } from "@/components/providers/SmoothScroll";
 import { SiteHeader } from "@/components/navigation/SiteHeader";
+import { SiteFooter } from "@/components/navigation/SiteFooter";
+import { HashScroll } from "@/components/navigation/HashScroll";
 import { Navbar } from "@/sections/Navbar";
 import { Chat } from "@/sections/Chat";
 
@@ -46,7 +48,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <SmoothScroll>
           <SiteHeader />
           <Navbar />
+          <HashScroll />
           <main className="relative w-full min-h-screen overflow-x-clip">{children}</main>
+          <SiteFooter />
           <Chat />
         </SmoothScroll>
         <Analytics />

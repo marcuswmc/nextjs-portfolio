@@ -1,20 +1,23 @@
-import { HomeLoader } from "@/components/HomeLoader";
 import { Hero } from "@/sections/Hero";
-import ServiceSummary from "@/sections/ServiceSummary";
+import Disciplines from "@/sections/Disciplines";
 import Services from "@/sections/Services";
-import About from "@/sections/About";
 import Works from "@/sections/Works";
+import LabTeaser from "@/sections/LabTeaser";
+import AiTeaser from "@/sections/AiTeaser";
+import About from "@/sections/About";
 import Contact from "@/sections/Contact";
 
 export default function Home() {
   return (
-    <HomeLoader>
+    <>
       <Hero />
-      <ServiceSummary />
+      <Disciplines />
       <Services />
-      <About />
       <Works />
+      <LabTeaser />
+      <AiTeaser />
+      <About />
       <Contact />
-    </HomeLoader>
+    </>
   );
 }

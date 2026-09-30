@@ -74,7 +74,7 @@ body {
   background: var(--site-canvas);
   color: var(--site-ink);
   overflow-x: hidden;
-  font-family: var(--font-amiamie);
+  font-family: var(--font-normal), sans-serif;
 }
 
 @media (prefers-reduced-motion: reduce) {

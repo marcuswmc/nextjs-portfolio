@@ -28,6 +28,14 @@ function LenisGsapSync() {
     if (lenis) lenis.options.smoothWheel = !reduced;
   }, [lenis, reduced]);
 
+  // Web fonts and late images shift layout; recompute trigger positions once they settle
+  useEffect(() => {
+    const refresh = () => ScrollTrigger.refresh();
+    document.fonts?.ready.then(refresh);
+    window.addEventListener("load", refresh);
+    return () => window.removeEventListener("load", refresh);
+  }, []);
+
   return null;
 }
 

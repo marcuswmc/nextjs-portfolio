@@ -22,80 +22,98 @@ export type Project = {
 
 export type Social = { name: string; href: string };
 
+export const contact = {
+  email: "marcus.relation@gmail.com",
+  phone: "+351 912 981 585",
+  location: "Porto, Portugal",
+};
+
+/** Main stack of a project, used by the Works filter. */
+export function projectStack(project: Project) {
+  const names = project.frameworks.map((f) => f.name.toLowerCase());
+  if (names.includes("next.js")) return "Next.js";
+  if (names.includes("react")) return "React";
+  if (names.includes("wordpress")) return "WordPress";
+  return "Other";
+}
+
 export const servicesData: Service[] = [
   {
-    title: "FullStack Development",
+    title: "Creative Development",
     description:
-      "Your business deserves a fast, secure, and future-proof digital foundation. I develop custom web apps with clean architecture, optimized databases, and seamless integrations—ensuring reliability at every layer.",
+      "Immersive, interactive interfaces that make brands feel alive — WebGL scenes, scroll-driven storytelling and motion systems that turn visits into experiences.",
+    items: [
+      {
+        title: "3D Web Experiences",
+        description: "Three.js, React Three Fiber, WebGL",
+      },
+      {
+        title: "Motion & Interaction",
+        description: "GSAP, Motion, scroll-based storytelling",
+      },
+      {
+        title: "UI/UX & Design Systems",
+        description: "Figma, reusable components, pixel-perfect UI",
+      },
+    ],
+  },
+  {
+    title: "AI Development",
+    description:
+      "AI features that do real work — assistants grounded in your data, prompts and tools that speed up creative teams, and automations that remove busywork.",
+    items: [
+      {
+        title: "AI Assistants & RAG",
+        description: "AI SDK, Gemini, OpenAI, tool calling",
+      },
+      {
+        title: "Prompts, Skills & Plugins",
+        description: "Claude, ChatGPT, custom AI tooling",
+      },
+      {
+        title: "Workflow Automation",
+        description: "API integrations, chatbots, assistants",
+      },
+    ],
+  },
+  {
+    title: "Full Stack Engineering",
+    description:
+      "A fast, secure and future-proof foundation — custom web apps with clean architecture, solid APIs and seamless integrations, on web and mobile.",
     items: [
       {
         title: "Frontend Excellence",
-        description: "(React, Nextjs, TypeScript, Interactive UI/UX)",
+        description: "React, Next.js, TypeScript",
       },
       {
-        title: "Backend Engineering",
-        description: "(REST APIs, Microservices, Auth Systems)",
+        title: "Backend & APIs",
+        description: "Node.js, REST, auth, databases",
       },
       {
-        title: "Database Design",
-        description: "(SQL/NoSQL Optimization, Scalable Structures)",
-      },
-    ],
-  },
-  {
-    title: "Web & Mobile Apps",
-    description:
-      "A clunky interface can sink even the best ideas. I craft responsive, pixel perfect web and mobile apps (React Native/Flutter) that users love—bridging design and functionality seamlessly.",
-    items: [
-      {
-        title: "Cross-Platform Apps",
-      },
-      {
-        title: "AI Automation (chatbot / assistant)",
-      },
-      {
-        title: "E-Commerce, Booking Systems, landing pages",
-      },
-    ],
-  },
-  {
-    title: "Advanced UI & Motion Design",
-    description:
-      "Transform static interfaces into immersive digital experiences. I craft visually striking, highly interactive UIs using cutting-edge animation tools—bringing emotion, depth, and precision to the frontend. Perfect for brands that want to stand out.",
-    items: [
-      {
-        title: "Dynamic Animations",
-        description: "(GSAP, Framer Motion, Scroll-based Interactions)",
-      },
-      {
-        title: "3D Web Experiences",
-        description: "(Three.js, WebGL, Real-time Visuals)",
-      },
-      {
-        title: "Creative Design Integration",
-        description: "(Figma, Photoshop, Illustrator)",
+        title: "Web & Mobile Apps",
+        description: "E-commerce, booking systems, React Native, Flutter",
       },
     ],
   },
   {
     title: "Performance & SEO",
     description:
-      "Speed is a feature, and visibility is power. I fine-tune your web app for blazing-fast load times and high search rankings—ensuring users find you quickly and stay engaged. From core vitals to advanced SEO strategy, performance is built in.",
+      "Speed is a feature and visibility is power. Fast load times, healthy Core Web Vitals and search-ready markup are built in, not bolted on.",
     items: [
       {
         title: "Performance Optimization",
-        description: "(Lazy Loading, Code Splitting, Asset Compression)",
+        description: "Lazy loading, code splitting, asset compression",
       },
       {
         title: "Core Web Vitals",
-        description: "(LCP, FID, CLS Monitoring & Improvements)",
+        description: "LCP, INP, CLS monitoring & improvements",
       },
       {
         title: "SEO Engineering",
-        description: "(SSR, Structured Data, Semantic HTML, Metadata)",
+        description: "SSR, structured data, semantic HTML, metadata",
       },
     ],
-  }
+  },
 ];
 export const projects: Project[] = [
   {
@@ -168,3 +186,8 @@ export const socials: Social[] = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/mvinicius-dev/" },
   { name: "GitHub", href: "https://github.com/marcuswmc" },
 ];
+
+export const brandLogos: string[] = Array.from(
+  { length: 18 },
+  (_, i) => `/brands/logo${String(i + 1).padStart(2, "0")}.png`
+);

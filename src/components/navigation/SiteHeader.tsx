@@ -4,14 +4,16 @@ import { LocalTime } from "@/components/LocalTime";
 import { ScrambleText } from "@/components/motion/ScrambleText";
 import { NavLink } from "@/components/navigation/NavLink";
 import { headerLinks } from "@/components/navigation/links";
-import { useHideOnScroll } from "@/hooks/useHideOnScroll";
+import { useScrollState } from "@/hooks/useHideOnScroll";
 
 /**
  * Editorial meta row fixed at the top of every page. Hides while scrolling down.
  * `mix-blend-difference` keeps it legible over light and dark sections in both themes.
  */
 export function SiteHeader() {
-  const hidden = useHideOnScroll();
+  const { hidden, scrolled } = useScrollState();
+  // Away from the top only the name and links stay, so the bar sits lighter over content
+  const meta = `transition-opacity duration-500 ${scrolled ? "opacity-0" : "opacity-100"}`;
 
   return (
     <header
@@ -23,12 +25,12 @@ export function SiteHeader() {
         <ScrambleText text="Marcus Vinicius" hoverTarget="a" />
       </NavLink>
 
-      <p className="text-white/60">
+      <p className={`hidden sm:block text-white/60 ${meta}`}>
         Creative Developer
         <br />& AI Developer
       </p>
 
-      <p className="hidden md:block text-white/60">
+      <p className={`hidden md:block text-white/60 ${meta}`}>
         Based in Porto, Portugal
         <br />
         <LocalTime /> Lisbon time

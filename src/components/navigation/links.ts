@@ -4,10 +4,10 @@ export type SiteLink = { label: string; href: string };
 export const menuLinks: SiteLink[] = [
   { label: "Home", href: "/#home" },
   { label: "Services", href: "/#services" },
-  { label: "About", href: "/#about" },
   { label: "Work", href: "/#work" },
   { label: "Lab", href: "/lab" },
   { label: "AI", href: "/ai" },
+  { label: "About", href: "/#about" },
   { label: "Contact", href: "/#contact" },
 ];
 
