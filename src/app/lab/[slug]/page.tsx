@@ -33,7 +33,11 @@ export default async function LabItemPage({ params }: Params) {
   if (!item) notFound();
 
   const code = await readFile(path.join(process.cwd(), item.sourcePath), "utf8");
-  const [codeHtml, usageHtml] = await Promise.all([highlight(code), highlight(item.usage)]);
+  const lang = item.sourcePath.endsWith(".js") ? "ts" : "tsx";
+  const [codeHtml, usageHtml] = await Promise.all([
+    highlight(code, lang),
+    item.usage ? highlight(item.usage) : Promise.resolve(""),
+  ]);
 
   const index = labItems.indexOf(item);
   const prev = labItems[(index - 1 + labItems.length) % labItems.length];

@@ -4,7 +4,7 @@ import { useState, type HTMLAttributes } from "react";
 import { InView } from "@/components/InView";
 import { NavLink } from "@/components/navigation/NavLink";
 import { controlDefaults, type LabItem } from "@/content/lab/registry";
-import { labPreviews } from "@/content/lab/previews";
+import { getLabPreview } from "@/content/lab/previews";
 import { cn } from "@/lib/utils";
 
 type LabCardProps = HTMLAttributes<HTMLLIElement> & {
@@ -15,13 +15,14 @@ type LabCardProps = HTMLAttributes<HTMLLIElement> & {
 /** Grid cell with a live preview; one-shot animations get a Replay button. */
 export function LabCard({ item, index, className, ...rest }: LabCardProps) {
   const [replayKey, setReplayKey] = useState(0);
-  const Preview = labPreviews[item.slug];
+  const Preview = getLabPreview(item);
 
   return (
     <li className={cn("flex flex-col border-b border-r border-current/20 bg-inherit", className)} {...rest}>
       <div className="flex items-center justify-between gap-4 px-6 pt-5 text-xs tracking-[0.15em] uppercase">
         <span>
           <span className="opacity-65">({String(index + 1).padStart(2, "0")})</span> {item.category}
+          {item.experimental && <span className="ml-2 text-gold">Experimental</span>}
         </span>
         {item.replayable ? (
           <button

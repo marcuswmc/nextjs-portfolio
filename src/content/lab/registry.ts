@@ -22,14 +22,20 @@ export type LabItem = {
   dependencies: string[];
   /** Source file shown in the Code tab (relative to the project root). */
   sourcePath: string;
-  /** Minimal usage example. */
-  usage: string;
+  /** Minimal usage example (omitted for view-only experiments). */
+  usage?: string;
   /** Props the detail page lets visitors tweak. */
   controls?: LabControl[];
   /** How to interact with the preview. */
   hint: string;
   /** The animation plays once (on load or scroll), so cards offer a Replay button. */
   replayable?: boolean;
+  /** Standalone scene served from `public/`, shown in an iframe instead of a React demo. */
+  embed?: string;
+  /** Code is shown but not offered for copy, install or download. */
+  viewOnly?: boolean;
+  /** Personal experiment rather than a reusable component. */
+  experimental?: boolean;
 };
 
 export const labItems: LabItem[] = [
@@ -152,6 +158,32 @@ export const labItems: LabItem[] = [
       { name: "ringTilt", label: "Ring tilt", type: "range", default: 0, min: -0.8, max: 0.8, step: 0.05 },
     ],
     hint: "Move the cursor",
+  },
+  {
+    slug: "haunted-house",
+    title: "Haunted House",
+    category: "3D",
+    description:
+      "Experimental three.js scene: a small house and a field of graves built from primitives, PBR textures, a physical sky and exponential fog, with three coloured ghost lights orbiting through the night and casting soft shadows.",
+    dependencies: ["three", "lil-gui"],
+    sourcePath: "labs/haunted-house/script.js",
+    hint: "Drag to orbit",
+    embed: "/lab-embeds/haunted-house/index.html",
+    viewOnly: true,
+    experimental: true,
+  },
+  {
+    slug: "galaxy-generator",
+    title: "Galaxy Generator",
+    category: "3D",
+    description:
+      "Experimental procedural galaxy: 100,000 particles placed along spiral branches with tunable spin, randomness and colour falloff, rendered with additive blending. Tweak every parameter live in the panel.",
+    dependencies: ["three", "lil-gui"],
+    sourcePath: "labs/galaxy-generator/script.js",
+    hint: "Drag to orbit",
+    embed: "/lab-embeds/galaxy-generator/index.html",
+    viewOnly: true,
+    experimental: true,
   },
 ];
 

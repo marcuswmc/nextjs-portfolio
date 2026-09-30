@@ -3,6 +3,8 @@
 import dynamic from "next/dynamic";
 import type { ComponentType } from "react";
 import type { DemoProps } from "@/components/lab/demos/types";
+import EmbedDemo from "@/components/lab/demos/EmbedDemo";
+import type { LabItem } from "@/content/lab/registry";
 
 function PreviewLoading() {
   return <span className="text-xs tracking-[0.2em] uppercase animate-pulse opacity-60">Loading</span>;
@@ -18,3 +20,19 @@ export const labPreviews: Record<string, ComponentType<DemoProps>> = {
   "section-header": dynamic(() => import("@/components/lab/demos/SectionHeaderDemo"), { ssr: false, loading: PreviewLoading }),
   planet: dynamic(() => import("@/components/lab/demos/PlanetDemo"), { ssr: false, loading: PreviewLoading }),
 };
+
+const embedPreviews = new Map<string, ComponentType<DemoProps>>();
+
+/** Preview for any item: its React demo, or the iframe for standalone scenes (cached per slug). */
+export function getLabPreview(item: LabItem): ComponentType<DemoProps> | undefined {
+  if (!item.embed) return labPreviews[item.slug];
+  let Embed = embedPreviews.get(item.slug);
+  if (!Embed) {
+    const { embed, title } = item;
+    const Component = ({ compact }: DemoProps) => <EmbedDemo src={embed} title={title} compact={compact} />;
+    Component.displayName = `Embed(${item.slug})`;
+    embedPreviews.set(item.slug, Component);
+    Embed = Component;
+  }
+  return Embed;
+}

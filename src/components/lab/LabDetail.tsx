@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { CopyButton } from "@/components/motion/CopyButton";
 import { controlDefaults, type LabItem } from "@/content/lab/registry";
-import { labPreviews } from "@/content/lab/previews";
+import { getLabPreview } from "@/content/lab/previews";
 import { cn } from "@/lib/utils";
 
 type LabDetailProps = {
@@ -20,7 +20,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
   const [tab, setTab] = useState<Tab>("preview");
   const [values, setValues] = useState(() => controlDefaults(item));
   const [replayKey, setReplayKey] = useState(0);
-  const Preview = labPreviews[item.slug];
+  const Preview = getLabPreview(item);
   const install = item.dependencies.length ? `npm i ${item.dependencies.join(" ")}` : null;
 
   // SplitText and friends rewrite the DOM, so DOM demos remount when props change;
@@ -60,6 +60,8 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
           >
             Replay ↻
           </button>
+        ) : item.viewOnly ? (
+          <span className="opacity-65">View only</span>
         ) : (
           <CopyButton value={code} label="Copy code" className="link-underline" />
         )}
@@ -67,8 +69,13 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
 
       {tab === "preview" ? (
         <div className="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-12">
-          <div className="relative flex items-center justify-center overflow-hidden border rounded-2xl lg:col-span-9 border-ink/20 min-h-[60svh]">
-            <span className="absolute text-xs tracking-[0.15em] uppercase top-5 left-6 opacity-65">
+          <div
+            className={cn(
+              "relative flex items-center justify-center overflow-hidden border rounded-2xl border-ink/20 min-h-[60svh]",
+              item.controls?.length ? "lg:col-span-9" : "lg:col-span-12"
+            )}
+          >
+            <span className="absolute z-10 text-xs tracking-[0.15em] uppercase pointer-events-none top-5 left-6 opacity-65 mix-blend-difference text-white">
               {item.hint}
             </span>
             {Preview && <Preview key={previewKey} values={values} />}
@@ -131,7 +138,13 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
         </div>
       )}
 
-      {/* Install + usage */}
+      {/* Install + usage (reusable components only; experiments are view-only) */}
+      {item.viewOnly ? (
+        <p className="mt-12 text-sm opacity-65">
+          Built with {item.dependencies.join(" + ")}. Shared to explore and read — the source is not
+          offered for download.
+        </p>
+      ) : (
       <div className="grid grid-cols-1 gap-4 mt-12 md:grid-cols-2">
         <div className="flex flex-col gap-3">
           <p className="text-xs tracking-[0.2em] uppercase opacity-65">Install</p>
@@ -158,6 +171,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
           />
         </div>
       </div>
+      )}
     </div>
   );
 }
