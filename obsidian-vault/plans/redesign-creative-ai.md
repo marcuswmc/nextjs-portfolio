@@ -105,6 +105,9 @@ Notas da implementação (30-09-2026):
 - Services unificado em 2 disciplinas (Creative Development + AI Development, 6 itens cada; Full Stack e Performance entraram em Creative).
 - AI Lab: skill **Obsidian Memory Vault** (Cowork) com `SKILL.md` e template buscados do GitHub no build (`remoteUrl`); Markdown quebra linha (`code-wrap`).
 - Chat IA: fica **desligado** por enquanto (decisão do Marcus).
+- Planeta: monta na primeira interação (scroll/toque/tecla) com a seção a até 1,5 viewport — já aparece pronto; o carregamento da página continua sem WebGL.
+- Lab: experimentos **Haunted House** e **Galaxy Generator** (three.js puro, rotulados só como "Experimental"): build estático em `public/lab-embeds/<slug>` exibido em iframe; código visível, sem copiar/baixar/instalar (`viewOnly`); fontes em `labs/<slug>/script.js` (ver `labs/README.md`).
+- Work: + Move Social (Next.js, Tailwind, Lenis), Obsidian Memory (HTML/CSS/JS), HPLG Framework (Next.js, Tailwind) — stacks detectados nos sites; imagens de card capturadas dos sites (1903×1080).
 - **Em espera:** 3 cenas 3D das tasks Revelo (phase2-delivery, puna, the perfect pull — só o `index.html` de cada, GLB para download) **não publicar** até o Marcus confirmar autorização da Revelo/cliente.
 
 ## Risks

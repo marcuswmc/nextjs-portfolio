@@ -36,6 +36,7 @@ export function projectStack(project: Project) {
   if (names.includes("next.js")) return "Next.js";
   if (names.includes("react")) return "React";
   if (names.includes("wordpress")) return "WordPress";
+  if (names.includes("html")) return "HTML/CSS/JS";
   return "Other";
 }
 
@@ -106,6 +107,41 @@ export const servicesData: Service[] = [
   },
 ];
 export const projects: Project[] = [
+  {
+    id: 6,
+    name: "Move Social",
+    link: "https://move.social/",
+    image: "/assets/projects/move-social.jpg",
+    bgImage: "/assets/backgrounds/move-social-bg.jpg",
+    frameworks: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Tailwind CSS" },
+      { id: 3, name: "Lenis" },
+    ],
+  },
+  {
+    id: 7,
+    name: "Obsidian Memory",
+    link: "https://obsidian-memory-site.vercel.app/",
+    image: "/assets/projects/obsidian-memory.jpg",
+    bgImage: "/assets/backgrounds/obsidian-memory-bg.jpg",
+    frameworks: [
+      { id: 1, name: "HTML" },
+      { id: 2, name: "CSS" },
+      { id: 3, name: "JavaScript" },
+    ],
+  },
+  {
+    id: 8,
+    name: "HPLG Framework",
+    link: "https://hplg-framework.vercel.app/",
+    image: "/assets/projects/hplg-framework.jpg",
+    bgImage: "/assets/backgrounds/hplg-framework-bg.jpg",
+    frameworks: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Tailwind CSS" },
+    ],
+  },
   {
     id: 1,
     name: "Sattis Studio",
