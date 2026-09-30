@@ -105,6 +105,7 @@ Notas da implementação (30-09-2026):
 - Services unificado em 2 disciplinas (Creative Development + AI Development, 6 itens cada; Full Stack e Performance entraram em Creative).
 - AI Lab: skill **Obsidian Memory Vault** (Cowork) com `SKILL.md` e template buscados do GitHub no build (`remoteUrl`); Markdown quebra linha (`code-wrap`).
 - Chat IA: fica **desligado** por enquanto (decisão do Marcus).
+- **Em espera:** 3 cenas 3D das tasks Revelo (phase2-delivery, puna, the perfect pull — só o `index.html` de cada, GLB para download) **não publicar** até o Marcus confirmar autorização da Revelo/cliente.
 
 ## Risks
 - **Vários canvases WebGL** (home + lab) pesam no mobile → canvas compartilhado, render sob demanda, fallback estático no mobile.
