@@ -30,7 +30,7 @@ Portfólio pessoal de Marcus Vinicius (Full Stack Developer com foco em frontend
 - Nada conhecido
 
 ### Focus right now
-- `src/sections/Chat.tsx`: refinando UI do chat IA; alteração não commitada adicionando 5 novas sugestões de perguntas
+- Branch `feat/redesign-creative-ai` — plano em [[plans/redesign-creative-ai]]. Fase 0 (fundação) commitada em `c9055d8`; próximo: Fase 1 (home redesenhada: Hero tipográfico, planeta vai para seção "Two disciplines" com scroll).
 
 ## Key Decisions Made
 
@@ -39,6 +39,9 @@ These are settled. Do not reopen them without a good reason (details in `decisio
 - **Modelo do chat:** Gemini 2.5 Flash Lite via `@ai-sdk/google`
 - **RAG:** busca por keywords em dados estáticos (`src/lib/professionalData.ts`), sem banco vetorial
 - **Linguagem:** TypeScript em todo o projeto (migrado de JS)
+- **Cores:** usar tokens `canvas/ink/contrast/on-contrast` (+ `gold`), nunca `bg-black`/`text-white` fixos; dark mode segue o sistema (`prefers-color-scheme`), sem toggle
+- **GSAP:** importar sempre de `@/lib/gsap` (plugins registrados lá)
+- **Navegação:** desktop só header fixo; menu fullscreen apenas no mobile; links via `NavLink`
 
 ## File Map
 
