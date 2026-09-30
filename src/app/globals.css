@@ -297,6 +297,12 @@ a[data-streamdown="link"]:hover {
   line-height: 1.7;
 }
 
+/* Prose files (Markdown) read better wrapped than scrolled sideways */
+.code-wrap pre.shiki {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
 @media (prefers-color-scheme: dark) {
   .code-block .shiki,
   .code-block .shiki span {

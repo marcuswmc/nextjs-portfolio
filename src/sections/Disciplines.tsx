@@ -12,7 +12,7 @@ const PlanetScene = dynamic(
 );
 
 const creative = ["3D & WebGL", "Motion & Interaction", "UI/UX & Design Systems", "Creative Coding"];
-const ai = ["AI Assistants & RAG", "Prompts, Skills & Plugins", "Workflow Automation", "AI Creative Tools"];
+const ai = ["AI Solutions & Automation", "AI Integration & MCP", "Chatbots & Agents", "Creative AI & Fine-tuning"];
 
 /**
  * Pinned scroll story: the planet drifts between the two disciplines

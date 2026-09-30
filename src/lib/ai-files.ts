@@ -5,10 +5,23 @@ import { highlight } from "@/lib/highlight";
 
 export type ResolvedAiFile = { name: string; lang: AiFile["lang"]; code: string; html: string };
 
+async function fetchRemote(url: string) {
+  try {
+    const res = await fetch(url, { cache: "force-cache" });
+    if (!res.ok) throw new Error(`${res.status}`);
+    return await res.text();
+  } catch {
+    // Keep the build green if GitHub is unreachable; the page links to the source anyway
+    return `# Couldn't load this file at build time\n\nOpen it on GitHub: ${url}\n`;
+  }
+}
+
 async function readSource(file: AiFile) {
   if (file.content !== undefined) return file.content;
-  if (!file.sourcePath) return "";
-  let code = await readFile(path.join(process.cwd(), file.sourcePath), "utf8");
+  let code: string;
+  if (file.remoteUrl) code = await fetchRemote(file.remoteUrl);
+  else if (file.sourcePath) code = await readFile(path.join(process.cwd(), file.sourcePath), "utf8");
+  else return "";
   if (file.from) {
     const start = code.indexOf(file.from);
     if (start >= 0) code = code.slice(start);

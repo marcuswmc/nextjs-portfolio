@@ -8,7 +8,7 @@ import { NavLink } from "@/components/navigation/NavLink";
 
 const disciplines = [
   { index: "01", title: "Creative Development", detail: "3D · WebGL · Motion · UI" },
-  { index: "02", title: "AI Development", detail: "Assistants · RAG · Automations" },
+  { index: "02", title: "AI Development", detail: "Automation · Integration · MCP" },
 ];
 
 export function Hero() {

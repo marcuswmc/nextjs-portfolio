@@ -101,7 +101,10 @@ Notas da implementação (30-09-2026):
 - [x] Acessibilidade: SplitText com `aria: "none"` + cópia `sr-only` (fim do aria-label proibido em span/p); textos secundários com opacidade ≥ 60–65% (contraste AA); link "Skip to content"; página 404 no estilo.
 - [x] Lighthouse (mobile, build de produção local): Home 90/100/96/100 · Lab 98/100/96/100 · AI 97/100/96/100 · Work 96/100/96/100 (Perf/A11y/BP/SEO). BP 96 = só o script do Vercel Analytics 404 em localhost.
 - [ ] **Chat IA:** decisão do Marcus no fim (manter, alterar ou remover). Código e `/api/chat` preservados, fora do layout.
-- Pendência de conteúdo: link do CV em `professionalData.ts` aponta para `marcusdev.me` (arquivo protegido — confirmar com o Marcus).
+- Link do CV e do portfólio em `professionalData.ts` atualizados para marcussilva.dev (01-10-2026, a pedido).
+- Services unificado em 2 disciplinas (Creative Development + AI Development, 6 itens cada; Full Stack e Performance entraram em Creative).
+- AI Lab: skill **Obsidian Memory Vault** (Cowork) com `SKILL.md` e template buscados do GitHub no build (`remoteUrl`); Markdown quebra linha (`code-wrap`).
+- Chat IA: fica **desligado** por enquanto (decisão do Marcus).
 
 ## Risks
 - **Vários canvases WebGL** (home + lab) pesam no mobile → canvas compartilhado, render sob demanda, fallback estático no mobile.

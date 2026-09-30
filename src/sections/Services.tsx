@@ -66,7 +66,7 @@ export default function Services() {
         label="Behind the scene, beyond the screen"
         title="Services"
         count={servicesData.length}
-        aside="Two disciplines, one studio of one — from WebGL and motion to AI assistants and automations, shipped on a solid full stack."
+        aside="Two disciplines, one studio of one — immersive web experiences on a solid full stack, and AI solutions that automate, integrate and create."
       />
 
       <ul data-service-list className="px-8 mt-12 md:px-10">
@@ -100,9 +100,7 @@ export default function Services() {
                   </span>
                 </span>
                 <span className="hidden text-xs tracking-[0.2em] uppercase md:block md:col-span-3 text-on-contrast/65">
-                  {service.discipline === "Foundation"
-                    ? "Foundation"
-                    : `${service.discipline} Developer`}
+                  {service.discipline} Developer
                 </span>
                 <span
                   aria-hidden="true"
@@ -131,7 +129,7 @@ export default function Services() {
                   >
                     {service.description}
                   </p>
-                  <ul className="grid col-span-12 gap-px mt-4 sm:grid-cols-3 md:mt-0 md:col-span-6 md:col-start-7 bg-on-contrast/15">
+                  <ul className="grid col-span-12 gap-px mt-4 grid-cols-2 sm:grid-cols-3 md:mt-0 md:col-span-6 md:col-start-7 bg-on-contrast/15">
                     {service.items.map((item, itemIndex) => (
                       <li
                         key={item.title}

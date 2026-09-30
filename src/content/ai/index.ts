@@ -1,7 +1,7 @@
 /**
  * AI Lab registry — metadata only, safe to import from server and client.
- * Files either carry inline `content` or point at a `sourcePath` in this repo,
- * which the server reads at build time (optionally trimmed between two markers).
+ * Files carry inline `content`, point at a `sourcePath` in this repo, or at a `remoteUrl`
+ * (e.g. a raw GitHub file) — the last two are read at build time, optionally trimmed between markers.
  *
  * To add an item: append to `aiItems`. The listing, filters and `/ai/[slug]` page follow.
  */
@@ -23,8 +23,10 @@ export type AiFile = {
   lang: AiFileLang;
   /** Inline content… */
   content?: string;
-  /** …or a file in this repo, read at build time. */
+  /** …or a file in this repo, read at build time… */
   sourcePath?: string;
+  /** …or a public raw file (fetched at build time, so it stays in sync with its repo). */
+  remoteUrl?: string;
   /** Keep only the part between these markers (start included, end excluded). */
   from?: string;
   to?: string;
@@ -86,6 +88,44 @@ export const aiItems: AiItem[] = [
     repo: "https://github.com/marcuswmc/obsidian-memory-plugin",
   },
   {
+    slug: "obsidian-memory-vault-skill",
+    type: "Skill",
+    title: "Obsidian Memory Vault",
+    description:
+      "The Cowork edition of Obsidian Memory as a single agent skill: resumes a project from its Markdown vault on the first message and writes sessions, state and decisions back as you work.",
+    tools: ["Claude Cowork"],
+    files: [
+      {
+        name: "SKILL.md",
+        lang: "markdown",
+        remoteUrl:
+          "https://raw.githubusercontent.com/marcuswmc/obsidian-memory-plugin/main/cowork/skills/vault/SKILL.md",
+      },
+      {
+        name: "claude-md-template.md",
+        lang: "markdown",
+        remoteUrl:
+          "https://raw.githubusercontent.com/marcuswmc/obsidian-memory-plugin/main/cowork/skills/vault/claude-md-template.md",
+      },
+    ],
+    highlights: [
+      "Loads the project's memory before the first answer — context, current state and the last session",
+      "Saves session notes and updates the state as work happens (Cowork has no end-of-session hook)",
+      "Records decisions, specs, plans, bugs and processes as their own notes",
+      "Same vault format as the Claude Code plugin — switch tools without losing memory",
+      "File tools only: no scripts, never runs git",
+    ],
+    steps: [
+      "In Claude Cowork, add the `marcuswmc/obsidian-memory-plugin` marketplace and install \"Obsidian Memory for Cowork\".",
+      "Open a real project folder and ask to create the project memory — the skill runs `init` and builds `obsidian-vault/`.",
+      "Start any later session with \"where did we leave off?\": it reads `CLAUDE.md` and the latest session note before answering.",
+      "Say \"save\" (or wrap up) to write the session note and refresh the current state; use `status` to check the vault.",
+    ],
+    url: "https://obsidian-memory-site.vercel.app/",
+    repo: "https://github.com/marcuswmc/obsidian-memory-plugin/tree/main/cowork/skills/vault",
+    license: "MIT",
+  },
+  {
     slug: "hplg-framework",
     type: "Prompt",
     title: "HPLG Framework",
@@ -113,6 +153,7 @@ export const aiItems: AiItem[] = [
 export function copyLabel(item: AiItem) {
   if (item.type === "Plugin") return "Copy install";
   if (item.type === "Prompt") return "Copy prompt";
+  if (item.type === "Skill") return "Copy skill";
   return "Copy code";
 }
 

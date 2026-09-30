@@ -6,7 +6,7 @@ export type ServiceItem = {
 export type Service = {
   title: string;
   /** Which side of the practice the service belongs to. */
-  discipline: "Creative" | "AI" | "Foundation";
+  discipline: "Creative" | "AI";
   description: string;
   items: ServiceItem[];
 };
@@ -44,19 +44,31 @@ export const servicesData: Service[] = [
     title: "Creative Development",
     discipline: "Creative",
     description:
-      "Immersive, interactive interfaces that make brands feel alive — WebGL scenes, scroll-driven storytelling and motion systems that turn visits into experiences.",
+      "Immersive, high-performance web experiences that make brands feel alive — from WebGL scenes and motion systems to the full-stack foundation that ships them fast, accessible and search-ready.",
     items: [
       {
-        title: "3D Web Experiences",
-        description: "Three.js, React Three Fiber, WebGL",
+        title: "3D & WebGL Experiences",
+        description: "Three.js, React Three Fiber, real-time visuals",
       },
       {
         title: "Motion & Interaction",
-        description: "GSAP, Motion, scroll-based storytelling",
+        description: "GSAP, Motion, scroll-driven storytelling",
       },
       {
         title: "UI/UX & Design Systems",
-        description: "Figma, reusable components, pixel-perfect UI",
+        description: "Figma, component libraries, pixel-perfect UI",
+      },
+      {
+        title: "Frontend Engineering",
+        description: "React, Next.js, TypeScript",
+      },
+      {
+        title: "Full Stack & APIs",
+        description: "Node.js, REST, databases, e-commerce",
+      },
+      {
+        title: "Performance & SEO",
+        description: "Core Web Vitals, SSR, structured data",
       },
     ],
   },
@@ -64,59 +76,31 @@ export const servicesData: Service[] = [
     title: "AI Development",
     discipline: "AI",
     description:
-      "AI features that do real work — assistants grounded in your data, prompts and tools that speed up creative teams, and automations that remove busywork.",
+      "AI solutions and automations that do real work — integrating models into products and workflows, building agents and chatbots, and bringing AI into the creative process, tuned to your data.",
     items: [
       {
-        title: "AI Assistants & RAG",
-        description: "AI SDK, Gemini, OpenAI, tool calling",
+        title: "AI Solutions & Automation",
+        description: "End-to-end workflows that remove busywork",
       },
       {
-        title: "Prompts, Skills & Plugins",
-        description: "Claude, ChatGPT, custom AI tooling",
+        title: "AI Integration",
+        description: "LLMs and AI APIs inside your products and tools",
       },
       {
-        title: "Workflow Automation",
-        description: "API integrations, chatbots, assistants",
-      },
-    ],
-  },
-  {
-    title: "Full Stack Engineering",
-    discipline: "Foundation",
-    description:
-      "A fast, secure and future-proof foundation — custom web apps with clean architecture, solid APIs and seamless integrations, on web and mobile.",
-    items: [
-      {
-        title: "Frontend Excellence",
-        description: "React, Next.js, TypeScript",
+        title: "MCP & Agent Tooling",
+        description: "Model Context Protocol servers, skills and plugins",
       },
       {
-        title: "Backend & APIs",
-        description: "Node.js, REST, auth, databases",
+        title: "Chatbots & Conversational AI",
+        description: "Assistants grounded in your business knowledge",
       },
       {
-        title: "Web & Mobile Apps",
-        description: "E-commerce, booking systems, React Native, Flutter",
-      },
-    ],
-  },
-  {
-    title: "Performance & SEO",
-    discipline: "Foundation",
-    description:
-      "Speed is a feature and visibility is power. Fast load times, healthy Core Web Vitals and search-ready markup are built in, not bolted on.",
-    items: [
-      {
-        title: "Performance Optimization",
-        description: "Lazy loading, code splitting, asset compression",
+        title: "Creative AI",
+        description: "Generative image, video and design pipelines",
       },
       {
-        title: "Core Web Vitals",
-        description: "LCP, INP, CLS monitoring & improvements",
-      },
-      {
-        title: "SEO Engineering",
-        description: "SSR, structured data, semantic HTML, metadata",
+        title: "Fine-tuning & Training",
+        description: "Adapting models to your data and domain",
       },
     ],
   },
