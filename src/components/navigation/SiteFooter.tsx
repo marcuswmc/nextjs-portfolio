@@ -21,6 +21,7 @@ export function SiteFooter() {
         type: "chars",
         mask: "chars",
         autoSplit: true,
+        aria: "none",
         onSplit(self) {
           return gsap.from(self.chars, {
             yPercent: 100,
@@ -39,7 +40,7 @@ export function SiteFooter() {
   return (
     <footer ref={rootRef} className="px-8 pt-16 pb-8 overflow-hidden md:px-10">
       <nav aria-label="Footer" className="grid grid-cols-2 gap-6 pb-10 text-sm border-t pt-6 md:grid-cols-4 border-ink/20">
-        <p className="opacity-50">
+        <p className="opacity-65">
           Creative Developer
           <br />& AI Developer
         </p>
@@ -78,7 +79,7 @@ export function SiteFooter() {
         Marcus Vinicius
       </p>
 
-      <div className="flex justify-between mt-6 text-xs opacity-50">
+      <div className="flex justify-between mt-6 text-xs opacity-65">
         <span>© {new Date().getFullYear()} Marcus Vinicius</span>
         <span>Porto, Portugal</span>
       </div>

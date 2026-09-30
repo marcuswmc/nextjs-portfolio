@@ -45,7 +45,7 @@ export function Hero() {
           data-hero-meta
           className="flex items-baseline gap-4 text-sm md:col-span-4 md:col-start-9 md:justify-self-end"
         >
-          <span className="opacity-50">(00)</span>
+          <span className="opacity-65">(00)</span>
           <span>
             Portfolio <span className="text-gold">©{new Date().getFullYear()}</span> — Porto, PT
           </span>
@@ -72,9 +72,9 @@ export function Hero() {
       <div className="grid grid-cols-2 gap-6 text-sm md:grid-cols-12">
         {disciplines.map((item) => (
           <div key={item.index} data-hero-meta className="md:col-span-3">
-            <p className="opacity-50">({item.index})</p>
+            <p className="opacity-65">({item.index})</p>
             <p className="mt-1">{item.title}</p>
-            <p className="opacity-50">{item.detail}</p>
+            <p className="opacity-65">{item.detail}</p>
           </div>
         ))}
         <NavLink

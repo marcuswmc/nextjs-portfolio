@@ -83,7 +83,7 @@ export function SectionHeader({
   return (
     <div ref={rootRef} className={cn("px-8 pt-24 md:px-10 md:pt-32", className)}>
       <div className="grid grid-cols-12 gap-4 text-xs tracking-[0.2em] uppercase">
-        <span data-meta className="col-span-2 opacity-50 md:col-span-1">
+        <span data-meta className="col-span-2 opacity-65 md:col-span-1">
           ({index})
         </span>
         <span data-meta className="col-span-10 md:col-span-5">

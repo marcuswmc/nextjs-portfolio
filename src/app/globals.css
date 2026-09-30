@@ -14,18 +14,10 @@
 @theme {
   --color-gold: #cfa355;
 
-  /* Fontes Amiamie */
+  /* Amiamie (next/font sets the real family on <body>) */
   --font-normal: "Amiamie", sans-serif;
-  --font-italic: "Amiamie", sans-serif;
   --font-light: "Amiamie", sans-serif;
   --font-light-italic: "Amiamie", sans-serif;
-  --font-black: "Amiamie", sans-serif;
-  --font-black-italic: "Amiamie", sans-serif;
-
-  /* Fontes Amiamie Round */
-  --font-round: "Amiamie-Round", sans-serif;
-  --font-round-black: "Amiamie-Round", sans-serif;
-  --font-round-black-italic: "Amiamie-Round", sans-serif;
 
   --animate-marquee: marquee 40s infinite linear;
   @keyframes marquee {

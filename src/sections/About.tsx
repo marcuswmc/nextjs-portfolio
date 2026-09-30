@@ -114,20 +114,20 @@ export default function About() {
                 <dd className="text-[clamp(2.5rem,5vw,4.5rem)] leading-none tracking-tight">
                   {stat.value}
                 </dd>
-                <dd className="mt-2 text-sm text-on-contrast/50">{stat.label}</dd>
+                <dd className="mt-2 text-sm text-on-contrast/65">{stat.label}</dd>
               </div>
             ))}
           </dl>
 
           <div>
-            <p className="text-xs tracking-[0.2em] uppercase text-on-contrast/50">When I&apos;m not coding</p>
+            <p className="text-xs tracking-[0.2em] uppercase text-on-contrast/65">When I&apos;m not coding</p>
             <ul className="mt-4 border-t border-on-contrast/20">
               {offline.map((item, index) => (
                 <li
                   key={item}
                   className="flex gap-6 py-3 transition-colors duration-300 border-b border-on-contrast/20 hover:text-gold"
                 >
-                  <span className="text-sm tabular-nums text-on-contrast/40">0{index + 1}</span>
+                  <span className="text-sm tabular-nums text-on-contrast/60">0{index + 1}</span>
                   {item}
                 </li>
               ))}
@@ -139,7 +139,7 @@ export default function About() {
       {/* Brands */}
       <div className="px-8 mt-32 md:px-10">
         <p className="text-xs tracking-[0.2em] uppercase">
-          <span className="opacity-50">(06)</span> Brands I&apos;ve worked with
+          <span className="opacity-65">(06)</span> Brands I&apos;ve worked with
         </p>
         <ul
           data-brands
@@ -154,7 +154,7 @@ export default function About() {
               <img
                 src={logo}
                 alt={`Brand ${index + 1}`}
-                className="object-contain w-full h-full transition-all duration-500 opacity-50 group-hover:opacity-100 group-hover:scale-110"
+                className="object-contain w-full h-full transition-all duration-500 opacity-65 group-hover:opacity-100 group-hover:scale-110"
                 loading="lazy"
               />
             </li>

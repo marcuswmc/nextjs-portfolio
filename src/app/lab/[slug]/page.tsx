@@ -20,7 +20,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const item = getLabItem((await params).slug);
   if (!item) return {};
-  return { title: `${item.title} — Lab`, description: item.description };
+  return {
+    alternates: { canonical: `/lab/${item.slug}` },
+    title: `${item.title} — Lab`,
+    description: item.description,
+  };
 }
 
 export default async function LabItemPage({ params }: Params) {
@@ -65,7 +69,7 @@ export default async function LabItemPage({ params }: Params) {
             href={`/lab/${target.slug}`}
             className={`group flex flex-col gap-2 pt-6 border-t border-ink/20 ${label === "Next" ? "items-end text-right" : ""}`}
           >
-            <span className="text-xs tracking-[0.2em] uppercase opacity-50">{label}</span>
+            <span className="text-xs tracking-[0.2em] uppercase opacity-65">{label}</span>
             <span className="text-[clamp(1.5rem,3.5vw,3rem)] leading-none tracking-tight transition-transform duration-500 group-hover:translate-x-2">
               {target.title}
             </span>

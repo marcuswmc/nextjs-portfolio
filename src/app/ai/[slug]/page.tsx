@@ -18,7 +18,11 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const item = getAiItem((await params).slug);
   if (!item) return {};
-  return { title: `${item.title} — AI Lab`, description: item.description };
+  return {
+    alternates: { canonical: `/ai/${item.slug}` },
+    title: `${item.title} — AI Lab`,
+    description: item.description,
+  };
 }
 
 export default async function AiItemPage({ params }: Params) {
@@ -53,7 +57,7 @@ export default async function AiItemPage({ params }: Params) {
       {next !== item && (
         <nav aria-label="More from the AI Lab" className="px-8 mt-24 md:px-10">
           <NavLink href={`/ai/${next.slug}`} className="flex flex-col items-end gap-2 pt-6 text-right border-t group border-ink/20">
-            <span className="text-xs tracking-[0.2em] uppercase opacity-50">Next</span>
+            <span className="text-xs tracking-[0.2em] uppercase opacity-65">Next</span>
             <span className="text-[clamp(1.5rem,3.5vw,3rem)] leading-none tracking-tight transition-transform duration-500 group-hover:-translate-x-2">
               {next.title}
             </span>

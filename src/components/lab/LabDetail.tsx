@@ -45,7 +45,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
               onClick={() => setTab(t)}
               className={cn(
                 "capitalize cursor-pointer link-underline transition-opacity duration-300",
-                tab === t ? "opacity-100" : "opacity-40 hover:opacity-100"
+                tab === t ? "opacity-100" : "opacity-60 hover:opacity-100"
               )}
             >
               {t}
@@ -68,7 +68,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
       {tab === "preview" ? (
         <div className="grid grid-cols-1 gap-4 mt-6 lg:grid-cols-12">
           <div className="relative flex items-center justify-center overflow-hidden border rounded-2xl lg:col-span-9 border-ink/20 min-h-[60svh]">
-            <span className="absolute text-xs tracking-[0.15em] uppercase top-5 left-6 opacity-50">
+            <span className="absolute text-xs tracking-[0.15em] uppercase top-5 left-6 opacity-65">
               {item.hint}
             </span>
             {Preview && <Preview key={previewKey} values={values} />}
@@ -79,7 +79,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
               className="flex flex-col gap-6 p-6 border rounded-2xl lg:col-span-3 border-ink/20"
               onSubmit={(e) => e.preventDefault()}
             >
-              <p className="text-xs tracking-[0.2em] uppercase opacity-50">Props</p>
+              <p className="text-xs tracking-[0.2em] uppercase opacity-65">Props</p>
               {item.controls.map((control) => (
                 <label key={control.name} className="flex flex-col gap-2 text-sm">
                   <span className="flex justify-between">
@@ -134,7 +134,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
       {/* Install + usage */}
       <div className="grid grid-cols-1 gap-4 mt-12 md:grid-cols-2">
         <div className="flex flex-col gap-3">
-          <p className="text-xs tracking-[0.2em] uppercase opacity-50">Install</p>
+          <p className="text-xs tracking-[0.2em] uppercase opacity-65">Install</p>
           {install ? (
             <div className="flex items-center justify-between gap-4 px-5 py-4 font-mono text-sm border rounded-2xl border-ink/20">
               <code className="min-w-0 truncate">{install}</code>
@@ -150,7 +150,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
           )}
         </div>
         <div className="flex flex-col gap-3">
-          <p className="text-xs tracking-[0.2em] uppercase opacity-50">Usage</p>
+          <p className="text-xs tracking-[0.2em] uppercase opacity-65">Usage</p>
           <div
             data-lenis-prevent
             className="overflow-hidden border code-block rounded-2xl border-ink/20"

@@ -5,7 +5,7 @@ import type { ComponentType } from "react";
 import type { DemoProps } from "@/components/lab/demos/types";
 
 function PreviewLoading() {
-  return <span className="text-xs tracking-[0.2em] uppercase animate-pulse opacity-40">Loading</span>;
+  return <span className="text-xs tracking-[0.2em] uppercase animate-pulse opacity-60">Loading</span>;
 }
 
 /** Live preview component per lab slug (lazy, client-only). Options stay inline: next/dynamic requires an object literal. */

@@ -36,6 +36,7 @@ export function RevealText({
         type: "lines",
         mask: "lines",
         autoSplit: true,
+        aria: "none", // the readable copy is the sr-only text below
         onSplit(self) {
           return gsap.from(self.lines, {
             yPercent: 110,
@@ -56,5 +57,14 @@ export function RevealText({
     { scope: ref, dependencies: [reduced] }
   );
 
-  return createElement(Tag, { ref, className }, children);
+  return createElement(
+    Tag,
+    { className },
+    <span key="sr" className="sr-only">
+      {children}
+    </span>,
+    <span key="visual" ref={ref} aria-hidden="true" className="block">
+      {children}
+    </span>
+  );
 }

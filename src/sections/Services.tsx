@@ -89,7 +89,7 @@ export default function Services() {
                 <span
                   className={cn(
                     "col-span-2 text-sm tabular-nums transition-colors duration-300 md:col-span-1",
-                    isOpen ? "text-gold" : "text-on-contrast/40 group-hover:text-gold"
+                    isOpen ? "text-gold" : "text-on-contrast/60 group-hover:text-gold"
                   )}
                 >
                   ({String(index + 1).padStart(2, "0")})
@@ -99,7 +99,7 @@ export default function Services() {
                     {service.title}
                   </span>
                 </span>
-                <span className="hidden text-xs tracking-[0.2em] uppercase md:block md:col-span-3 text-on-contrast/50">
+                <span className="hidden text-xs tracking-[0.2em] uppercase md:block md:col-span-3 text-on-contrast/65">
                   {service.discipline === "Foundation"
                     ? "Foundation"
                     : `${service.discipline} Developer`}
@@ -142,7 +142,7 @@ export default function Services() {
                         <span>
                           <span className="block leading-tight">{item.title}</span>
                           {item.description && (
-                            <span className="block mt-2 text-sm text-on-contrast/50">
+                            <span className="block mt-2 text-sm text-on-contrast/65">
                               {item.description}
                             </span>
                           )}

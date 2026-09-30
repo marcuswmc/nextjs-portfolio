@@ -59,7 +59,7 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
     <div ref={rootRef}>
       {/* Filters */}
       <div className="grid grid-cols-12 gap-4 px-8 mt-10 text-sm md:px-10">
-        <p className="col-span-3 md:col-span-1 opacity-50">Type</p>
+        <p className="col-span-3 md:col-span-1 opacity-65">Type</p>
         <ul className="flex flex-wrap col-span-9 gap-x-5 gap-y-1 md:col-span-6">
           {(["All", ...aiTypes] as TypeFilter[]).map((t) => (
             <li key={t}>
@@ -70,7 +70,7 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
                 onClick={() => t !== type && capture(() => setType(t))}
                 className={cn(
                   "cursor-pointer transition-opacity duration-300 link-underline disabled:cursor-not-allowed disabled:opacity-20",
-                  t === type ? "opacity-100" : "opacity-40 hover:opacity-100"
+                  t === type ? "opacity-100" : "opacity-60 hover:opacity-100"
                 )}
               >
                 {t === "All" ? t : `${t}s`}
@@ -79,7 +79,7 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
             </li>
           ))}
         </ul>
-        <p className="col-span-3 md:col-span-1 opacity-50">Built for</p>
+        <p className="col-span-3 md:col-span-1 opacity-65">Built for</p>
         <ul className="flex flex-wrap col-span-9 gap-x-5 gap-y-1 md:col-span-4">
           {tools.map((t) => (
             <li key={t}>
@@ -89,7 +89,7 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
                 onClick={() => t !== tool && capture(() => setTool(t))}
                 className={cn(
                   "cursor-pointer transition-opacity duration-300 link-underline",
-                  t === tool ? "opacity-100" : "opacity-40 hover:opacity-100"
+                  t === tool ? "opacity-100" : "opacity-60 hover:opacity-100"
                 )}
               >
                 {t}
@@ -99,7 +99,7 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
         </ul>
       </div>
 
-      <p className="px-8 mt-6 text-xs tracking-[0.2em] uppercase md:px-10 opacity-50" aria-live="polite">
+      <p className="px-8 mt-6 text-xs tracking-[0.2em] uppercase md:px-10 opacity-65" aria-live="polite">
         Showing {shown} of {entries.length}
       </p>
 
@@ -120,10 +120,10 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
             >
               <div className="flex items-center justify-between gap-4 text-xs tracking-[0.15em] uppercase">
                 <span>
-                  <span className="opacity-50">({String(index + 1).padStart(2, "0")})</span>{" "}
+                  <span className="opacity-65">({String(index + 1).padStart(2, "0")})</span>{" "}
                   <span className="text-gold">{item.type}</span>
                 </span>
-                <span className="opacity-50">{item.tools.join(" · ")}</span>
+                <span className="opacity-65">{item.tools.join(" · ")}</span>
               </div>
 
               <div>
@@ -189,11 +189,11 @@ export function AiGrid({ entries }: { entries: AiGridEntry[] }) {
       {/* What is coming — honest about empty categories */}
       {upcoming.length > 0 && (
         <div className="px-8 mt-16 md:px-10">
-          <p className="text-xs tracking-[0.2em] uppercase opacity-50">In the works</p>
+          <p className="text-xs tracking-[0.2em] uppercase opacity-65">In the works</p>
           <ul className="grid mt-4 border-t border-l sm:grid-cols-2 lg:grid-cols-4 border-ink/20">
             {upcoming.map((t) => (
               <li key={t} className="flex flex-col gap-6 p-6 border-b border-r border-ink/20">
-                <span className="text-xs tracking-[0.15em] uppercase opacity-50">Coming soon</span>
+                <span className="text-xs tracking-[0.15em] uppercase opacity-65">Coming soon</span>
                 <div>
                   <h3 className="text-2xl tracking-tight">{t}s</h3>
                   <p className="mt-2 text-sm opacity-60">{aiTypeDescriptions[t]}</p>

@@ -5,6 +5,7 @@ import { aiItems } from "@/content/ai";
 import { primaryContent } from "@/lib/ai-files";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/ai" },
   title: "AI Lab",
   description:
     "Prompts, skills, plugins, automations and AI building blocks by Marcus Vinicius — free to copy, download and use.",

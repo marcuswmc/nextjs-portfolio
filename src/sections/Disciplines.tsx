@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useEffect, useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { initialPlanetState, type PlanetState } from "@/components/three/PlanetScene";
+import { initialPlanetState, type PlanetState } from "@/components/three/planetState";
 
 const PlanetScene = dynamic(
   () => import("@/components/three/PlanetScene").then((m) => m.PlanetScene),
@@ -24,7 +24,18 @@ export default function Disciplines() {
   const [mountCanvas, setMountCanvas] = useState(false);
   const reduced = useReducedMotion();
 
-  // Only create the WebGL context when the section gets close
+  // Warm the 3D chunk (and the GLB, preloaded by the module) once the browser is idle
+  useEffect(() => {
+    const warm = () => void import("@/components/three/PlanetScene");
+    if ("requestIdleCallback" in window) {
+      const id = window.requestIdleCallback(warm, { timeout: 6000 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const id = setTimeout(warm, 3000);
+    return () => clearTimeout(id);
+  }, []);
+
+  // Only create the WebGL context when the section is on screen
   useEffect(() => {
     const el = sectionRef.current;
     if (!el) return;
@@ -35,7 +46,9 @@ export default function Disciplines() {
           observer.disconnect();
         }
       },
-      { rootMargin: "100% 0px" }
+      // Mount once the section is well inside the viewport (not at page load on short heros);
+      // WebGL setup is the heaviest main-thread work on the page
+      { rootMargin: "0px 0px -20% 0px" }
     );
     observer.observe(el);
     return () => observer.disconnect();
@@ -131,7 +144,11 @@ export default function Disciplines() {
     <section id="disciplines" ref={sectionRef} className="relative h-[450vh]">
       <div className="sticky top-0 overflow-hidden h-svh">
         <div className="absolute inset-0 -z-10">
-          {mountCanvas && <PlanetScene state={planetState} idle={!reduced} />}
+          {mountCanvas && (
+            <div className="absolute inset-0 duration-1000 animate-in fade-in">
+              <PlanetScene state={planetState} idle={!reduced} />
+            </div>
+          )}
         </div>
 
         {/* Intro */}

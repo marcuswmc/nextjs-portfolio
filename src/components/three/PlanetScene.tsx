@@ -5,26 +5,9 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Environment, Lightformer } from "@react-three/drei";
 import * as THREE from "three";
 import { MOON_SCALE, PlanetModel } from "@/components/three/PlanetModel";
+import type { PlanetState } from "@/components/three/planetState";
 
-/** Values written by a scroll timeline and eased toward every frame. */
-export type PlanetState = {
-  /** Screen-space offset in world units (positive = right / up). */
-  x: number;
-  y: number;
-  scale: number;
-  rotY: number;
-  ringTilt: number;
-  moonScale: number;
-};
-
-export const initialPlanetState: PlanetState = {
-  x: 0,
-  y: 0,
-  scale: 0.75,
-  rotY: 0,
-  ringTilt: 0,
-  moonScale: 1,
-};
+export { initialPlanetState, type PlanetState } from "@/components/three/planetState";
 
 type RigProps = { state: RefObject<PlanetState>; idle: boolean };
 

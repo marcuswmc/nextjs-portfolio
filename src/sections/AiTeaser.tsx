@@ -27,7 +27,7 @@ export default function AiTeaser() {
         <article className="flex flex-col justify-between gap-10 p-6 border rounded-2xl lg:col-span-6 border-on-contrast/20">
           <div className="flex items-center justify-between text-xs tracking-[0.15em] uppercase">
             <span className="text-gold">Featured · {featured.type}</span>
-            <span className="opacity-50">{featured.tools.join(" · ")}</span>
+            <span className="opacity-65">{featured.tools.join(" · ")}</span>
           </div>
           <div>
             <h3 className="text-4xl leading-none tracking-tight lg:text-5xl">{featured.title}</h3>
@@ -58,14 +58,14 @@ export default function AiTeaser() {
             return (
               <li key={type} className="border-b border-on-contrast/20">
                 <NavLink href="/ai" className="grid items-baseline grid-cols-12 gap-4 py-5 group">
-                  <span className="col-span-2 text-sm tabular-nums transition-colors duration-300 text-on-contrast/40 group-hover:text-gold">
+                  <span className="col-span-2 text-sm tabular-nums transition-colors duration-300 text-on-contrast/60 group-hover:text-gold">
                     ({String(index + 1).padStart(2, "0")})
                   </span>
                   <span className="col-span-7">
                     <span className="block text-3xl tracking-tight transition-transform duration-500 group-hover:translate-x-2">
                       {type}s
                     </span>
-                    <span className="block mt-1 text-sm text-on-contrast/50">{aiTypeDescriptions[type]}</span>
+                    <span className="block mt-1 text-sm text-on-contrast/65">{aiTypeDescriptions[type]}</span>
                   </span>
                   <span className="col-span-3 text-xs tracking-[0.15em] uppercase justify-self-end text-on-contrast/60">
                     {count > 0 ? `${count} available` : "Coming soon"}

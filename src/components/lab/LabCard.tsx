@@ -21,7 +21,7 @@ export function LabCard({ item, index, className, ...rest }: LabCardProps) {
     <li className={cn("flex flex-col border-b border-r border-current/20 bg-inherit", className)} {...rest}>
       <div className="flex items-center justify-between gap-4 px-6 pt-5 text-xs tracking-[0.15em] uppercase">
         <span>
-          <span className="opacity-50">({String(index + 1).padStart(2, "0")})</span> {item.category}
+          <span className="opacity-65">({String(index + 1).padStart(2, "0")})</span> {item.category}
         </span>
         {item.replayable ? (
           <button
@@ -33,7 +33,7 @@ export function LabCard({ item, index, className, ...rest }: LabCardProps) {
             Replay ↻
           </button>
         ) : (
-          <span className="opacity-50">{item.hint}</span>
+          <span className="opacity-65">{item.hint}</span>
         )}
       </div>
 
@@ -47,7 +47,7 @@ export function LabCard({ item, index, className, ...rest }: LabCardProps) {
       <div className="flex items-end justify-between gap-4 px-6 pt-4 pb-6 mt-auto border-t border-current/10">
         <div>
           <h3 className="text-2xl leading-none tracking-tight">{item.title}</h3>
-          <p className="mt-2 text-xs tracking-wider uppercase opacity-50">
+          <p className="mt-2 text-xs tracking-wider uppercase opacity-65">
             {item.dependencies.length ? item.dependencies.join(" · ") : "No dependencies"}
           </p>
         </div>

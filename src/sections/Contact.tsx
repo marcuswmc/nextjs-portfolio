@@ -18,7 +18,7 @@ export default function Contact() {
 
       <div className="grid gap-12 px-8 mt-12 md:px-10 lg:grid-cols-12">
         <div className="flex flex-col gap-6 lg:col-span-8">
-          <p className="text-xs tracking-[0.2em] uppercase opacity-50">Write me</p>
+          <p className="text-xs tracking-[0.2em] uppercase opacity-65">Write me</p>
           <a
             href={`mailto:${contact.email}`}
             className="self-start text-[clamp(1.6rem,4.6vw,4.5rem)] leading-none tracking-tight link-underline break-all"
@@ -49,7 +49,7 @@ export default function Contact() {
 
       <dl className="grid gap-8 px-8 mt-20 text-sm md:px-10 sm:grid-cols-2 lg:grid-cols-4">
         <div className="pt-4 border-t border-ink/20">
-          <dt className="opacity-50">Phone</dt>
+          <dt className="opacity-65">Phone</dt>
           <dd className="mt-2">
             <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="link-underline">
               {contact.phone}
@@ -57,13 +57,13 @@ export default function Contact() {
           </dd>
         </div>
         <div className="pt-4 border-t border-ink/20">
-          <dt className="opacity-50">Location</dt>
+          <dt className="opacity-65">Location</dt>
           <dd className="mt-2">
             {contact.location} · Remote worldwide
           </dd>
         </div>
         <div className="pt-4 border-t border-ink/20 lg:col-span-2">
-          <dt className="opacity-50">Social</dt>
+          <dt className="opacity-65">Social</dt>
           <dd className="flex flex-wrap mt-2 gap-x-6 gap-y-1">
             {socials.map((social) => (
               <a

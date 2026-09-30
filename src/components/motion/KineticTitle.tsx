@@ -1,6 +1,6 @@
 "use client";
 
-import { createElement, useRef, type ReactNode } from "react";
+import { createElement, Fragment, useRef, type ReactNode } from "react";
 import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { cn } from "@/lib/utils";
@@ -39,6 +39,7 @@ export function KineticTitle({
         type: "chars",
         mask: "chars",
         autoSplit: true,
+        aria: "none", // the readable copy is the sr-only text below
         onSplit(self) {
           return gsap.from(self.chars, {
             yPercent: 115,
@@ -84,20 +85,27 @@ export function KineticTitle({
       // leading goes last: tailwind-merge drops it when a later text-[size] class appears
       className: cn("uppercase tracking-[-0.045em]", className, "leading-[0.82]"),
     },
-    lines.map((line, i) => (
-      <span
-        key={i}
-        data-line-wrap
-        className={cn(
-          "block",
-          line.align === "right" && "text-right",
-          line.align === "center" && "text-center"
-        )}
-      >
-        <span data-line className="block">
-          {line.content}
+    <span key="sr" className="sr-only">
+      {lines.map((line, i) => (
+        <Fragment key={i}>{line.content} </Fragment>
+      ))}
+    </span>,
+    <span key="visual" aria-hidden="true" className="block">
+      {lines.map((line, i) => (
+        <span
+          key={i}
+          data-line-wrap
+          className={cn(
+            "block",
+            line.align === "right" && "text-right",
+            line.align === "center" && "text-center"
+          )}
+        >
+          <span data-line className="block">
+            {line.content}
+          </span>
         </span>
-      </span>
-    ))
+      ))}
+    </span>
   );
 }

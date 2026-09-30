@@ -65,7 +65,7 @@ export function AiDetail({ item, files }: AiDetailProps) {
                 onClick={() => setActive(i)}
                 className={cn(
                   "font-mono cursor-pointer link-underline transition-opacity duration-300",
-                  i === active ? "opacity-100" : "opacity-40 hover:opacity-100"
+                  i === active ? "opacity-100" : "opacity-60 hover:opacity-100"
                 )}
               >
                 {f.name}
@@ -106,25 +106,25 @@ export function AiDetail({ item, files }: AiDetailProps) {
       <aside className="flex flex-col gap-10 lg:col-span-4 lg:sticky lg:top-24 lg:self-start">
         <dl className="grid grid-cols-2 gap-6 text-sm">
           <div className="pt-4 border-t border-ink/20">
-            <dt className="opacity-50">Type</dt>
+            <dt className="opacity-65">Type</dt>
             <dd className="mt-1 text-gold">{item.type}</dd>
           </div>
           <div className="pt-4 border-t border-ink/20">
-            <dt className="opacity-50">Built for</dt>
+            <dt className="opacity-65">Built for</dt>
             <dd className="mt-1">{item.tools.join(", ")}</dd>
           </div>
           <div className="pt-4 border-t border-ink/20">
-            <dt className="opacity-50">{files.length ? "Files" : "Format"}</dt>
+            <dt className="opacity-65">{files.length ? "Files" : "Format"}</dt>
             <dd className="mt-1">{files.length || "Web page"}</dd>
           </div>
           <div className="pt-4 border-t border-ink/20">
-            <dt className="opacity-50">License</dt>
+            <dt className="opacity-65">License</dt>
             <dd className="mt-1">{item.license ?? "Free to use"}</dd>
           </div>
         </dl>
 
         <div>
-          <p className="text-xs tracking-[0.2em] uppercase opacity-50">How to use</p>
+          <p className="text-xs tracking-[0.2em] uppercase opacity-65">How to use</p>
           <ol className="mt-4 border-t border-ink/20">
             {item.steps.map((step, i) => (
               <li key={i} className="flex gap-4 py-4 border-b border-ink/20">

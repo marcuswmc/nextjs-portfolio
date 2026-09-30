@@ -58,7 +58,7 @@ export function LabGrid({ items }: { items: LabItem[] }) {
   return (
     <div ref={rootRef}>
       <div className="grid grid-cols-12 gap-4 px-8 mt-10 text-sm md:px-10">
-        <p className="col-span-3 md:col-span-1 opacity-50">Filter</p>
+        <p className="col-span-3 md:col-span-1 opacity-65">Filter</p>
         <ul className="flex flex-wrap col-span-9 gap-x-5 gap-y-1 md:col-span-11">
           {(["All", ...labCategories] as Filter[]).map((f) => {
             const count = f === "All" ? items.length : counts[f];
@@ -71,7 +71,7 @@ export function LabGrid({ items }: { items: LabItem[] }) {
                   aria-pressed={f === filter}
                   className={cn(
                     "cursor-pointer transition-opacity duration-300 link-underline disabled:cursor-not-allowed disabled:opacity-20",
-                    f === filter ? "opacity-100" : "opacity-40 hover:opacity-100"
+                    f === filter ? "opacity-100" : "opacity-60 hover:opacity-100"
                   )}
                 >
                   {f}

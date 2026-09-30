@@ -1,6 +1,7 @@
 "use client";
 
 import { useLayoutEffect, useRef, useState } from "react";
+import Image from "next/image";
 import { Icon } from "@iconify/react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { projects, projectStack } from "@/constants";
@@ -97,7 +98,7 @@ export default function Works() {
 
       {/* Controls */}
       <div className="grid grid-cols-12 gap-4 px-8 mt-10 text-sm md:px-10">
-        <p className="col-span-3 md:col-span-1 opacity-50">Stack</p>
+        <p className="col-span-3 md:col-span-1 opacity-65">Stack</p>
         <ul className="flex flex-wrap col-span-9 gap-x-4 gap-y-1 md:col-span-6">
           {filters.map((f) => (
             <li key={f}>
@@ -106,7 +107,7 @@ export default function Works() {
                 onClick={() => f !== filter && captureThen(() => setFilter(f))}
                 className={cn(
                   "cursor-pointer transition-opacity duration-300 link-underline",
-                  f === filter ? "opacity-100" : "opacity-40 hover:opacity-100"
+                  f === filter ? "opacity-100" : "opacity-60 hover:opacity-100"
                 )}
                 aria-pressed={f === filter}
               >
@@ -115,7 +116,7 @@ export default function Works() {
             </li>
           ))}
         </ul>
-        <p className="col-span-3 md:col-span-1 md:col-start-10 opacity-50">View</p>
+        <p className="col-span-3 md:col-span-1 md:col-start-10 opacity-65">View</p>
         <ul className="flex col-span-9 gap-4 md:col-span-2">
           {(["list", "grid"] as View[]).map((v) => (
             <li key={v}>
@@ -124,7 +125,7 @@ export default function Works() {
                 onClick={() => v !== view && captureThen(() => setView(v))}
                 className={cn(
                   "capitalize cursor-pointer transition-opacity duration-300 link-underline",
-                  v === view ? "opacity-100" : "opacity-40 hover:opacity-100"
+                  v === view ? "opacity-100" : "opacity-60 hover:opacity-100"
                 )}
                 aria-pressed={v === view}
               >
@@ -135,7 +136,7 @@ export default function Works() {
         </ul>
       </div>
 
-      <p className="px-8 mt-6 text-xs tracking-[0.2em] uppercase md:px-10 opacity-50" aria-live="polite">
+      <p className="px-8 mt-6 text-xs tracking-[0.2em] uppercase md:px-10 opacity-65" aria-live="polite">
         Showing {count} of {projects.length}
       </p>
 
@@ -168,7 +169,7 @@ export default function Works() {
                   <div className="absolute inset-0 hidden transition-transform duration-500 origin-bottom scale-y-0 md:block bg-ink -z-10 group-hover:scale-y-100 ease-[cubic-bezier(0.65,0,0.35,1)]" />
                   <div className="flex items-end justify-between gap-6 px-8 transition-all duration-500 md:px-10 md:group-hover:px-12 md:group-hover:text-canvas">
                     <div className="flex items-baseline gap-6">
-                      <span className="text-sm tabular-nums opacity-50">
+                      <span className="text-sm tabular-nums opacity-65">
                         {String(index + 1).padStart(2, "0")}
                       </span>
                       <h3 className="text-[26px] lg:text-[40px] leading-none tracking-tight">
@@ -187,12 +188,9 @@ export default function Works() {
                   </div>
                   {/* mobile image */}
                   <div className="px-8 mt-4 md:hidden">
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="object-cover w-full rounded-md aspect-[16/10]"
-                      loading="lazy"
-                    />
+                    <div className="relative overflow-hidden rounded-md aspect-[16/10]">
+                      <Image src={project.image} alt={project.name} fill sizes="100vw" className="object-cover" />
+                    </div>
                     <p className="mt-2 text-xs tracking-wider uppercase opacity-70">
                       {project.frameworks.map((f) => f.name).join(" · ")}
                     </p>
@@ -201,19 +199,24 @@ export default function Works() {
               ) : (
                 <div className="flex flex-col gap-3">
                   <div className="relative overflow-hidden rounded-md aspect-[16/10] bg-ink/10">
-                    <img
+                    <Image
                       src={project.bgImage}
                       alt=""
                       aria-hidden="true"
-                      className="absolute inset-0 object-cover w-full h-full transition-all duration-700 scale-110 blur-sm brightness-50 group-hover:scale-100"
-                      loading="lazy"
+                      fill
+                      sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                      quality={40}
+                      className="object-cover transition-all duration-700 scale-110 blur-sm brightness-50 group-hover:scale-100"
                     />
-                    <img
-                      src={project.image}
-                      alt={project.name}
-                      className="absolute object-cover transition-transform duration-700 rounded-sm shadow-2xl inset-6 w-[calc(100%-3rem)] h-[calc(100%-3rem)] group-hover:scale-[1.04] ease-[cubic-bezier(0.22,1,0.36,1)]"
-                      loading="lazy"
-                    />
+                    <div className="absolute overflow-hidden rounded-sm shadow-2xl inset-6 transition-transform duration-700 group-hover:scale-[1.04] ease-[cubic-bezier(0.22,1,0.36,1)]">
+                      <Image
+                        src={project.image}
+                        alt={project.name}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover"
+                      />
+                    </div>
                   </div>
                   <div className="flex items-start justify-between gap-4">
                     <div>
@@ -240,7 +243,7 @@ export default function Works() {
         className="fixed top-0 left-0 z-30 hidden overflow-hidden rounded-md opacity-0 pointer-events-none md:block w-[520px] aspect-[16/10] shadow-2xl"
       >
         {hovered !== null && (
-          <img src={projects[hovered].image} alt="" className="object-cover w-full h-full" />
+          <Image src={projects[hovered].image} alt="" fill sizes="520px" className="object-cover" />
         )}
       </div>
     </section>

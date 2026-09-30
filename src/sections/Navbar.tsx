@@ -122,13 +122,13 @@ export function Navbar() {
           className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
         >
           <div className="font-light">
-            <p className="tracking-wider text-on-contrast/50">Email</p>
+            <p className="tracking-wider text-on-contrast/65">Email</p>
             <p className="text-xl tracking-widest lowercase text-pretty">
               marcus.relation@gmail.com
             </p>
           </div>
           <div className="font-light">
-            <p className="tracking-wider text-on-contrast/50">Social Media</p>
+            <p className="tracking-wider text-on-contrast/65">Social Media</p>
             <div className="flex flex-col flex-wrap md:flex-row gap-x-2">
               {socials.map((social, index) => (
                 <a

@@ -93,11 +93,14 @@ Notas da implementação (30-09-2026):
 - Áreas de código com scroll usam `data-lenis-prevent` (senão o Lenis captura a roda). Links de navegação sem Text Scramble.
 - **Como adicionar um item:** nova entrada em `aiItems`; listagem, filtros e página de detalhe são automáticos.
 
-### Fase 4: 3D com scroll + acabamento
-- [ ] **Chat IA:** redesenhar botão (magnético, no estilo novo) e painel (tipografia, estados, tema claro/escuro).
-- [ ] Transição entre páginas (View Transitions ou GSAP).
-- [ ] SEO: metadata e imagem OG por página, `sitemap.ts`, `robots.ts`.
-- [ ] Performance: lazy load dos canvases, Lighthouse, testes em mobile e com reduced motion.
+### Fase 4: Acabamento (concluída 30-09-2026)
+- [x] Transição entre páginas: cortina (`PageTransition`) com o nome do destino; `NavLink` usa para rotas diferentes; voltar/avançar do navegador é instantâneo; respeita reduced motion.
+- [x] SEO: `metadataBase` = `NEXT_PUBLIC_SITE_URL` ou **https://marcussilva.dev**, canonical por página, Open Graph/Twitter, imagens OG geradas (`opengraph-image.tsx` por rota e por item), `sitemap.ts`, `robots.ts`, JSON-LD Person na home.
+- [x] Performance: bundle da home 471 kB → 195 kB (estado do planeta em módulo sem three.js; chat fora do layout); só 3 fontes Amiamie (regular, light, light italic); `next/image` no /work; canvas do planeta monta só com a seção 20% na tela, chunk aquecido no idle; deps removidas (`react-responsive`, `maath`).
+- [x] Acessibilidade: SplitText com `aria: "none"` + cópia `sr-only` (fim do aria-label proibido em span/p); textos secundários com opacidade ≥ 60–65% (contraste AA); link "Skip to content"; página 404 no estilo.
+- [x] Lighthouse (mobile, build de produção local): Home 90/100/96/100 · Lab 98/100/96/100 · AI 97/100/96/100 · Work 96/100/96/100 (Perf/A11y/BP/SEO). BP 96 = só o script do Vercel Analytics 404 em localhost.
+- [ ] **Chat IA:** decisão do Marcus no fim (manter, alterar ou remover). Código e `/api/chat` preservados, fora do layout.
+- Pendência de conteúdo: link do CV em `professionalData.ts` aponta para `marcusdev.me` (arquivo protegido — confirmar com o Marcus).
 
 ## Risks
 - **Vários canvases WebGL** (home + lab) pesam no mobile → canvas compartilhado, render sob demanda, fallback estático no mobile.
@@ -106,4 +109,4 @@ Notas da implementação (30-09-2026):
 - **Escopo grande:** entregar por fase, cada uma revisável no preview (commits separados).
 
 ## Status
-Fases 0–3 concluídas (30-09-2026). Próximo: Fase 4 (3D/scroll extra, transições de página, SEO, performance, chat).
+Fases 0–4 concluídas (30-09-2026). Pendente: decisão sobre o chat IA; revisão final e PR.

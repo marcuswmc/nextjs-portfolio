@@ -4,6 +4,7 @@ import { LabGrid } from "@/components/lab/LabGrid";
 import { labItems } from "@/content/lab/registry";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/lab" },
   title: "Lab",
   description:
     "A library of components, heros, sections, text animations and 3D experiments by Marcus Vinicius — live previews and copyable code.",
