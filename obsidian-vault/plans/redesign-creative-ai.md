@@ -89,7 +89,8 @@ Notas da implementação (30-09-2026):
 - `/ai` (filtros por tipo e ferramenta, Flip, copiar/baixar no card, "In the works" para tipos vazios) e `/ai/[slug]` SSG (abas de arquivos com shiki, copiar/baixar, passo a passo, links).
 - Download gerado no navegador (Blob) — sem arquivos em `public/`.
 - Uso de "steps" estruturados no lugar de markdown/streamdown (evita estilos do streamdown).
-- Itens: **Obsidian Memory** (plugin do Marcus — comandos de instalação literais do site, MIT, GitHub), **HPLG Framework** (prompt framework do Marcus — só destaques + link; o texto dos templates não foi copiado para não publicar versão alterada), Portfolio Assistant (prompt do chat), Keyword RAG Chat (rota + busca do chat).
+- Itens: **Obsidian Memory** (plugin do Marcus — comandos de instalação literais do site, MIT, GitHub) e **HPLG Framework** (prompt framework do Marcus — só destaques + link; o texto dos templates não foi copiado para não publicar versão alterada). Portfolio Assistant e Keyword RAG Chat foram removidos a pedido; tipo "Tool" também.
+- Áreas de código com scroll usam `data-lenis-prevent` (senão o Lenis captura a roda). Links de navegação sem Text Scramble.
 - **Como adicionar um item:** nova entrada em `aiItems`; listagem, filtros e página de detalhe são automáticos.
 
 ### Fase 4: 3D com scroll + acabamento

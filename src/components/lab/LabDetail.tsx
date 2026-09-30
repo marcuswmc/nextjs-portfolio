@@ -122,7 +122,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
           ) : null}
         </div>
       ) : (
-        <div className="mt-6 overflow-hidden border code-block rounded-2xl border-ink/20">
+        <div data-lenis-prevent className="mt-6 overflow-hidden border code-block rounded-2xl border-ink/20">
           <div className="flex justify-between px-5 py-3 text-xs tracking-wider border-b border-ink/10 opacity-70">
             <span>{item.sourcePath.split("/").pop()}</span>
             <span>{code.split("\n").length} lines</span>
@@ -152,6 +152,7 @@ export function LabDetail({ item, code, codeHtml, usageHtml }: LabDetailProps) {
         <div className="flex flex-col gap-3">
           <p className="text-xs tracking-[0.2em] uppercase opacity-50">Usage</p>
           <div
+            data-lenis-prevent
             className="overflow-hidden border code-block rounded-2xl border-ink/20"
             dangerouslySetInnerHTML={{ __html: usageHtml }}
           />

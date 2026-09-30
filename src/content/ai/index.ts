@@ -5,9 +5,8 @@
  *
  * To add an item: append to `aiItems`. The listing, filters and `/ai/[slug]` page follow.
  */
-import { systemPrompt } from "@/constants/systemPrompt";
 
-export const aiTypes = ["Prompt", "Skill", "Plugin", "Automation", "Tool"] as const;
+export const aiTypes = ["Prompt", "Skill", "Plugin", "Automation"] as const;
 export type AiItemType = (typeof aiTypes)[number];
 
 export const aiTypeDescriptions: Record<AiItemType, string> = {
@@ -15,7 +14,6 @@ export const aiTypeDescriptions: Record<AiItemType, string> = {
   Skill: "Agent skills that teach an AI a repeatable workflow.",
   Plugin: "Bundles of skills, tools and commands for AI coding agents.",
   Automation: "Workflows that connect AI to the tools you already use.",
-  Tool: "Building blocks for AI apps — tools, RAG and agent code.",
 };
 
 export type AiFileLang = "markdown" | "tsx" | "ts" | "json" | "bash";
@@ -108,52 +106,6 @@ export const aiItems: AiItem[] = [
       "Generate: the output keeps the label readable and aligned while the scene stays photorealistic.",
     ],
     url: "https://hplg-framework.vercel.app/",
-  },
-  {
-    slug: "portfolio-assistant-prompt",
-    type: "Prompt",
-    title: "Portfolio Assistant",
-    description:
-      "The system prompt behind my portfolio assistant: grounded answers through a search tool, no invented facts, replies in the visitor's language.",
-    tools: ["Gemini", "AI SDK"],
-    files: [{ name: "system-prompt.md", lang: "markdown", content: systemPrompt() }],
-    steps: [
-      "Copy the prompt and set it as the system message of your chat model.",
-      "Give the model a search tool named `searchTool` (see the Keyword RAG item) so it can look up facts before answering.",
-      "Replace the role description with your own profession and adjust the ALWAYS / NEVER lists to your tone.",
-      "Keep the fallback sentence: it stops the model from inventing answers when the search returns nothing.",
-    ],
-  },
-  {
-    slug: "keyword-rag-chat",
-    type: "Tool",
-    title: "Keyword RAG Chat",
-    description:
-      "A lightweight retrieval setup for personal sites: a typed knowledge base, a scoring search without embeddings or a vector database, and an AI SDK route that calls it as a tool.",
-    tools: ["AI SDK", "Gemini", "Next.js"],
-    files: [
-      { name: "app/api/chat/route.ts", lang: "ts", sourcePath: "src/app/api/chat/route.ts" },
-      {
-        name: "lib/search.ts",
-        lang: "ts",
-        sourcePath: "src/lib/professionalData.ts",
-        from: "export function searchRelevantInfo",
-        to: "// ==========================================\n// 📊",
-      },
-      {
-        name: "lib/knowledge.ts",
-        lang: "ts",
-        sourcePath: "src/lib/professionalData.ts",
-        from: "export interface ProfessionalInfo",
-        to: "export const professionalData",
-      },
-    ],
-    steps: [
-      "Describe yourself as an array of entries (`id`, `category`, `content`, `keywords`) — one entry per topic: bio, skills, projects, contact.",
-      "Drop in the search function: it scores entries by keyword hits, words in content and category, and full-phrase matches, then returns the top results.",
-      "Add the route and expose the search as a tool; the model calls it before answering and quotes only what comes back.",
-      "Install `ai`, `@ai-sdk/google` and `zod`, set `GOOGLE_GENERATIVE_AI_API_KEY`, and pair it with the Portfolio Assistant prompt.",
-    ],
   },
 ];
 

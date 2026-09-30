@@ -82,7 +82,7 @@ export function AiDetail({ item, files }: AiDetailProps) {
         )}
 
         {file && (
-          <div className="mt-6 overflow-hidden border code-block rounded-2xl border-ink/20">
+          <div data-lenis-prevent className="mt-6 overflow-hidden border code-block rounded-2xl border-ink/20">
             <div className="flex justify-between px-5 py-3 text-xs tracking-wider border-b border-ink/10 opacity-70">
               <span className="font-mono">{file.name}</span>
               <span>{file.code.split("\n").length} lines</span>

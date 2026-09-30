@@ -1,6 +1,5 @@
 "use client";
 
-import { ScrambleText } from "@/components/motion/ScrambleText";
 import { NavLink } from "@/components/navigation/NavLink";
 import { headerLinks } from "@/components/navigation/links";
 import { useScrollState } from "@/hooks/useHideOnScroll";
@@ -21,7 +20,7 @@ export function SiteHeader() {
       }`}
     >
       <NavLink href="/#home" className="self-start justify-self-start">
-        <ScrambleText text="Marcus Vinicius" hoverTarget="a" />
+        Marcus Vinicius
       </NavLink>
 
       <p className={`hidden sm:block text-white/60 ${meta}`}>
@@ -40,7 +39,7 @@ export function SiteHeader() {
           {headerLinks.map((link, index) => (
             <li key={link.href}>
               <NavLink href={link.href} className="link-underline">
-                <ScrambleText text={link.label} hoverTarget="a" />
+                {link.label}
               </NavLink>
               {index < headerLinks.length - 1 && <span aria-hidden="true">,</span>}
             </li>

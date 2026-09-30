@@ -6,7 +6,6 @@ import { gsap, SplitText, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
 import { NavLink } from "@/components/navigation/NavLink";
 import { menuLinks } from "@/components/navigation/links";
-import { ScrambleText } from "@/components/motion/ScrambleText";
 
 /** Site-wide footer with an oversized name that rises in as it enters the view. */
 export function SiteFooter() {
@@ -48,7 +47,7 @@ export function SiteFooter() {
           {menuLinks.slice(0, 4).map((link) => (
             <li key={link.href}>
               <NavLink href={link.href} className="link-underline">
-                <ScrambleText text={link.label} hoverTarget="a" />
+                {link.label}
               </NavLink>
             </li>
           ))}
@@ -57,7 +56,7 @@ export function SiteFooter() {
           {menuLinks.slice(4).map((link) => (
             <li key={link.href}>
               <NavLink href={link.href} className="link-underline">
-                <ScrambleText text={link.label} hoverTarget="a" />
+                {link.label}
               </NavLink>
             </li>
           ))}
