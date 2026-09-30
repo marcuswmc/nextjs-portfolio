@@ -1,6 +1,5 @@
 "use client";
 
-import { LocalTime } from "@/components/LocalTime";
 import { ScrambleText } from "@/components/motion/ScrambleText";
 import { NavLink } from "@/components/navigation/NavLink";
 import { headerLinks } from "@/components/navigation/links";
@@ -33,7 +32,7 @@ export function SiteHeader() {
       <p className={`hidden md:block text-white/60 ${meta}`}>
         Based in Porto, Portugal
         <br />
-        <LocalTime /> Lisbon time
+        Working worldwide
       </p>
 
       <nav aria-label="Main" className="hidden md:block justify-self-end">

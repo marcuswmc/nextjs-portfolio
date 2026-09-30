@@ -5,6 +5,8 @@ export type ServiceItem = {
 
 export type Service = {
   title: string;
+  /** Which side of the practice the service belongs to. */
+  discipline: "Creative" | "AI" | "Foundation";
   description: string;
   items: ServiceItem[];
 };
@@ -40,6 +42,7 @@ export function projectStack(project: Project) {
 export const servicesData: Service[] = [
   {
     title: "Creative Development",
+    discipline: "Creative",
     description:
       "Immersive, interactive interfaces that make brands feel alive — WebGL scenes, scroll-driven storytelling and motion systems that turn visits into experiences.",
     items: [
@@ -59,6 +62,7 @@ export const servicesData: Service[] = [
   },
   {
     title: "AI Development",
+    discipline: "AI",
     description:
       "AI features that do real work — assistants grounded in your data, prompts and tools that speed up creative teams, and automations that remove busywork.",
     items: [
@@ -78,6 +82,7 @@ export const servicesData: Service[] = [
   },
   {
     title: "Full Stack Engineering",
+    discipline: "Foundation",
     description:
       "A fast, secure and future-proof foundation — custom web apps with clean architecture, solid APIs and seamless integrations, on web and mobile.",
     items: [
@@ -97,6 +102,7 @@ export const servicesData: Service[] = [
   },
   {
     title: "Performance & SEO",
+    discipline: "Foundation",
     description:
       "Speed is a feature and visibility is power. Fast load times, healthy Core Web Vitals and search-ready markup are built in, not bolted on.",
     items: [

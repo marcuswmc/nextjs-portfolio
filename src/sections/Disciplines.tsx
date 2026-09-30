@@ -49,9 +49,26 @@ export default function Disciplines() {
         { isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" },
         (context) => {
           const { isDesktop } = context.conditions as { isDesktop: boolean };
-          const side = isDesktop ? 1.15 : 0;
-          const lift = isDesktop ? 0 : 0.55;
           const s = planetState.current;
+
+          // Planet framing per phase, sized so it never sits under the copy:
+          // intro → small and low (title above), lists → pushed to the opposite side
+          // (or up, on mobile), outro → small and high (title below).
+          const framing = isDesktop
+            ? {
+                intro: { x: 0, y: -0.6, scale: 0.58 },
+                creative: { x: 1.15, y: 0, scale: 0.85 },
+                ai: { x: -1.15, y: 0, scale: 0.85 },
+                outro: { x: 0, y: 0.55, scale: 0.58 },
+              }
+            : {
+                intro: { x: 0, y: -0.5, scale: 0.4 },
+                creative: { x: 0, y: 0.72, scale: 0.48 },
+                ai: { x: 0, y: 0.72, scale: 0.48 },
+                outro: { x: 0, y: 0.55, scale: 0.45 },
+              };
+
+          Object.assign(s, initialPlanetState, framing.intro);
 
           const tl = gsap.timeline({
             defaults: { ease: "power2.inOut" },
@@ -65,25 +82,25 @@ export default function Disciplines() {
 
           tl.set("[data-group]", { autoAlpha: 0 })
             .set("[data-group='intro']", { autoAlpha: 1 })
-            .to(s, { scale: 1, duration: 1 }, 0)
+            .to(s, { rotY: Math.PI * 0.3, duration: 1 }, 0)
             // Intro out
             .to("[data-group='intro'] > *", { yPercent: -60, autoAlpha: 0, stagger: 0.1, duration: 0.6 }, 1)
             // Creative in — planet moves right, list on the left
-            .to(s, { x: side, y: lift, scale: isDesktop ? 0.85 : 0.6, rotY: Math.PI * 0.8, ringTilt: 0.35, duration: 1.4 }, 1.2)
+            .to(s, { ...framing.creative, rotY: Math.PI * 0.8, ringTilt: 0.35, duration: 1.4 }, 1.2)
             .set("[data-group='creative']", { autoAlpha: 1 }, 1.4)
-            .from("[data-group='creative'] [data-item]", { yPercent: 100, autoAlpha: 0, stagger: 0.15, duration: 0.6 }, 1.4)
-            .to("[data-group='creative'] [data-item]", { yPercent: -100, autoAlpha: 0, stagger: 0.08, duration: 0.5 }, 3.6)
-            .set("[data-group='creative']", { autoAlpha: 0 }, 4.3)
+            .from("[data-group='creative'] [data-item]", { yPercent: 100, autoAlpha: 0, stagger: 0.15, duration: 0.6 }, 1.6)
+            .to("[data-group='creative'] [data-item]", { yPercent: -100, autoAlpha: 0, stagger: 0.08, duration: 0.5 }, 3.4)
+            .set("[data-group='creative']", { autoAlpha: 0 }, 4.1)
             // AI in — planet moves left, moon grows
-            .to(s, { x: -side, rotY: Math.PI * 1.9, ringTilt: -0.3, moonScale: 1.8, duration: 1.4 }, 3.8)
+            .to(s, { ...framing.ai, rotY: Math.PI * 1.9, ringTilt: -0.3, moonScale: 1.8, duration: 1.4 }, 3.8)
             .set("[data-group='ai']", { autoAlpha: 1 }, 4.4)
-            .from("[data-group='ai'] [data-item]", { yPercent: 100, autoAlpha: 0, stagger: 0.15, duration: 0.6 }, 4.4)
+            .from("[data-group='ai'] [data-item]", { yPercent: 100, autoAlpha: 0, stagger: 0.15, duration: 0.6 }, 4.8)
             .to("[data-group='ai'] [data-item]", { yPercent: -100, autoAlpha: 0, stagger: 0.08, duration: 0.5 }, 6.6)
             .set("[data-group='ai']", { autoAlpha: 0 }, 7.3)
-            // Outro — back to center, one craft
-            .to(s, { x: 0, y: 0, scale: isDesktop ? 1.05 : 0.8, rotY: Math.PI * 2.4, ringTilt: 0, moonScale: 1, duration: 1.2 }, 6.8)
-            .set("[data-group='outro']", { autoAlpha: 1 }, 7.4)
-            .from("[data-group='outro'] > *", { yPercent: 60, autoAlpha: 0, stagger: 0.1, duration: 0.6 }, 7.4)
+            // Outro — planet rises, one craft below it
+            .to(s, { ...framing.outro, rotY: Math.PI * 2.4, ringTilt: 0, moonScale: 1, duration: 1.2 }, 7)
+            .set("[data-group='outro']", { autoAlpha: 1 }, 7.8)
+            .from("[data-group='outro'] > *", { yPercent: 60, autoAlpha: 0, stagger: 0.1, duration: 0.6 }, 7.8)
             .to({}, { duration: 0.6 });
 
           gsap.fromTo(
@@ -120,7 +137,7 @@ export default function Disciplines() {
         {/* Intro */}
         <div
           data-group="intro"
-          className="absolute inset-x-0 flex flex-col items-center gap-4 px-8 text-center pointer-events-none top-28 md:top-32"
+          className="absolute inset-x-0 flex flex-col items-center gap-4 px-8 text-center pointer-events-none top-[12svh]"
         >
           <p className="text-xs tracking-[0.3em] uppercase opacity-60">(01) Two disciplines</p>
           <p className="text-[clamp(2rem,5vw,4.5rem)] leading-none tracking-tight uppercase">
@@ -151,7 +168,7 @@ export default function Disciplines() {
         {/* Outro */}
         <div
           data-group="outro"
-          className="absolute inset-x-0 flex flex-col items-center gap-3 px-8 text-center pointer-events-none bottom-24"
+          className="absolute inset-x-0 flex flex-col items-center gap-3 px-8 text-center pointer-events-none bottom-[14svh]"
         >
           <p className="text-[clamp(1.75rem,4vw,3.5rem)] leading-none tracking-tight uppercase">
             Design <span className="font-light-italic normal-case text-gold">×</span> Intelligence

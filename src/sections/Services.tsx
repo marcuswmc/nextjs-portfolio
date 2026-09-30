@@ -1,123 +1,161 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { SectionHeader } from "@/components/SectionHeader";
 import { servicesData } from "@/constants";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
+import { cn } from "@/lib/utils";
 
+/** Services as an editorial index: one row per service, expanding into its details. */
 export default function Services() {
   const sectionRef = useRef<HTMLElement | null>(null);
+  const panelRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const [open, setOpen] = useState<number | null>(0);
   const reduced = useReducedMotion();
 
   useGSAP(
     () => {
+      // Closed panels start collapsed; the open one keeps its natural height
+      panelRefs.current.forEach((panel, i) => {
+        if (panel) gsap.set(panel, { height: i === 0 ? "auto" : 0 });
+      });
+
       if (reduced) return;
-      const mm = gsap.matchMedia();
-
-      // Cards stack on desktop: each one darkens and shrinks as the next covers it (opacity would show the card beneath)
-      mm.add("(min-width: 768px)", () => {
-        const cards = gsap.utils.toArray<HTMLElement>("[data-service-card]");
-        cards.forEach((card, i) => {
-          const next = cards[i + 1];
-          if (!next) return;
-          gsap.to(card.querySelector("[data-service-inner]"), {
-            scale: 0.94,
-            filter: "brightness(0.35)",
-            ease: "none",
-            scrollTrigger: {
-              trigger: next,
-              start: "top bottom",
-              end: "top 20%",
-              scrub: true,
-            },
-          });
-        });
+      gsap.from("[data-service-row]", {
+        y: 50,
+        autoAlpha: 0,
+        duration: 1,
+        ease: "power3.out",
+        stagger: 0.1,
+        scrollTrigger: { trigger: "[data-service-list]", start: "top 80%", once: true },
       });
-
-      gsap.utils.toArray<HTMLElement>("[data-service-card]").forEach((card) => {
-        gsap.from(card.querySelectorAll("[data-service-row]"), {
-          yPercent: 60,
-          autoAlpha: 0,
-          duration: 0.9,
-          ease: "power3.out",
-          stagger: 0.08,
-          scrollTrigger: { trigger: card, start: "top 75%", once: true },
-        });
-      });
-
-      return () => mm.revert();
     },
     { scope: sectionRef, dependencies: [reduced] }
   );
+
+  const toggle = (index: number) => {
+    const next = open === index ? null : index;
+    const duration = reduced ? 0 : 0.7;
+
+    panelRefs.current.forEach((panel, i) => {
+      if (!panel) return;
+      if (i === next) {
+        gsap.to(panel, { height: "auto", duration, ease: "expo.inOut" });
+        gsap.fromTo(
+          panel.querySelectorAll("[data-service-detail]"),
+          { y: 24, autoAlpha: 0 },
+          { y: 0, autoAlpha: 1, duration, ease: "power3.out", stagger: 0.06, delay: duration * 0.3 }
+        );
+      } else if (i === open) {
+        gsap.to(panel, { height: 0, duration, ease: "expo.inOut" });
+      }
+    });
+
+    setOpen(next);
+  };
 
   return (
     <section
       id="services"
       ref={sectionRef}
-      className="relative pb-24 bg-contrast text-on-contrast rounded-t-4xl"
+      className="relative pb-24 bg-contrast text-on-contrast rounded-4xl"
     >
       <SectionHeader
         index="02"
         label="Behind the scene, beyond the screen"
         title="Services"
+        count={servicesData.length}
         aside="Two disciplines, one studio of one — from WebGL and motion to AI assistants and automations, shipped on a solid full stack."
       />
 
-      <div className="mt-16">
-        {servicesData.map((service, index) => (
-          <article
-            key={service.title}
-            data-service-card
-            className="md:sticky"
-            style={{ top: `calc(8vh + ${index * 4.5}rem)` }}
-          >
-            <div
-              data-service-inner
-              className="grid gap-8 px-8 pt-6 pb-16 origin-top border-t md:grid-cols-12 md:px-10 bg-contrast border-on-contrast/20"
+      <ul data-service-list className="px-8 mt-12 md:px-10">
+        {servicesData.map((service, index) => {
+          const isOpen = open === index;
+          const panelId = `service-panel-${index}`;
+          return (
+            <li
+              key={service.title}
+              data-service-row
+              className="border-b border-on-contrast/20 first:border-t"
             >
-              <div className="flex items-baseline gap-6 md:col-span-5">
-                <span className="text-sm tabular-nums text-gold">
-                  {String(index + 1).padStart(2, "0")}
-                  <span className="text-on-contrast/40">/{String(servicesData.length).padStart(2, "0")}</span>
+              <button
+                type="button"
+                onClick={() => toggle(index)}
+                aria-expanded={isOpen}
+                aria-controls={panelId}
+                className="grid items-baseline w-full grid-cols-12 gap-4 py-6 text-left cursor-pointer group md:py-8"
+              >
+                <span
+                  className={cn(
+                    "col-span-2 text-sm tabular-nums transition-colors duration-300 md:col-span-1",
+                    isOpen ? "text-gold" : "text-on-contrast/40 group-hover:text-gold"
+                  )}
+                >
+                  ({String(index + 1).padStart(2, "0")})
                 </span>
-                <h3 className="text-3xl leading-none tracking-tight lg:text-5xl">{service.title}</h3>
-              </div>
+                <span className="col-span-8 md:col-span-7">
+                  <span className="block text-[clamp(1.75rem,4.5vw,4rem)] leading-[0.95] tracking-tight transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-3">
+                    {service.title}
+                  </span>
+                </span>
+                <span className="hidden text-xs tracking-[0.2em] uppercase md:block md:col-span-3 text-on-contrast/50">
+                  {service.discipline === "Foundation"
+                    ? "Foundation"
+                    : `${service.discipline} Developer`}
+                </span>
+                <span
+                  aria-hidden="true"
+                  className={cn(
+                    "col-span-2 text-2xl leading-none justify-self-end transition-transform duration-500 md:col-span-1",
+                    isOpen && "rotate-45"
+                  )}
+                >
+                  +
+                </span>
+              </button>
 
-              <div className="flex flex-col gap-8 md:col-span-7">
-                <p className="max-w-2xl text-lg leading-relaxed lg:text-xl text-on-contrast/60 text-pretty">
-                  {service.description}
-                </p>
-
-                <ul className="border-t border-on-contrast/15">
-                  {service.items.map((item, itemIndex) => (
-                    <li
-                      key={item.title}
-                      className="overflow-hidden border-b group/item border-on-contrast/15"
-                    >
-                      <div data-service-row>
-                      <div className="flex flex-col gap-1 py-4 transition-transform duration-500 md:flex-row md:items-center md:justify-between md:group-hover/item:translate-x-3">
-                        <span className="flex items-center gap-6 text-xl lg:text-2xl">
-                          <span className="text-sm transition-colors duration-300 tabular-nums text-on-contrast/30 group-hover/item:text-gold">
-                            0{itemIndex + 1}
-                          </span>
-                          {item.title}
+              <div
+                id={panelId}
+                ref={(el) => {
+                  panelRefs.current[index] = el;
+                }}
+                className="overflow-hidden"
+                role="region"
+                aria-label={service.title}
+              >
+                <div className="grid grid-cols-12 gap-4 pb-10">
+                  <p
+                    data-service-detail
+                    className="col-span-12 max-w-xl text-lg leading-relaxed md:col-span-5 md:col-start-2 text-on-contrast/60 text-pretty"
+                  >
+                    {service.description}
+                  </p>
+                  <ul className="grid col-span-12 gap-px mt-4 sm:grid-cols-3 md:mt-0 md:col-span-6 md:col-start-7 bg-on-contrast/15">
+                    {service.items.map((item, itemIndex) => (
+                      <li
+                        key={item.title}
+                        data-service-detail
+                        className="flex flex-col justify-between gap-6 p-4 bg-contrast min-h-36"
+                      >
+                        <span className="text-xs tabular-nums text-gold">0{itemIndex + 1}</span>
+                        <span>
+                          <span className="block leading-tight">{item.title}</span>
+                          {item.description && (
+                            <span className="block mt-2 text-sm text-on-contrast/50">
+                              {item.description}
+                            </span>
+                          )}
                         </span>
-                        {item.description && (
-                          <span className="text-sm transition-opacity duration-500 pl-11 md:pl-0 text-on-contrast/50 md:opacity-0 md:group-hover/item:opacity-100">
-                            {item.description}
-                          </span>
-                        )}
-                      </div>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </div>
-            </div>
-          </article>
-        ))}
-      </div>
+            </li>
+          );
+        })}
+      </ul>
     </section>
   );
 }

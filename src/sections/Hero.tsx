@@ -76,13 +76,12 @@ export function Hero() {
         </p>
         <p
           data-hero-meta
-          className="flex items-center gap-2 text-sm md:col-span-4 md:col-start-9 md:justify-self-end"
+          className="flex items-baseline gap-4 text-sm md:col-span-4 md:col-start-9 md:justify-self-end"
         >
-          <span className="relative flex size-2">
-            <span className="absolute inline-flex w-full h-full rounded-full opacity-75 animate-ping bg-gold" />
-            <span className="relative inline-flex rounded-full size-2 bg-gold" />
+          <span className="opacity-50">(00)</span>
+          <span>
+            Portfolio <span className="text-gold">©{new Date().getFullYear()}</span> — Porto, PT
           </span>
-          Available for new projects
         </p>
       </div>
 

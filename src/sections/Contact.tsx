@@ -1,7 +1,6 @@
 "use client";
 
 import { SectionHeader } from "@/components/SectionHeader";
-import { LocalTime } from "@/components/LocalTime";
 import { CopyButton } from "@/components/motion/CopyButton";
 import { Magnetic } from "@/components/motion/Magnetic";
 import { ScrambleText } from "@/components/motion/ScrambleText";
@@ -60,7 +59,7 @@ export default function Contact() {
         <div className="pt-4 border-t border-ink/20">
           <dt className="opacity-50">Location</dt>
           <dd className="mt-2">
-            {contact.location} · <LocalTime />
+            {contact.location} · Remote worldwide
           </dd>
         </div>
         <div className="pt-4 border-t border-ink/20 lg:col-span-2">
