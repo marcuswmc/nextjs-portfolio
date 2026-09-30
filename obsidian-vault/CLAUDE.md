@@ -30,7 +30,7 @@ Portfólio pessoal de Marcus Vinicius (Full Stack Developer com foco em frontend
 - Nada conhecido
 
 ### Focus right now
-- Branch `feat/redesign-creative-ai` — plano em [[plans/redesign-creative-ai]]. Fase 0 (fundação) commitada em `c9055d8`; próximo: Fase 1 (home redesenhada: Hero tipográfico, planeta vai para seção "Two disciplines" com scroll).
+- Branch `feat/redesign-creative-ai` — plano em [[plans/redesign-creative-ai]]. Fases 0 e 1 prontas (home redesenhada). Próximo: Fase 2 (/lab: registry de componentes, previews, detalhe com código).
 
 ## Key Decisions Made
 
@@ -42,6 +42,7 @@ These are settled. Do not reopen them without a good reason (details in `decisio
 - **Cores:** usar tokens `canvas/ink/contrast/on-contrast` (+ `gold`), nunca `bg-black`/`text-white` fixos; dark mode segue o sistema (`prefers-color-scheme`), sem toggle
 - **GSAP:** importar sempre de `@/lib/gsap` (plugins registrados lá)
 - **Navegação:** desktop só header fixo; menu fullscreen apenas no mobile; links via `NavLink`
+- **Planeta 3D:** fora do Hero; vive na seção `Disciplines` (scroll: planeta = Creative, lua = AI)
 
 ## File Map
 
