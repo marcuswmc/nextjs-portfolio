@@ -1,11 +1,9 @@
 'use client'
 
 import { useGSAP } from "@gsap/react"
-import gsap from "gsap"
+import { gsap } from "@/lib/gsap";
 import { useRef } from "react"
-import { ScrollTrigger } from "gsap/all"
 
-gsap.registerPlugin(ScrollTrigger)
 
 type AnimatedTextLinesProps = {
   text: string;

@@ -10,11 +10,20 @@ import {
   amiamieRoundBlackItalic,
 } from "./fonts/fonts";
 import "./globals.css";
-import { Analytics } from "@vercel/analytics/next"
+import { Analytics } from "@vercel/analytics/next";
+import type { Metadata } from "next";
+import { SmoothScroll } from "@/components/providers/SmoothScroll";
+import { SiteHeader } from "@/components/navigation/SiteHeader";
+import { Navbar } from "@/sections/Navbar";
+import { Chat } from "@/sections/Chat";
 
-export const metadata = {
-  title: "Marcus Vinicius",
-  description: "Full Stack Web - Creative Developer",
+export const metadata: Metadata = {
+  title: {
+    default: "Marcus Vinicius — Creative & AI Developer",
+    template: "%s — Marcus Vinicius",
+  },
+  description:
+    "Creative Developer and AI Developer based in Porto. 3D web experiences, motion, AI products and automations.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -34,8 +43,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           antialiased
         `}
       >
-        {children}
-        <Analytics/>
+        <SmoothScroll>
+          <SiteHeader />
+          <Navbar />
+          <main className="relative w-full min-h-screen overflow-x-clip">{children}</main>
+          <Chat />
+        </SmoothScroll>
+        <Analytics />
       </body>
     </html>
   );

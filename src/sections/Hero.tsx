@@ -29,7 +29,7 @@ export function Hero() {
       subtitle={"404 No bugs Found"}
       title={"Marcus v."}
       text={text}
-      textColor={"text-black"}
+      textColor={"text-ink"}
       />
       <figure
         className="absolute inset-0 -z-50"

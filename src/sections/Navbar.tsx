@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { socials } from "@/constants";
-import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
-import { Link } from "react-scroll";
+import { gsap, useGSAP } from "@/lib/gsap";
+import { NavLink } from "@/components/navigation/NavLink";
+import { menuLinks } from "@/components/navigation/links";
+import { useHideOnScroll } from "@/hooks/useHideOnScroll";
 
 export function Navbar() {
   const navRef = useRef<HTMLDivElement | null>(null);
@@ -15,7 +16,7 @@ export function Navbar() {
   const tl = useRef<gsap.core.Timeline | null>(null);
   const iconsTl = useRef<gsap.core.Timeline | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [showBurguer, setShowBurguer] = useState(true);
+  const hideBurger = useHideOnScroll();
 
   useGSAP(() => {
 
@@ -80,21 +81,6 @@ export function Navbar() {
       );
   }, []);
 
-  useEffect(() => {
-    let lastScrollY = window.scrollY;
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      setShowBurguer(currentScrollY <= lastScrollY || currentScrollY < 10);
-
-      lastScrollY = currentScrollY;
-    };
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   const toggleMenu = () => {
     if (isOpen) {
       tl.current?.reverse();
@@ -110,49 +96,45 @@ export function Navbar() {
     <>
       <nav
         ref={navRef}
-        className="navbar-initial fixed z-50 flex flex-col justify-between w-full h-full px-8 md:px-10 lg:px-10 uppercase bg-black text-white/80 py-28 gap-y-10 md:w-1/2 md:left-1/2"
+        className="navbar-initial md:hidden fixed z-50 flex flex-col justify-between w-full h-full px-8 md:px-10 lg:px-10 uppercase bg-contrast text-on-contrast/80 py-28 gap-y-10 md:w-1/2 md:left-1/2"
       >
-        <div className="flex flex-col text-5xl gap-y-2 md:text-6xl lg:text-8xl">
-          {["home", "services", "about", "work", "contact"].map(
-            (section, index) => (
-              <div key={index} ref={(el) => { linksRef.current[index] = el; }}>
-                <Link className="transition-all duration-300 hover:text-white cursor-pointer"
-                to={`${section}`}
-                smooth
-                offset={0}
-                duration={2000}
+        <div className="flex flex-col gap-y-2 text-5xl md:text-6xl lg:text-[clamp(3.5rem,9vh,6rem)] leading-none">
+          {menuLinks.map((link, index) => (
+            <div key={link.href} ref={(el) => { linksRef.current[index] = el; }}>
+              <NavLink
+                href={link.href}
+                className="transition-all duration-300 hover:text-on-contrast"
                 onClick={() => {
                   if (isOpen) {
-                    tl.current?.reverse() || null;
+                    tl.current?.reverse();
                     iconsTl.current?.reverse();
                     setIsOpen(false);
                   }
                 }}
-                >
-                  {section}
-                </Link>
-              </div>
-            )
-          )}
+              >
+                {link.label}
+              </NavLink>
+            </div>
+          ))}
         </div>
         <div
           ref={contactRef}
           className="flex flex-col flex-wrap justify-between gap-8 md:flex-row"
         >
           <div className="font-light">
-            <p className="tracking-wider text-white/50">Email</p>
+            <p className="tracking-wider text-on-contrast/50">Email</p>
             <p className="text-xl tracking-widest lowercase text-pretty">
               marcus.relation@gmail.com
             </p>
           </div>
           <div className="font-light">
-            <p className="tracking-wider text-white/50">Social Media</p>
+            <p className="tracking-wider text-on-contrast/50">Social Media</p>
             <div className="flex flex-col flex-wrap md:flex-row gap-x-2">
               {socials.map((social, index) => (
                 <a
                   key={index}
                   href={social.href}
-                  className="text-sm leading-loose tracking-widest uppercase hover:text-white transition-colors duration-300"
+                  className="text-sm leading-loose tracking-widest uppercase hover:text-on-contrast transition-colors duration-300"
                 >
                   {"{ "}
                   {social.name}
@@ -163,24 +145,27 @@ export function Navbar() {
           </div>
         </div>
       </nav>
-      <div
-        className="fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-black rounded-full cursor-pointer w-14 h-14 md:w-20 md:h-20 top-4 right-10"
+      <button
+        type="button"
+        aria-label={isOpen ? "Close menu" : "Open menu"}
+        aria-expanded={isOpen}
+        className="md:hidden fixed z-50 flex flex-col items-center justify-center gap-1 transition-all duration-300 bg-ink rounded-full cursor-pointer w-14 h-14 top-5 right-6"
         onClick={toggleMenu}
         style={
-          showBurguer
-            ? { clipPath: "circle(50% at 50% 50%)" }
-            : { clipPath: "circle(0% at 50% 50%)" }
+          hideBurger && !isOpen
+            ? { clipPath: "circle(0% at 50% 50%)" }
+            : { clipPath: "circle(50% at 50% 50%)" }
         }
       >
         <span
           ref={topLineRef}
-          className="block w-8 h-0.5 bg-white rounded-full origin-center"
+          className="block w-8 h-0.5 bg-canvas rounded-full origin-center"
         ></span>
         <span
           ref={bottomLineRef}
-          className="block w-8 h-0.5 bg-white rounded-full origin-center"
+          className="block w-8 h-0.5 bg-canvas rounded-full origin-center"
         ></span>
-      </div>
+      </button>
     </>
   );
 }

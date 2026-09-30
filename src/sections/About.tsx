@@ -2,7 +2,7 @@
 import AnimatedHeaderSection from "@/components/AnimatedHeaderSection";
 import { AnimatedTextLines } from "@/components/AnimatedTextLines";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import Image from "next/image";
 import { useRef } from "react";
 import myImage from "../images/man.jpg"
@@ -49,15 +49,15 @@ When I’m not coding:
   });
 
   return (
-    <section id="about" className="min-h-screen bg-black rounded-b-4xl">
+    <section id="about" className="min-h-screen bg-contrast rounded-b-4xl">
       <AnimatedHeaderSection
         subtitle={"Cod with purpose, Built to scale"}
         title={"About"}
         text={text}
-        textColor={"text-white"}
+        textColor={"text-on-contrast"}
         withScrollTrigger={true}
       />
-      <div className="flex flex-col items-center justify-between gap-16 px-8 md:px-10 lg:px-10 pb-16 text-lg font-light tracking-wide lg:flex-row md:text-xl lg:text-2xl text-white/60">
+      <div className="flex flex-col items-center justify-between gap-16 px-8 md:px-10 lg:px-10 pb-16 text-lg font-light tracking-wide lg:flex-row md:text-xl lg:text-2xl text-on-contrast/60">
         <Image
           ref={imgRef}
           src={myImage}

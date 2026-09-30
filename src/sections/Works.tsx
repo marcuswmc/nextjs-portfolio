@@ -4,7 +4,7 @@ import AnimatedHeaderSection from "@/components/AnimatedHeaderSection";
 import { projects } from "@/constants";
 import { useGSAP } from "@gsap/react";
 import { Icon } from "@iconify/react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import { useRef, useState } from "react";
 
 export default function Works() {
@@ -104,7 +104,7 @@ export default function Works() {
         subtitle={"Logic meets Aesthetics, Seamlessly"}
         title={"Works"}
         text={text}
-        textColor={"text-black"}
+        textColor={"text-ink"}
         withScrollTrigger={true}
       />
       <div
@@ -130,10 +130,10 @@ export default function Works() {
                 ref={(el) => {
                   overlayRefs.current[index] = el;
                 }}
-                className="absolute inset-0 hidden md:block duration-200 bg-black -z-10 clip-path"
+                className="absolute inset-0 hidden md:block duration-200 bg-ink -z-10 clip-path"
               />
               {/* title */}
-              <div className="flex justify-between px-8 md:px-10 lg:px-10 text-black transition-all duration-500 md:group-hover:px-12 md:group-hover:text-white">
+              <div className="flex justify-between px-8 md:px-10 lg:px-10 text-ink transition-all duration-500 md:group-hover:px-12 md:group-hover:text-canvas">
                 <h2 className="lg:text-[32px] text-[26px] leading-none">
                   {project.name}
                 </h2>
@@ -144,14 +144,14 @@ export default function Works() {
               </div>
 
               {/* divider */}
-              <div className="w-full h-0.5 bg-black/80" />
+              <div className="w-full h-0.5 bg-ink/80" />
 
               {/* framework */}
               <div className="flex px-8 md:px-10 lg:px-10 text-xs leading-loose uppercase transition-all duration-500 md:text-sm gap-x-5 md:group-hover:px-12">
                 {project.frameworks.map((framework) => (
                   <p
                     key={framework.id}
-                    className="text-black transition-colors duration-500 md:group-hover:text-white"
+                    className="text-ink transition-colors duration-500 md:group-hover:text-canvas"
                   >
                     {framework.name}
                   </p>
@@ -176,7 +176,7 @@ export default function Works() {
         {/* desktop floating preview image */}
         <div
           ref={previewRef}
-          className="fixed -top-2/6 left-0 z-50 overflow-hidden border-4 border-black pointer-events-none w-[660px] md:block hidden opacity-0"
+          className="fixed -top-2/6 left-0 z-50 overflow-hidden border-4 border-ink pointer-events-none w-[660px] md:block hidden opacity-0"
         >
           {currentIndex !== null && (
             <img

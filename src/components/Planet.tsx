@@ -3,7 +3,7 @@
 import React, { JSX, useRef } from "react";
 import { useGLTF } from "@react-three/drei";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import * as THREE from "three";
 
 export function Planet(props: JSX.IntrinsicElements["group"]) {

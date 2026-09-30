@@ -1,0 +1,83 @@
+---
+type: plan
+status: draft
+date: 30-09-2026
+tags: [claude/plan]
+---
+# Redesign: Creative Developer + AI Developer
+
+Context: [[CLAUDE]] · Branch: `feat/redesign-creative-ai`
+
+## Goal
+
+Deixar o portfólio mais moderno e clean (referências editoriais/suíças: tipografia grande, fundo neutro, metadados pequenos em grid, filtros Grid/List), com mais microinterações e dark mode automático pelo sistema. Posicionar o Marcus claramente em **duas vertentes: Creative Developer e AI Developer**, com duas páginas novas:
+
+- **/lab**: biblioteca de componentes, heros, sections e animações 3D (estilo reactbits.dev), com preview ao vivo/interativo e código para copiar.
+- **/ai**: AI Creative Solutions — prompts, plugins, skills, automações e MCPs criados por ele, disponíveis para uso (copiar, baixar, instalar).
+
+## Decisões (30-09-2026)
+- **Rotas:** `/lab` (componentes) e `/ai` (AI Creative Solutions).
+- **Conteúdo:** subir com seed extraído do próprio site; Marcus adiciona o resto depois pelos registries.
+- **Acento:** manter o dourado `#cfa355`, usado com moderação.
+- **CLI (registry shadcn):** fica para uma próxima edição; por ora só copiar código.
+- **Menu:** sem menu de botão no desktop; header fixo em grid (some ao rolar para baixo, volta ao rolar para cima). Menu fullscreen só no mobile.
+- **Planeta 3D:** sai do Hero (Hero vira tipográfico) e ganha um uso mais interessante, ligado ao scroll (ver Fase 1).
+- **Chat IA:** redesenhar botão e painel no fim (Fase 4).
+
+## Direção visual (das referências)
+
+- **Tipografia como protagonista:** títulos enormes (Amiamie Black/Regular), cortes na borda da tela (ASAP, HAUS), contraste de pesos.
+- **Metadados em grid:** labels pequenas em colunas (nome · função · cidade · links), como Richard Ekwonye / Other°.
+- **Filtros + troca de visualização:** "Service: All / Digital / 3D / AI…" e "View: List / Grid" (Orchard, Other°), com contador sobrescrito `Selected Works⁽⁵⁾`.
+- **Paleta:** monocromática (off-white `#e5e5e0` / preto) com um acento único (hoje o dourado `#cfa355`).
+- **Rodapé com nome gigante** (Dominic) e cards com bordas finas em grid (Dark Mode Aesthetics).
+
+## Steps
+
+### Fase 0: Fundação
+- [x] **Tokens de design** em `globals.css`: `--bg`, `--fg`, `--muted`, `--line`, `--surface-inverse`, `--accent`. Hoje há cores fixas (`bg-black`, `text-white`, `#e5e5e0`) espalhadas; tudo passa a usar tokens.
+- [x] **Dark mode pelo sistema:** trocar `@custom-variant dark (&:is(.dark *))` por `prefers-color-scheme`, sem toggle. Seções que hoje são "invertidas" (pretas) ganham uma superfície própria no dark (ex.: `#0d0d0c` vs `#1a1a18`) para manter o ritmo claro/escuro.
+- [x] **Layout multi-página:** mover `ReactLenis` para um provider no `layout.tsx`; transformar `page.tsx` em server component (metadata por página) com seções client dentro. Loader de progresso 3D só na home.
+- [x] **Navegação:** header fixo em grid com `mix-blend-difference` (Marcus Vinicius · Creative & AI Developer · Porto + relógio local · Work, Lab, AI, Contact), esconde ao rolar para baixo. Menu fullscreen só no mobile, com as rotas novas (`NavLink` = Next Link + scroll Lenis para âncoras).
+- [x] **Base de motion:** hook `useReducedMotion`, utilitários GSAP (SplitText e Flip já vêm no GSAP 3.13), primitivos reutilizáveis: `MagneticButton`, `TextScramble`, `RevealText`, `HoverUnderline`, `CopyButton`.
+- [x] Limpeza: remover dependências sem uso (`npx`, `tsc`, `react-slick`, possivelmente `react-scroll`), arquivos `.DS_Store`.
+
+### Fase 1: Home redesenhada (seção por seção)
+- [ ] **Hero:** só tipografia — dupla identidade gigante ("CREATIVE / AI — DEVELOPER", troca animada tipo scramble), sem o planeta.
+- [ ] **ServiceSummary → "Two disciplines" com o planeta:** seção fixada (pin) em que o scroll controla o planeta — a esfera grande = Creative, a lua = AI; o anel gira e a câmera se aproxima conforme as palavras-chave de cada vertente entram de um lado e do outro. O planeta também vira item do /lab.
+- [ ] **Services:** mantém os cards empilhados sticky, reorganizados: Creative Development (3D/WebGL, Motion, UI), AI Development (LLM apps, RAG/agentes, automações, MCP/plugins), Full Stack, Performance & SEO. Índices `01/02`, hover que revela detalhes.
+- [ ] **Works:** filtros por categoria + toggle **List / Grid** com transição **GSAP Flip**; lista mantém o preview flutuante no hover; grid com zoom/cor no hover. Contador sobrescrito.
+- [ ] **Novo: Lab teaser** — 3 a 4 componentes em destaque com preview ao vivo → `/lab`.
+- [ ] **Novo: AI Solutions teaser** — cards de prompts/skills em destaque com "copiar" → `/ai`.
+- [ ] **About:** layout editorial mais limpo, foto com reveal, números (anos de experiência, projetos, marcas), texto sem emojis ou com ícones discretos.
+- [ ] **Brands:** reaproveitar `ContactSummary` (hoje fora da página) como grid de logos com bordas finas, estilo "Trusted by".
+- [ ] **Contact + Footer:** e-mail com copiar-para-área-de-transferência + feedback, botões magnéticos, relógio local, nome gigante no rodapé.
+- [ ] **Chat IA:** adaptar ao tema claro/escuro via tokens (sem mudar a lógica).
+
+### Fase 2: Página /lab (biblioteca de componentes)
+- [ ] **Registry tipado** em `src/content/lab/`: `slug`, título, categoria (Components, Heros, Sections, Text Animations, 3D), tags, dependências, preview (carregado com `next/dynamic`), código-fonte e props.
+- [ ] **Listagem:** filtro por categoria, busca, cards com preview ao vivo que só roda quando está visível (IntersectionObserver). Os previews 3D usam **um único canvas compartilhado** (`View` do drei) para não abrir vários contextos WebGL.
+- [ ] **Página de detalhe `/lab/[slug]`:** preview grande e interativo, controles de props, abas Preview/Code, código com syntax highlight (shiki) e botão copiar.
+- [ ] Conteúdo inicial, extraído do próprio site: AnimatedTextLines, Works hover preview, MagneticButton, TextScramble, Planet 3D.
+- [ ] ~~Instalação via CLI com registry shadcn~~ → adiado para próxima edição.
+
+### Fase 3: Página /ai (AI Creative Solutions)
+- [ ] **Registry tipado** em `src/content/ai/`: tipo (Prompt, Skill, Plugin, Automation, MCP), título, descrição, ferramentas compatíveis (Claude, ChatGPT, n8n…), conteúdo em markdown, arquivos para download e link do GitHub.
+- [ ] **Listagem** com filtros por tipo e ferramenta; cards com ações rápidas (copiar prompt, baixar, instalar).
+- [ ] **Detalhe `/ai/[slug]`:** markdown renderizado com `streamdown` (já instalado), bloco de instalação copiável e arquivos para baixar (em `public/ai/`).
+- [ ] Conteúdo inicial: o assistente RAG do portfólio (system prompt + tool) como primeiro case.
+
+### Fase 4: 3D com scroll + acabamento
+- [ ] **Chat IA:** redesenhar botão (magnético, no estilo novo) e painel (tipografia, estados, tema claro/escuro).
+- [ ] Transição entre páginas (View Transitions ou GSAP).
+- [ ] SEO: metadata e imagem OG por página, `sitemap.ts`, `robots.ts`.
+- [ ] Performance: lazy load dos canvases, Lighthouse, testes em mobile e com reduced motion.
+
+## Risks
+- **Vários canvases WebGL** (home + lab) pesam no mobile → canvas compartilhado, render sob demanda, fallback estático no mobile.
+- **Dark mode** com seções invertidas pode perder contraste → validar os tokens nos dois temas (WCAG AA).
+- **Conteúdo real** para /lab e /ai depende do Marcus; sem ele, as páginas sobem com poucos itens.
+- **Escopo grande:** entregar por fase, cada uma revisável no preview (commits separados).
+
+## Status
+Fase 0 concluída (30-09-2026). Próximo: Fase 1.
