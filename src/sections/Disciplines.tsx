@@ -1,220 +1,247 @@
 "use client";
 
-import dynamic from "next/dynamic";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { useReducedMotion } from "@/hooks/useReducedMotion";
-import { initialPlanetState, type PlanetState } from "@/components/three/planetState";
+import { LinePlanet, PLANET_RADIUS } from "@/components/LinePlanet";
+import { LineIcon, type LineIconName } from "@/components/LineIcon";
+import { cn } from "@/lib/utils";
 
-const PlanetScene = dynamic(
-  () => import("@/components/three/PlanetScene").then((m) => m.PlanetScene),
-  { ssr: false }
-);
+type Discipline = {
+  key: "creative" | "ai";
+  index: string;
+  eyebrow: string;
+  title: [string, string];
+  items: { label: string; icon: LineIconName }[];
+};
 
-const creative = ["3D & WebGL", "Motion & Interaction", "UI/UX & Design Systems", "Creative Coding"];
-const ai = ["AI Solutions & Automation", "AI Integration & MCP", "Chatbots & Agents", "Creative AI & Fine-tuning"];
+const disciplines: Discipline[] = [
+  {
+    key: "creative",
+    index: "01",
+    eyebrow: "The planet — form, motion and depth",
+    title: ["Creative", "Developer"],
+    items: [
+      { label: "3D & WebGL", icon: "cube" },
+      { label: "Motion & Interaction", icon: "motion" },
+      { label: "UI/UX & Design Systems", icon: "layout" },
+      { label: "Frontend Engineering", icon: "code" },
+    ],
+  },
+  {
+    key: "ai",
+    index: "02",
+    eyebrow: "The moon — intelligence in orbit",
+    title: ["AI", "Developer"],
+    items: [
+      { label: "AI Solutions & Automation", icon: "automation" },
+      { label: "AI Integration & MCP", icon: "plug" },
+      { label: "Chatbots & Agents", icon: "chat" },
+      { label: "Creative AI & Fine-tuning", icon: "sparkle" },
+    ],
+  },
+];
+
+/** Planet size at rest: share of the shorter screen side (bigger on portrait screens). */
+const baseScale = () => (window.innerWidth / window.innerHeight < 0.8 ? 0.85 : 0.62);
 
 /**
- * Pinned scroll story: the planet drifts between the two disciplines
- * (the planet = Creative, its moon = AI) while each list reveals.
+ * Scroll story: a line-art planet sits in the centre, grows until it swallows the screen
+ * (the background inverts — we're inside), the two disciplines play out in there,
+ * and on the way out it shrinks back to its starting size.
  */
 export default function Disciplines() {
   const sectionRef = useRef<HTMLElement | null>(null);
-  const planetState = useRef<PlanetState>({ ...initialPlanetState });
-  const [mountCanvas, setMountCanvas] = useState(false);
   const reduced = useReducedMotion();
-
-  // Warm the 3D chunk (and the GLB, preloaded by the module) once the browser is idle
-  useEffect(() => {
-    const warm = () => void import("@/components/three/PlanetScene");
-    if ("requestIdleCallback" in window) {
-      const id = window.requestIdleCallback(warm, { timeout: 6000 });
-      return () => window.cancelIdleCallback(id);
-    }
-    const id = setTimeout(warm, 3000);
-    return () => clearTimeout(id);
-  }, []);
-
-  // Set the scene up ahead of arrival: once the visitor starts interacting (first scroll, touch
-  // or key) and the section is within ~1.5 viewports. Page load itself stays free of WebGL work,
-  // and by the time the section is reached the planet is already rendered.
-  useEffect(() => {
-    const el = sectionRef.current;
-    if (!el) return;
-    let near = false;
-    let interacted = false;
-    const tryMount = () => {
-      if (near && interacted) {
-        setMountCanvas(true);
-        cleanup();
-      }
-    };
-    const onInteract = () => {
-      interacted = true;
-      tryMount();
-    };
-    const events = ["scroll", "wheel", "touchstart", "pointerdown", "keydown"] as const;
-    events.forEach((type) => window.addEventListener(type, onInteract, { passive: true, once: true }));
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        near = entry.isIntersecting;
-        tryMount();
-      },
-      { rootMargin: "150% 0px" }
-    );
-    observer.observe(el);
-    function cleanup() {
-      observer.disconnect();
-      events.forEach((type) => window.removeEventListener(type, onInteract));
-    }
-    return cleanup;
-  }, []);
 
   useGSAP(
     () => {
+      if (reduced) return;
+      const q = gsap.utils.selector(sectionRef);
+      const planet = q("[data-planet]")[0];
+      const svg = sectionRef.current?.querySelector<SVGSVGElement>("svg[data-stage]");
+      if (!planet || !svg) return;
+
+      // Draw the planet on when the section arrives
+      gsap.from(q("[data-planet] [data-draw]"), {
+        drawSVG: "0%",
+        duration: 1.6,
+        ease: "power2.inOut",
+        stagger: 0.04,
+        scrollTrigger: { trigger: sectionRef.current, start: "top 75%", once: true },
+      });
+
       const mm = gsap.matchMedia();
+      mm.add({ dark: "(prefers-color-scheme: dark)", light: "(prefers-color-scheme: light)" }, () => {
+        const css = getComputedStyle(document.documentElement);
+        const ink = css.getPropertyValue("--site-ink").trim();
+        const canvas = css.getPropertyValue("--site-canvas").trim();
 
-      mm.add(
-        { isDesktop: "(min-width: 768px)", isMobile: "(max-width: 767px)" },
-        (context) => {
-          const { isDesktop } = context.conditions as { isDesktop: boolean };
-          const s = planetState.current;
+        // Scale at which the sphere covers the whole screen (with a margin)
+        const coverScale = () => {
+          const unit = Math.min(svg.clientWidth, svg.clientHeight) / 220;
+          return (Math.hypot(svg.clientWidth, svg.clientHeight) / 2 / (PLANET_RADIUS * unit)) * 1.12;
+        };
 
-          // Planet framing per phase, sized so it never sits under the copy:
-          // intro → small and low (title above), lists → pushed to the opposite side
-          // (or up, on mobile), outro → small and high (title below).
-          const framing = isDesktop
-            ? {
-                intro: { x: 0, y: -0.6, scale: 0.58 },
-                creative: { x: 1.15, y: 0, scale: 0.85 },
-                ai: { x: -1.15, y: 0, scale: 0.85 },
-                outro: { x: 0, y: 0.55, scale: 0.58 },
-              }
-            : {
-                intro: { x: 0, y: -0.5, scale: 0.4 },
-                creative: { x: 0, y: 0.72, scale: 0.48 },
-                ai: { x: 0, y: 0.72, scale: 0.48 },
-                outro: { x: 0, y: 0.55, scale: 0.45 },
-              };
+        const origin = { svgOrigin: "0 0" };
+        gsap.set(planet, { scale: baseScale(), rotation: 0, ...origin });
+        gsap.set(q("[data-tone]"), { color: ink });
 
-          Object.assign(s, initialPlanetState, framing.intro);
-
-          const tl = gsap.timeline({
-            defaults: { ease: "power2.inOut" },
-            scrollTrigger: {
-              trigger: sectionRef.current,
-              start: "top top",
-              end: "bottom bottom",
-              scrub: 1,
-            },
-          });
-
-          tl.set("[data-group]", { autoAlpha: 0 })
-            .set("[data-group='intro']", { autoAlpha: 1 })
-            .to(s, { rotY: Math.PI * 0.3, duration: 1 }, 0)
-            // Intro out
-            .to("[data-group='intro'] > *", { yPercent: -60, autoAlpha: 0, stagger: 0.1, duration: 0.6 }, 1)
-            // Creative in — planet moves right, list on the left
-            .to(s, { ...framing.creative, rotY: Math.PI * 0.8, ringTilt: 0.35, duration: 1.4 }, 1.2)
-            .set("[data-group='creative']", { autoAlpha: 1 }, 1.4)
-            .from("[data-group='creative'] [data-item]", { yPercent: 100, autoAlpha: 0, stagger: 0.15, duration: 0.6 }, 1.6)
-            .to("[data-group='creative'] [data-item]", { yPercent: -100, autoAlpha: 0, stagger: 0.08, duration: 0.5 }, 3.4)
-            .set("[data-group='creative']", { autoAlpha: 0 }, 4.1)
-            // AI in — planet moves left, moon grows
-            .to(s, { ...framing.ai, rotY: Math.PI * 1.9, ringTilt: -0.3, moonScale: 1.8, duration: 1.4 }, 3.8)
-            .set("[data-group='ai']", { autoAlpha: 1 }, 4.4)
-            .from("[data-group='ai'] [data-item]", { yPercent: 100, autoAlpha: 0, stagger: 0.15, duration: 0.6 }, 4.8)
-            .to("[data-group='ai'] [data-item]", { yPercent: -100, autoAlpha: 0, stagger: 0.08, duration: 0.5 }, 6.6)
-            .set("[data-group='ai']", { autoAlpha: 0 }, 7.3)
-            // Outro — planet rises, one craft below it
-            .to(s, { ...framing.outro, rotY: Math.PI * 2.4, ringTilt: 0, moonScale: 1, duration: 1.2 }, 7)
-            .set("[data-group='outro']", { autoAlpha: 1 }, 7.8)
-            .from("[data-group='outro'] > *", { yPercent: 60, autoAlpha: 0, stagger: 0.1, duration: 0.6 }, 7.8)
-            .to({}, { duration: 0.6 });
-
-          gsap.fromTo(
-            "[data-progress]",
-            { scaleX: 0 },
-            {
-              scaleX: 1,
-              ease: "none",
-              scrollTrigger: {
-                trigger: sectionRef.current,
-                start: "top top",
-                end: "bottom bottom",
-                scrub: true,
-              },
-            }
-          );
-
-          return () => Object.assign(planetState.current, initialPlanetState);
+        // Initial states set up front: a staggered from() inside a timeline only
+        // pre-renders its first target, so everything else would flash in.
+        const panel = (key: string, part: string) => q(`[data-group='${key}'] ${part}`);
+        for (const key of ["creative", "ai"]) {
+          gsap.set(panel(key, "[data-word]"), { yPercent: 110 });
+          gsap.set(panel(key, "[data-fade]"), { autoAlpha: 0, y: 20 });
+          gsap.set(panel(key, "[data-item]"), { autoAlpha: 0, y: 30 });
+          gsap.set(panel(key, "[data-icon-path]"), { drawSVG: "0%" });
         }
-      );
+        gsap.set(q("[data-group='outro'] > *"), { autoAlpha: 0, yPercent: 60 });
+
+        const tl = gsap.timeline({
+          defaults: { ease: "power2.inOut" },
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: "top top",
+            end: "bottom bottom",
+            scrub: 1,
+            invalidateOnRefresh: true,
+          },
+        });
+
+        tl
+          // Intro out, zoom into the planet
+          .to(q("[data-group='intro'] > *"), { yPercent: -80, autoAlpha: 0, stagger: 0.08, duration: 0.6 }, 0.2)
+          .to(planet, { scale: coverScale, ...origin, duration: 2, ease: "power3.in" }, 0.2)
+          .to(q("[data-ring]"), { rotation: -14, ...origin, duration: 2 }, 0.2)
+          .to(q("[data-moon]"), { x: 60, y: -50, autoAlpha: 0, duration: 1.2 }, 0.4)
+          .to(q("[data-sparkles]"), { autoAlpha: 0, duration: 0.6 }, 0.3)
+          // Background inverts as we pass through the surface
+          .to(q("[data-planet-fill]"), { opacity: 1, duration: 0.3, ease: "none" }, 1.95)
+          .to(q("[data-tone]"), { color: canvas, duration: 0.3, ease: "none" }, 1.95)
+          .to(q("[data-planet-bands]"), { opacity: 0.3, duration: 0.5 }, 1.95)
+          .to(q("[data-ring]"), { opacity: 0.45, duration: 0.5 }, 1.95)
+          // Slow drift while inside
+          .to(planet, { rotation: 10, ...origin, duration: 5.6, ease: "none" }, 2.2)
+
+          // Creative
+          .to(q("[data-group='creative'] [data-word]"), { yPercent: 0, stagger: 0.08, duration: 0.6 }, 2.3)
+          .to(q("[data-group='creative'] [data-fade]"), { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.5 }, 2.4)
+          .to(q("[data-group='creative'] [data-item]"), { autoAlpha: 1, y: 0, stagger: 0.12, duration: 0.6 }, 2.7)
+          .to(q("[data-group='creative'] [data-icon-path]"), { drawSVG: "100%", stagger: 0.04, duration: 0.6 }, 2.8)
+
+          // Sweep line wipes Creative away
+          .fromTo(q("[data-sweep]"), { scaleX: 0, transformOrigin: "left center" }, { scaleX: 1, duration: 0.5 }, 4.6)
+          .to(q("[data-group='creative'] [data-word], [data-group='creative'] [data-fade], [data-group='creative'] [data-item]"), { yPercent: -110, autoAlpha: 0, stagger: 0.03, duration: 0.5 }, 4.8)
+          .to(q("[data-sweep]"), { scaleX: 0, transformOrigin: "right center", duration: 0.5 }, 5.15)
+
+          // AI
+          .to(q("[data-group='ai'] [data-word]"), { yPercent: 0, stagger: 0.08, duration: 0.6 }, 5.4)
+          .to(q("[data-group='ai'] [data-fade]"), { autoAlpha: 1, y: 0, stagger: 0.08, duration: 0.5 }, 5.5)
+          .to(q("[data-group='ai'] [data-item]"), { autoAlpha: 1, y: 0, stagger: 0.12, duration: 0.6 }, 5.8)
+          .to(q("[data-group='ai'] [data-icon-path]"), { drawSVG: "100%", stagger: 0.04, duration: 0.6 }, 5.9)
+          .to(q("[data-group='ai'] [data-word], [data-group='ai'] [data-fade], [data-group='ai'] [data-item]"), { yPercent: -110, autoAlpha: 0, stagger: 0.03, duration: 0.5 }, 7.6)
+
+          // Back out: the planet shrinks to its starting size
+          .to(q("[data-planet-fill]"), { opacity: 0, duration: 0.25, ease: "none" }, 7.9)
+          .to(q("[data-tone]"), { color: ink, duration: 0.25, ease: "none" }, 7.9)
+          .to(q("[data-planet-bands]"), { opacity: 1, duration: 0.6 }, 7.9)
+          .to(q("[data-ring]"), { opacity: 1, duration: 0.6 }, 7.9)
+          .to(planet, { scale: baseScale, rotation: 0, ...origin, duration: 1.8, ease: "power2.inOut" }, 7.95)
+          .to(q("[data-ring]"), { rotation: 0, ...origin, duration: 1.8 }, 7.9)
+          .to(q("[data-moon]"), { x: 0, y: 0, autoAlpha: 1, duration: 1.2 }, 8.4)
+          .to(q("[data-sparkles]"), { autoAlpha: 1, duration: 0.6 }, 9)
+          .to(q("[data-group='outro'] > *"), { yPercent: 0, autoAlpha: 1, stagger: 0.1, duration: 0.6 }, 9.2)
+          .to({}, { duration: 0.6 });
+
+        gsap.fromTo(
+          q("[data-progress]"),
+          { scaleX: 0 },
+          {
+            scaleX: 1,
+            ease: "none",
+            scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom bottom", scrub: true },
+          }
+        );
+
+        // Subtle parallax toward the cursor while the planet is small
+        const stage = q("[data-parallax]")[0];
+        const xTo = gsap.quickTo(stage, "x", { duration: 1.2, ease: "power3.out" });
+        const yTo = gsap.quickTo(stage, "y", { duration: 1.2, ease: "power3.out" });
+        const onMove = (e: PointerEvent) => {
+          xTo((e.clientX / window.innerWidth - 0.5) * 24);
+          yTo((e.clientY / window.innerHeight - 0.5) * 24);
+        };
+        window.addEventListener("pointermove", onMove, { passive: true });
+        return () => window.removeEventListener("pointermove", onMove);
+      });
 
       return () => mm.revert();
     },
-    { scope: sectionRef }
+    { scope: sectionRef, dependencies: [reduced] }
   );
 
+  if (reduced) return <StaticDisciplines />;
+
   return (
-    <section id="disciplines" ref={sectionRef} className="relative h-[450vh]">
+    <section id="disciplines" ref={sectionRef} className="relative h-[600vh]">
       <div className="sticky top-0 overflow-hidden h-svh">
-        <div className="absolute inset-0 -z-10">
-          {mountCanvas && (
-            <div className="absolute inset-0 duration-500 animate-in fade-in">
-              <PlanetScene state={planetState} idle={!reduced} />
-            </div>
-          )}
+        {/* Planet stage */}
+        <div data-parallax className="absolute -inset-6">
+          <svg
+            data-stage
+            data-tone
+            viewBox="-110 -110 220 220"
+            preserveAspectRatio="xMidYMid meet"
+            className="w-full h-full"
+            aria-hidden="true"
+          >
+            <LinePlanet />
+          </svg>
         </div>
 
         {/* Intro */}
         <div
           data-group="intro"
-          className="absolute inset-x-0 flex flex-col items-center gap-4 px-8 text-center pointer-events-none top-[12svh]"
+          className="absolute inset-x-0 flex flex-col items-center gap-3 px-8 text-center pointer-events-none top-[11svh]"
         >
-          <p className="text-xs tracking-[0.3em] uppercase opacity-60">(01) Two disciplines</p>
+          <p className="text-xs tracking-[0.3em] uppercase opacity-65">(01) Two disciplines</p>
           <p className="text-[clamp(2rem,5vw,4.5rem)] leading-none tracking-tight uppercase">
-            One <span className="font-light-italic normal-case text-gold">craft</span>
+            One <span className="normal-case font-light-italic text-gold">craft</span>
           </p>
         </div>
+        <p
+          data-group="intro"
+          className="absolute inset-x-0 text-xs tracking-[0.3em] text-center uppercase pointer-events-none bottom-[11svh]"
+        >
+          <span className="inline-block opacity-65">Scroll to enter the planet ↓</span>
+        </p>
 
-        {/* Creative — left */}
-        <DisciplineList
-          group="creative"
-          index="01"
-          title="Creative Developer"
-          subtitle="The planet — form, motion and depth."
-          items={creative}
-          className="md:left-10 md:right-auto"
-        />
+        {/* Inside the planet */}
+        {disciplines.map((d) => (
+          <DisciplinePanel key={d.key} discipline={d} />
+        ))}
 
-        {/* AI — right */}
-        <DisciplineList
-          group="ai"
-          index="02"
-          title="AI Developer"
-          subtitle="The moon — intelligence in orbit."
-          items={ai}
-          className="md:right-10 md:left-auto md:text-right md:items-end"
-        />
+        <div data-sweep className="absolute inset-x-0 h-px top-1/2 bg-gold" style={{ transform: "scaleX(0)" }} />
 
         {/* Outro */}
         <div
           data-group="outro"
-          className="absolute inset-x-0 flex flex-col items-center gap-3 px-8 text-center pointer-events-none bottom-[14svh]"
+          className="absolute inset-x-0 flex flex-col items-center gap-3 px-8 text-center pointer-events-none bottom-[13svh]"
         >
           <p className="text-[clamp(1.75rem,4vw,3.5rem)] leading-none tracking-tight uppercase">
-            Design <span className="font-light-italic normal-case text-gold">×</span> Intelligence
+            Design <span className="font-light-italic text-gold">×</span> Intelligence
           </p>
-          <p className="max-w-md text-sm opacity-60">
-            Interfaces that feel alive, powered by AI that actually helps.
-          </p>
+          <p className="max-w-md text-sm opacity-65">Interfaces that feel alive, powered by AI that actually helps.</p>
         </div>
 
         {/* Progress */}
-        <div className="absolute flex items-center gap-4 text-xs tracking-[0.2em] uppercase bottom-8 inset-x-8 md:inset-x-10">
+        <div
+          data-tone
+          className="absolute flex items-center gap-4 text-xs tracking-[0.2em] uppercase bottom-8 inset-x-8 md:inset-x-10"
+        >
           <span>Creative</span>
-          <div className="relative flex-1 h-px bg-current/20">
+          <div className="relative flex-1 h-px bg-current/25">
             <div data-progress className="absolute inset-0 origin-left bg-gold" />
           </div>
           <span>AI</span>
@@ -224,40 +251,74 @@ export default function Disciplines() {
   );
 }
 
-type DisciplineListProps = {
-  group: string;
-  index: string;
-  title: string;
-  subtitle: string;
-  items: string[];
-  className?: string;
-};
-
-function DisciplineList({ group, index, title, subtitle, items, className }: DisciplineListProps) {
+function DisciplinePanel({ discipline }: { discipline: Discipline }) {
   return (
     <div
-      data-group={group}
-      className={`absolute inset-x-8 bottom-20 flex flex-col gap-4 md:bottom-auto md:top-1/2 md:-translate-y-1/2 md:w-[36vw] ${className ?? ""}`}
+      data-group={discipline.key}
+      className="absolute inset-0 flex flex-col justify-center gap-10 px-8 pointer-events-none md:px-10 text-canvas"
     >
-      <div className="overflow-hidden">
-        <p data-item className="text-xs tracking-[0.3em] uppercase opacity-60">
-          ({index}) {subtitle}
-        </p>
+      <div className="flex items-baseline justify-between gap-6 text-xs tracking-[0.3em] uppercase">
+        <span data-fade className="opacity-70">
+          ({discipline.index}) {discipline.eyebrow}
+        </span>
+        <span data-fade className="tabular-nums whitespace-nowrap opacity-70">
+          {discipline.index} / 02
+        </span>
       </div>
-      <div className="overflow-hidden">
-        <h3 data-item className="text-[clamp(2.25rem,4.5vw,4.5rem)] leading-[0.9] tracking-tight uppercase">
-          {title}
-        </h3>
-      </div>
-      <ul className="flex flex-col gap-1 mt-2 text-lg md:text-2xl">
-        {items.map((item) => (
-          <li key={item} className="overflow-hidden">
-            <span data-item className="block">
-              {item}
+
+      <h2 className="text-[clamp(3rem,11vw,10rem)] leading-[0.85] tracking-[-0.04em] uppercase">
+        {discipline.title.map((word, i) => (
+          <span key={word} className={cn("block overflow-hidden", i === 1 && "text-right")}>
+            <span data-word className="inline-block">
+              {word}
             </span>
+          </span>
+        ))}
+      </h2>
+
+      <ul className="grid grid-cols-2 gap-6 md:grid-cols-4">
+        {discipline.items.map((item, i) => (
+          <li key={item.label} data-item className="flex flex-col gap-3 pt-4 border-t border-current/25">
+            <LineIcon name={item.icon} className="size-10 text-gold" />
+            <span className="text-xs tabular-nums opacity-70">0{i + 1}</span>
+            <span className="text-lg leading-tight md:text-xl">{item.label}</span>
           </li>
         ))}
       </ul>
     </div>
+  );
+}
+
+/** Reduced motion: the planet at rest and both disciplines side by side. */
+function StaticDisciplines() {
+  return (
+    <section id="disciplines" className="px-8 py-24 md:px-10">
+      <p className="text-xs tracking-[0.3em] uppercase opacity-65">(01) Two disciplines</p>
+      <svg viewBox="-110 -110 220 220" className="w-[min(60vmin,28rem)] mx-auto my-12" aria-hidden="true">
+        <g transform="scale(1)">
+          <LinePlanet />
+        </g>
+      </svg>
+      <div className="grid gap-16 md:grid-cols-2">
+        {disciplines.map((d) => (
+          <div key={d.key}>
+            <p className="text-xs tracking-[0.3em] uppercase opacity-65">
+              ({d.index}) {d.eyebrow}
+            </p>
+            <h2 className="mt-4 text-[clamp(2.5rem,6vw,5rem)] leading-[0.9] tracking-tight uppercase">
+              {d.title.join(" ")}
+            </h2>
+            <ul className="mt-6 border-t border-ink/20">
+              {d.items.map((item) => (
+                <li key={item.label} className="flex items-center gap-4 py-3 border-b border-ink/20">
+                  <LineIcon name={item.icon} className="size-7 text-gold" />
+                  {item.label}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
