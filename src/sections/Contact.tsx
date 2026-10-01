@@ -1,75 +1,84 @@
-'use client'
+"use client";
 
-import { useGSAP } from "@gsap/react";
-import AnimatedHeaderSection from "../components/AnimatedHeaderSection";
-import { socials } from "../constants";
-import gsap from "gsap";
+import { SectionHeader } from "@/components/SectionHeader";
+import { CopyButton } from "@/components/motion/CopyButton";
+import { Magnetic } from "@/components/motion/Magnetic";
+import { ScrambleText } from "@/components/motion/ScrambleText";
+import { contact, socials } from "@/constants";
 
 export default function Contact() {
-  const text = `Got a question, how or project Idea?
-    I’D love to hear from you and discus further!`;
-  useGSAP(() => {
-    gsap.from(".social-link", {
-      y: 100,
-      opacity: 0,
-      delay: 0.5,
-      duration: 1,
-      stagger: 0.3,
-      ease: "back.out",
-      scrollTrigger: {
-        trigger: ".social-link",
-      },
-    });
-  }, []);
   return (
-    <section
-      id="contact"
-      className="flex flex-col justify-between min-h-screen bg-black"
-    >
-      <div>
-        <AnimatedHeaderSection
-          subtitle={"You Dream It, I Code it"}
-          title={"Contact"}
-          text={text}
-          textColor={"text-white"}
-          withScrollTrigger={true}
-        />
-        <div className="flex px-8 md:px-10 lg:px-10 font-light text-white uppercase lg:text-[32px] text-[26px] leading-none mb-10">
-          <div className="flex flex-col w-full gap-10">
-            <div className="social-link">
-              <h2>E-mail</h2>
-              <div className="w-full h-px my-2 bg-white/30" />
-              <p className="text-xl tracking-wider lowercase md:text-2xl lg:text-3xl">
-                marcus.relation@gmail.com
-              </p>
-            </div>
-            <div className="social-link">
-              <h2>Phone</h2>
-              <div className="w-full h-px my-2 bg-white/30" />
-              <p className="text-xl lowercase md:text-2xl lg:text-3xl">
-                +351 912 981 585
-              </p>
-            </div>
-            <div className="social-link">
-              <h2>Social Media</h2>
-              <div className="w-full h-px my-2 bg-white/30" />
-              <div className="flex flex-wrap gap-2">
-                {socials.map((social, index) => (
-                  <a
-                    key={index}
-                    href={social.href}
-                    className="text-xs leading-loose tracking-wides uppercase md:text-sm hover:text-white/80 transition-colors duration-200"
-                  >
-                    {"{ "}
-                    {social.name}
-                    {" }"}
-                  </a>
-                ))}
-              </div>
-            </div>
-          </div>
+    <section id="contact" className="relative pb-24">
+      <SectionHeader
+        index="07"
+        label="You dream it, I code it"
+        title="Contact"
+        aside="Got a question, a brief or a wild idea? I'd love to hear from you and discuss it further."
+      />
+
+      <div className="grid gap-12 px-8 mt-12 md:px-10 lg:grid-cols-12">
+        <div className="flex flex-col gap-6 lg:col-span-8">
+          <p className="text-xs tracking-[0.2em] uppercase opacity-65">Write me</p>
+          <a
+            href={`mailto:${contact.email}`}
+            className="self-start text-[clamp(1.6rem,4.6vw,4.5rem)] leading-none tracking-tight link-underline break-all"
+          >
+            {contact.email}
+          </a>
+          <CopyButton
+            value={contact.email}
+            label="Copy e-mail"
+            copiedLabel="E-mail copied"
+            className="self-start px-5 py-2 text-sm uppercase transition-colors duration-300 border rounded-full border-ink/30 hover:bg-ink hover:text-canvas"
+          />
+        </div>
+
+        <div className="flex items-center lg:col-span-4 lg:justify-end">
+          <Magnetic strength={0.4}>
+            <a
+              href={`mailto:${contact.email}?subject=New%20project`}
+              className="flex items-center justify-center text-sm tracking-wider text-center uppercase transition-transform duration-500 rounded-full size-40 bg-gold text-contrast hover:scale-105"
+            >
+              Start a
+              <br />
+              project
+            </a>
+          </Magnetic>
         </div>
       </div>
+
+      <dl className="grid gap-8 px-8 mt-20 text-sm md:px-10 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="pt-4 border-t border-ink/20">
+          <dt className="opacity-65">Phone</dt>
+          <dd className="mt-2">
+            <a href={`tel:${contact.phone.replace(/\s/g, "")}`} className="link-underline">
+              {contact.phone}
+            </a>
+          </dd>
+        </div>
+        <div className="pt-4 border-t border-ink/20">
+          <dt className="opacity-65">Location</dt>
+          <dd className="mt-2">
+            {contact.location} · Remote worldwide
+          </dd>
+        </div>
+        <div className="pt-4 border-t border-ink/20 lg:col-span-2">
+          <dt className="opacity-65">Social</dt>
+          <dd className="flex flex-wrap mt-2 gap-x-6 gap-y-1">
+            {socials.map((social) => (
+              <a
+                key={social.name}
+                href={social.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="link-underline"
+              >
+                <ScrambleText text={social.name} hoverTarget="a" />
+              </a>
+            ))}
+          </dd>
+        </div>
+      </dl>
     </section>
   );
 }

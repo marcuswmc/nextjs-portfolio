@@ -1,53 +1,37 @@
-'use client'
+import { socials } from "@/constants";
+import { siteUrl } from "@/lib/site";
+import { Hero } from "@/sections/Hero";
+import Disciplines from "@/sections/Disciplines";
+import Services from "@/sections/Services";
+import LabTeaser from "@/sections/LabTeaser";
+import AiTeaser from "@/sections/AiTeaser";
+import About from "@/sections/About";
+import Contact from "@/sections/Contact";
 
-import { Hero } from "@/sections/Hero"
-import { Navbar } from "../sections/Navbar"
-import ServiceSummary from "@/sections/ServiceSummary"
-import Services from "@/sections/Services"
-import ReactLenis from "lenis/react"
-import About from "@/sections/About"
-import Works from "@/sections/Works"
-import Contact from "@/sections/Contact"
-import { useProgress } from "@react-three/drei"
-import { useEffect, useState } from "react"
-import { Chat } from "@/sections/Chat"
+const personJsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Marcus Vinicius",
+  jobTitle: "Creative Developer & AI Developer",
+  url: siteUrl,
+  address: { "@type": "PostalAddress", addressLocality: "Porto", addressCountry: "PT" },
+  sameAs: socials.map((social) => social.href),
+};
 
 export default function Home() {
-  const {progress} = useProgress()
-  const [isReady, setIsReady] = useState(false)
-
-  useEffect(() => {
-    if(progress === 100) {
-      setIsReady(true)
-    }
-  }, [progress])
   return (
-    <ReactLenis root className="relative w-screen min-h-screen overflow-x-hidden">
-      {!isReady && (
-        <div className="fixed inset-0 z-[999] flex flex-col items-center justify-center bg-black text-white transition-opacity duration-700 font-light">
-          <p className="mb-4 text-xl tracking-widest animate-pulse">
-            Loading {Math.floor(progress)}%
-          </p>
-          <div className="relative h-1 overflow-hidden rounded w-60 bg-white/20">
-            <div 
-              className="absolute top-0 left-0 h-full transition-all duration-300 bg-white"
-              style={{width: `${progress}%`}}
-            ></div>
-          </div>
-        </div>
-      )}
-      <div className={`${
-        isReady ? "opacity-100" : "opacity-0"
-      } transition-opacity duration-1000`}>
-      <Navbar />
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personJsonLd) }}
+      />
       <Hero />
-      <ServiceSummary />
+      <Disciplines />
       <Services />
-      <About/>
-      <Works/>
-      <Contact/>
-      <Chat/>
-      </div>
-    </ReactLenis>
-  )
+      <LabTeaser />
+      <AiTeaser />
+      <About />
+      <Contact />
+    </>
+  );
 }

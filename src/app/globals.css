@@ -1,28 +1,23 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+/* Dark mode follows the OS; `.dark` still scopes dark tokens locally (e.g. chat panel) */
+@custom-variant dark {
+  @media (prefers-color-scheme: dark) {
+    @slot;
+  }
+  &:where(.dark, .dark *) {
+    @slot;
+  }
+}
 
 @theme {
-  --color-primary: #e5e5e0;
-  --color-DarkLava: #393632;
-  --color-SageGray: #8b8b73;
   --color-gold: #cfa355;
 
-  --color-gemini-product-gradient: linear-gradient(50deg,#346bf1 33.06%,#3186ff 48.67%,#4fa0ff 65.69%)
-
-  /* Fontes Amiamie */
+  /* Amiamie (next/font sets the real family on <body>) */
   --font-normal: "Amiamie", sans-serif;
-  --font-italic: "Amiamie", sans-serif;
   --font-light: "Amiamie", sans-serif;
   --font-light-italic: "Amiamie", sans-serif;
-  --font-black: "Amiamie", sans-serif;
-  --font-black-italic: "Amiamie", sans-serif;
-
-  /* Fontes Amiamie Round */
-  --font-round: "Amiamie-Round", sans-serif;
-  --font-round-black: "Amiamie-Round", sans-serif;
-  --font-round-black-italic: "Amiamie-Round", sans-serif;
 
   --animate-marquee: marquee 40s infinite linear;
   @keyframes marquee {
@@ -35,12 +30,47 @@
   }
 }
 
+/* Site tokens: canvas/ink = page, contrast/on-contrast = inverted sections */
+@theme inline {
+  --color-canvas: var(--site-canvas);
+  --color-ink: var(--site-ink);
+  --color-contrast: var(--site-contrast);
+  --color-on-contrast: var(--site-on-contrast);
+}
+
+:root {
+  color-scheme: light dark;
+  --site-canvas: #e5e5e0;
+  --site-ink: #0a0a0a;
+  --site-contrast: #0a0a0a;
+  --site-on-contrast: #f5f5f0;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --site-canvas: #0e0e0d;
+    --site-ink: #e5e5e0;
+    --site-contrast: #1a1a18;
+    --site-on-contrast: #e5e5e0;
+  }
+}
+
 body {
-  background: #e5e5e0;
-  color: black;
-  scroll-behavior: smooth;
+  background: var(--site-canvas);
+  color: var(--site-ink);
   overflow-x: hidden;
-  font-family: var(--font-amiamie);
+  font-family: var(--font-normal), sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  ::before,
+  ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 @utility clip-path {
@@ -63,6 +93,27 @@ body {
   @apply text-[52px] sm:text-[52px] md:text-[62px] lg:text-[90px];
 }
 
+
+@utility link-underline {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -0.1em;
+    width: 100%;
+    height: 1px;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.45s cubic-bezier(0.65, 0, 0.35, 1);
+  }
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
 
 .navbar-initial {
   transform: translateX(100%);
@@ -110,8 +161,6 @@ body {
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-
-  --color-gemini-product-gradient: linear-gradient(50deg,#346bf1 33.06%,#3186ff 48.67%,#4fa0ff 65.69%)
 }
 
 :root {
@@ -184,8 +233,42 @@ body {
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.551 0.027 264.364);
 
-  --color-gemini-product-gradient: linear-gradient(50deg,#346bf1 33.06%,#3186ff 48.67%,#4fa0ff 65.69%);
+}
 
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: oklch(0.13 0.028 261.692);
+    --foreground: oklch(0.985 0.002 247.839);
+    --card: oklch(0.21 0.034 264.665);
+    --card-foreground: oklch(0.985 0.002 247.839);
+    --popover: oklch(0.21 0.034 264.665);
+    --popover-foreground: oklch(0.985 0.002 247.839);
+    --primary: oklch(0.928 0.006 264.531);
+    --primary-foreground: oklch(0.21 0.034 264.665);
+    --secondary: oklch(0.278 0.033 256.848);
+    --secondary-foreground: oklch(0.985 0.002 247.839);
+    --muted: oklch(0.278 0.033 256.848);
+    --muted-foreground: oklch(0.707 0.022 261.325);
+    --accent: oklch(0.278 0.033 256.848);
+    --accent-foreground: oklch(0.985 0.002 247.839);
+    --destructive: oklch(0.704 0.191 22.216);
+    --border: oklch(1 0 0 / 10%);
+    --input: oklch(1 0 0 / 15%);
+    --ring: oklch(0.551 0.027 264.364);
+    --chart-1: oklch(0.488 0.243 264.376);
+    --chart-2: oklch(0.696 0.17 162.48);
+    --chart-3: oklch(0.769 0.188 70.08);
+    --chart-4: oklch(0.627 0.265 303.9);
+    --chart-5: oklch(0.645 0.246 16.439);
+    --sidebar: oklch(0.21 0.034 264.665);
+    --sidebar-foreground: oklch(0.985 0.002 247.839);
+    --sidebar-primary: oklch(0.488 0.243 264.376);
+    --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+    --sidebar-accent: oklch(0.278 0.033 256.848);
+    --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
+    --sidebar-border: oklch(1 0 0 / 10%);
+    --sidebar-ring: oklch(0.551 0.027 264.364);
+  }
 }
 
 @layer base {
@@ -193,7 +276,7 @@ body {
     @apply border-border outline-ring/50;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-canvas text-ink;
   }
 }
 
@@ -203,4 +286,26 @@ a[data-streamdown="link"] {
 
 a[data-streamdown="link"]:hover {
     opacity: 0.8;
+}
+
+/* Shiki dual themes: light by default, dark tokens under the OS dark scheme */
+.code-block pre.shiki {
+  background: transparent !important;
+  padding: 1.25rem;
+  overflow-x: auto;
+  font-size: 0.8125rem;
+  line-height: 1.7;
+}
+
+/* Prose files (Markdown) read better wrapped than scrolled sideways */
+.code-wrap pre.shiki {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+@media (prefers-color-scheme: dark) {
+  .code-block .shiki,
+  .code-block .shiki span {
+    color: var(--shiki-dark) !important;
+  }
 }

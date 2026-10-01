@@ -513,7 +513,7 @@ Focus Areas: Software Development, Algorithms, Database, UI/UX Design.`,
 
 Download my CV in PDF format for a comprehensive overview of my professional experience, skills, and academic background.
 
-[Download CV PDF](https://marcusdev.me/resume/marcus-vinicius-cv-en.pdf)`,
+[Download CV PDF](https://marcussilva.dev/resume/marcus-vinicius-cv-en.pdf)`,
     keywords: [
       "cv",
       "curriculum",
@@ -538,7 +538,7 @@ Download my CV in PDF format for a comprehensive overview of my professional exp
 📧 Email: marcus.relation@gmail.com
 💼 LinkedIn: https://www.linkedin.com/in/mvinicius-dev/
 🐙 GitHub: https://github.com/mvinicius-dev
-🌐 Portfolio: https://marcusdev.me
+🌐 Portfolio: https://marcussilva.dev
 📱 Phone: +351 912 981 585 (available via WhatsApp)
 
 📍 Location: Porto, Portugal (Working in Lisbon)

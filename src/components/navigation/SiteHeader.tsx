@@ -1,0 +1,51 @@
+"use client";
+
+import { NavLink } from "@/components/navigation/NavLink";
+import { headerLinks } from "@/components/navigation/links";
+import { useScrollState } from "@/hooks/useHideOnScroll";
+
+/**
+ * Editorial meta row fixed at the top of every page. Hides while scrolling down.
+ * `mix-blend-difference` keeps it legible over light and dark sections in both themes.
+ */
+export function SiteHeader() {
+  const { hidden, scrolled } = useScrollState();
+  // Away from the top only the name and links stay, so the bar sits lighter over content
+  const meta = `transition-opacity duration-500 ${scrolled ? "opacity-0" : "opacity-100"}`;
+
+  return (
+    <header
+      className={`fixed inset-x-0 top-0 z-40 grid grid-cols-2 gap-6 px-8 pt-8 pr-28 text-sm leading-tight text-white mix-blend-difference transition-transform duration-500 ease-[cubic-bezier(0.65,0,0.35,1)] md:grid-cols-4 md:px-10 md:pr-10 md:pt-8 ${
+        hidden ? "-translate-y-[150%]" : "translate-y-0"
+      }`}
+    >
+      <NavLink href="/" className="self-start justify-self-start">
+        Marcus Vinicius
+      </NavLink>
+
+      <p className={`hidden sm:block text-white/60 ${meta}`}>
+        Creative Developer
+        <br />& AI Developer
+      </p>
+
+      <p className={`hidden md:block text-white/60 ${meta}`}>
+        Based in Porto, Portugal
+        <br />
+        Working worldwide
+      </p>
+
+      <nav aria-label="Main" className="hidden md:block justify-self-end">
+        <ul className="flex flex-wrap gap-x-1">
+          {headerLinks.map((link, index) => (
+            <li key={link.href}>
+              <NavLink href={link.href} className="link-underline">
+                {link.label}
+              </NavLink>
+              {index < headerLinks.length - 1 && <span aria-hidden="true">,</span>}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </header>
+  );
+}

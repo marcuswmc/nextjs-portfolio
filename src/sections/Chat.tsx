@@ -4,7 +4,7 @@ import type React from "react";
 
 import { Fragment, useRef, useState, useEffect } from "react";
 import { useGSAP } from "@gsap/react";
-import gsap from "gsap";
+import { gsap } from "@/lib/gsap";
 import { useChat } from "@ai-sdk/react";
 import {
   Message,
@@ -52,6 +52,11 @@ const suggestions: { key: string; value: string }[] = [
   { key: nanoid(), value: "A brief summary about Marcus" },
   { key: nanoid(), value: "Does Marcus have experience with Next.js?" },
   { key: nanoid(), value: "What are Marcus' skills?" },
+  { key: nanoid(), value: "Which projects is Marcus most proud of?" },
+  { key: nanoid(), value: "Can Marcus share his portfolio links?" },
+  { key: nanoid(), value: "How can I contact Marcus Silva?" },
+  { key: nanoid(), value: "What industries has Marcus worked in?" },
+  { key: nanoid(), value: "What technologies does Marcus enjoy using?" },
 ];
 
 const chefSlug = {
@@ -216,7 +221,7 @@ export function Chat() {
     <Fragment>
       <div
         ref={chatRef}
-        className="chat-initial fixed top-0 right-0 z-[1000] flex flex-col w-full h-full md:px-10 lg:px-12 bg-black text-white/80 py-8 px-4 md:w-1/2"
+        className="chat-initial fixed top-0 right-0 z-[1000] flex flex-col w-full h-full md:px-10 lg:px-12 bg-contrast text-on-contrast/80 py-8 px-4 md:w-1/2"
       >
         <div className="flex justify-between">
           <div>
@@ -224,19 +229,19 @@ export function Chat() {
               onClick={() => newChat()}
               variant="outline"
               aria-label="New chat"
-              className="dark p-2 rounded-full border-input bg-black hover:bg-white transition-colors duration-200 group"
+              className="dark p-2 rounded-full border-input bg-contrast hover:bg-on-contrast transition-colors duration-200 group"
             >
               {" "}
-              <PlusIcon className="w-5 h-5 text-white group-hover:text-black" />{" "}
+              <PlusIcon className="w-5 h-5 text-on-contrast group-hover:text-contrast" />{" "}
             </Button>
           </div>
           <Button
             onClick={closeChat}
             variant="outline"
             aria-label="Close chat"
-            className="dark p-2 rounded-full border-input bg-black hover:bg-white transition-colors duration-200 group"
+            className="dark p-2 rounded-full border-input bg-contrast hover:bg-on-contrast transition-colors duration-200 group"
           >
-            <XIcon className="w-5 h-5 text-white group-hover:text-black" />
+            <XIcon className="w-5 h-5 text-on-contrast group-hover:text-contrast" />
           </Button>
         </div>
 
@@ -359,7 +364,7 @@ export function Chat() {
                 key={suggestion.key}
                 onClick={handleSuggestionClick}
                 suggestion={suggestion.value}
-                className="dark bg-black text-white/60 hover:bg-white hover:text-black trasition-colors"
+                className="dark bg-contrast text-on-contrast/60 hover:bg-on-contrast hover:text-contrast transition-colors"
                 onWheel={(e) => e.stopPropagation()}
                 onTouchMove={(e) => e.stopPropagation()}
               />
@@ -367,13 +372,13 @@ export function Chat() {
           </Suggestions>
         </div>
         <div ref={inputRef} className="pb-8">
-          <PromptInput onSubmit={handleSubmit} className="mt-4 dark bg-black">
+          <PromptInput onSubmit={handleSubmit} className="mt-4 dark bg-contrast">
             <PromptInputTextarea
               onChange={(e) => setText(e.target.value)}
               ref={textareaRef}
               value={text}
               placeholder="Ask about Marcus' experience, projects, links or skills..."
-              className="text-white bg-black placeholder:text-white/60"
+              className="text-on-contrast bg-contrast placeholder:text-on-contrast/60"
             />
             <PromptInputFooter>
               <Button
@@ -400,7 +405,7 @@ export function Chat() {
           <Tooltip>
             <TooltipTrigger asChild>
               <div
-                className="fixed z-[1001] flex items-center justify-center transition-all duration-300 bg-black rounded-full cursor-pointer w-16 h-16 md:w-20 md:h-20 bottom-14 right-10 hover:rotate-180 shadow-md"
+                className="fixed z-[1001] flex items-center justify-center transition-all duration-300 bg-ink rounded-full cursor-pointer w-16 h-16 md:w-20 md:h-20 bottom-14 right-10 hover:rotate-180 shadow-md"
                 onClick={toggleChat}
               >
                 <div

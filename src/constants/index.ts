@@ -5,6 +5,8 @@ export type ServiceItem = {
 
 export type Service = {
   title: string;
+  /** Which side of the practice the service belongs to. */
+  discipline: "Creative" | "AI";
   description: string;
   items: ServiceItem[];
 };
@@ -22,82 +24,124 @@ export type Project = {
 
 export type Social = { name: string; href: string };
 
+export const contact = {
+  email: "marcus.relation@gmail.com",
+  phone: "+351 912 981 585",
+  location: "Porto, Portugal",
+};
+
+/** Main stack of a project, used by the Works filter. */
+export function projectStack(project: Project) {
+  const names = project.frameworks.map((f) => f.name.toLowerCase());
+  if (names.includes("next.js")) return "Next.js";
+  if (names.includes("react")) return "React";
+  if (names.includes("wordpress")) return "WordPress";
+  if (names.includes("html")) return "HTML/CSS/JS";
+  return "Other";
+}
+
 export const servicesData: Service[] = [
   {
-    title: "FullStack Development",
+    title: "Creative Development",
+    discipline: "Creative",
     description:
-      "Your business deserves a fast, secure, and future-proof digital foundation. I develop custom web apps with clean architecture, optimized databases, and seamless integrations—ensuring reliability at every layer.",
+      "Immersive, high-performance web experiences that make brands feel alive — from WebGL scenes and motion systems to the full-stack foundation that ships them fast, accessible and search-ready.",
     items: [
       {
-        title: "Frontend Excellence",
-        description: "(React, Nextjs, TypeScript, Interactive UI/UX)",
+        title: "3D & WebGL Experiences",
+        description: "Three.js, React Three Fiber, real-time visuals",
       },
       {
-        title: "Backend Engineering",
-        description: "(REST APIs, Microservices, Auth Systems)",
+        title: "Motion & Interaction",
+        description: "GSAP, Motion, scroll-driven storytelling",
       },
       {
-        title: "Database Design",
-        description: "(SQL/NoSQL Optimization, Scalable Structures)",
+        title: "UI/UX & Design Systems",
+        description: "Figma, component libraries, pixel-perfect UI",
+      },
+      {
+        title: "Frontend Engineering",
+        description: "React, Next.js, TypeScript",
+      },
+      {
+        title: "Full Stack & APIs",
+        description: "Node.js, REST, databases, e-commerce",
+      },
+      {
+        title: "Performance & SEO",
+        description: "Core Web Vitals, SSR, structured data",
       },
     ],
   },
   {
-    title: "Web & Mobile Apps",
+    title: "AI Development",
+    discipline: "AI",
     description:
-      "A clunky interface can sink even the best ideas. I craft responsive, pixel perfect web and mobile apps (React Native/Flutter) that users love—bridging design and functionality seamlessly.",
+      "AI solutions and automations that do real work — integrating models into products and workflows, building agents and chatbots, and bringing AI into the creative process, tuned to your data.",
     items: [
       {
-        title: "Cross-Platform Apps",
+        title: "AI Solutions & Automation",
+        description: "End-to-end workflows that remove busywork",
       },
       {
-        title: "AI Automation (chatbot / assistant)",
+        title: "AI Integration",
+        description: "LLMs and AI APIs inside your products and tools",
       },
       {
-        title: "E-Commerce, Booking Systems, landing pages",
+        title: "MCP & Agent Tooling",
+        description: "Model Context Protocol servers, skills and plugins",
+      },
+      {
+        title: "Chatbots & Conversational AI",
+        description: "Assistants grounded in your business knowledge",
+      },
+      {
+        title: "Creative AI",
+        description: "Generative image, video and design pipelines",
+      },
+      {
+        title: "Fine-tuning & Training",
+        description: "Adapting models to your data and domain",
       },
     ],
   },
-  {
-    title: "Advanced UI & Motion Design",
-    description:
-      "Transform static interfaces into immersive digital experiences. I craft visually striking, highly interactive UIs using cutting-edge animation tools—bringing emotion, depth, and precision to the frontend. Perfect for brands that want to stand out.",
-    items: [
-      {
-        title: "Dynamic Animations",
-        description: "(GSAP, Framer Motion, Scroll-based Interactions)",
-      },
-      {
-        title: "3D Web Experiences",
-        description: "(Three.js, WebGL, Real-time Visuals)",
-      },
-      {
-        title: "Creative Design Integration",
-        description: "(Figma, Photoshop, Illustrator)",
-      },
-    ],
-  },
-  {
-    title: "Performance & SEO",
-    description:
-      "Speed is a feature, and visibility is power. I fine-tune your web app for blazing-fast load times and high search rankings—ensuring users find you quickly and stay engaged. From core vitals to advanced SEO strategy, performance is built in.",
-    items: [
-      {
-        title: "Performance Optimization",
-        description: "(Lazy Loading, Code Splitting, Asset Compression)",
-      },
-      {
-        title: "Core Web Vitals",
-        description: "(LCP, FID, CLS Monitoring & Improvements)",
-      },
-      {
-        title: "SEO Engineering",
-        description: "(SSR, Structured Data, Semantic HTML, Metadata)",
-      },
-    ],
-  }
 ];
 export const projects: Project[] = [
+  {
+    id: 6,
+    name: "Move Social",
+    link: "https://move.social/",
+    image: "/assets/projects/move-social.jpg",
+    bgImage: "/assets/backgrounds/move-social-bg.jpg",
+    frameworks: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Tailwind CSS" },
+      { id: 3, name: "Lenis" },
+    ],
+  },
+  {
+    id: 7,
+    name: "Obsidian Memory",
+    link: "https://obsidian-memory-site.vercel.app/",
+    image: "/assets/projects/obsidian-memory.jpg",
+    bgImage: "/assets/backgrounds/obsidian-memory-bg.jpg",
+    frameworks: [
+      { id: 1, name: "HTML" },
+      { id: 2, name: "CSS" },
+      { id: 3, name: "JavaScript" },
+    ],
+  },
+  {
+    id: 8,
+    name: "HPLG Framework",
+    link: "https://hplg-framework.vercel.app/",
+    image: "/assets/projects/hplg-framework.jpg",
+    bgImage: "/assets/backgrounds/hplg-framework-bg.jpg",
+    frameworks: [
+      { id: 1, name: "Next.js" },
+      { id: 2, name: "Tailwind CSS" },
+    ],
+  },
   {
     id: 1,
     name: "Sattis Studio",
@@ -168,3 +212,8 @@ export const socials: Social[] = [
   { name: "LinkedIn", href: "https://www.linkedin.com/in/mvinicius-dev/" },
   { name: "GitHub", href: "https://github.com/marcuswmc" },
 ];
+
+export const brandLogos: string[] = Array.from(
+  { length: 18 },
+  (_, i) => `/brands/logo${String(i + 1).padStart(2, "0")}.png`
+);
