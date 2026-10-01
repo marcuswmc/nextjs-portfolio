@@ -49,4 +49,5 @@ Notas:
 - Zoom: escala calculada para o raio cobrir a diagonal da tela; `svgOrigin: "0 0"` em **todo** tween do planeta (não persiste sozinho).
 - Inversão: `[data-planet-fill]` (cor `ink`) + cor das linhas `ink → canvas`, trocadas só enquanto o planeta cobre a tela (sem cinza intermediário); cores lidas das CSS vars dentro de `gsap.matchMedia` (refaz ao trocar tema).
 - Lição: `from()` com stagger dentro de timeline só pré-renderiza o 1º alvo → estados iniciais com `gsap.set` + `to()`.
+- Ajuste 01-10-2026: sem textos de entrada ("Two disciplines / ONE craft", "Scroll to enter"), sem outro "Design × Intelligence" e sem barra de progresso — só o planeta e os textos de dentro. Lá dentro, faixas e crateras somem e o anel fica a 20% (uma curva dourada sutil).
 - A home não carrega mais three.js nem o GLB; o Orbit Planet 3D segue no `/lab`. Lighthouse home (3 execuções): 87–90 / 100 / 96 / 100.

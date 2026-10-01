@@ -96,7 +96,6 @@ export default function Disciplines() {
           gsap.set(panel(key, "[data-item]"), { autoAlpha: 0, y: 30 });
           gsap.set(panel(key, "[data-icon-path]"), { drawSVG: "0%" });
         }
-        gsap.set(q("[data-group='outro'] > *"), { autoAlpha: 0, yPercent: 60 });
 
         const tl = gsap.timeline({
           defaults: { ease: "power2.inOut" },
@@ -110,8 +109,7 @@ export default function Disciplines() {
         });
 
         tl
-          // Intro out, zoom into the planet
-          .to(q("[data-group='intro'] > *"), { yPercent: -80, autoAlpha: 0, stagger: 0.08, duration: 0.6 }, 0.2)
+          // Zoom into the planet
           .to(planet, { scale: coverScale, ...origin, duration: 2, ease: "power3.in" }, 0.2)
           .to(q("[data-ring]"), { rotation: -14, ...origin, duration: 2 }, 0.2)
           .to(q("[data-moon]"), { x: 60, y: -50, autoAlpha: 0, duration: 1.2 }, 0.4)
@@ -119,8 +117,9 @@ export default function Disciplines() {
           // Background inverts as we pass through the surface
           .to(q("[data-planet-fill]"), { opacity: 1, duration: 0.3, ease: "none" }, 1.95)
           .to(q("[data-tone]"), { color: canvas, duration: 0.3, ease: "none" }, 1.95)
-          .to(q("[data-planet-bands]"), { opacity: 0.3, duration: 0.5 }, 1.95)
-          .to(q("[data-ring]"), { opacity: 0.45, duration: 0.5 }, 1.95)
+          // Inside, keep it quiet: bands and craters go, the ring stays as one faint gold curve
+          .to(q("[data-planet-bands]"), { opacity: 0, duration: 0.5 }, 1.95)
+          .to(q("[data-ring]"), { opacity: 0.2, duration: 0.5 }, 1.95)
           // Slow drift while inside
           .to(planet, { rotation: 10, ...origin, duration: 5.6, ease: "none" }, 2.2)
 
@@ -151,18 +150,7 @@ export default function Disciplines() {
           .to(q("[data-ring]"), { rotation: 0, ...origin, duration: 1.8 }, 7.9)
           .to(q("[data-moon]"), { x: 0, y: 0, autoAlpha: 1, duration: 1.2 }, 8.4)
           .to(q("[data-sparkles]"), { autoAlpha: 1, duration: 0.6 }, 9)
-          .to(q("[data-group='outro'] > *"), { yPercent: 0, autoAlpha: 1, stagger: 0.1, duration: 0.6 }, 9.2)
-          .to({}, { duration: 0.6 });
-
-        gsap.fromTo(
-          q("[data-progress]"),
-          { scaleX: 0 },
-          {
-            scaleX: 1,
-            ease: "none",
-            scrollTrigger: { trigger: sectionRef.current, start: "top top", end: "bottom bottom", scrub: true },
-          }
-        );
+          .to({}, { duration: 0.5 });
 
         // Subtle parallax toward the cursor while the planet is small
         const stage = q("[data-parallax]")[0];
@@ -200,52 +188,12 @@ export default function Disciplines() {
           </svg>
         </div>
 
-        {/* Intro */}
-        <div
-          data-group="intro"
-          className="absolute inset-x-0 flex flex-col items-center gap-3 px-8 text-center pointer-events-none top-[11svh]"
-        >
-          <p className="text-xs tracking-[0.3em] uppercase opacity-65">(01) Two disciplines</p>
-          <p className="text-[clamp(2rem,5vw,4.5rem)] leading-none tracking-tight uppercase">
-            One <span className="normal-case font-light-italic text-gold">craft</span>
-          </p>
-        </div>
-        <p
-          data-group="intro"
-          className="absolute inset-x-0 text-xs tracking-[0.3em] text-center uppercase pointer-events-none bottom-[11svh]"
-        >
-          <span className="inline-block opacity-65">Scroll to enter the planet ↓</span>
-        </p>
-
         {/* Inside the planet */}
         {disciplines.map((d) => (
           <DisciplinePanel key={d.key} discipline={d} />
         ))}
 
         <div data-sweep className="absolute inset-x-0 h-px top-1/2 bg-gold" style={{ transform: "scaleX(0)" }} />
-
-        {/* Outro */}
-        <div
-          data-group="outro"
-          className="absolute inset-x-0 flex flex-col items-center gap-3 px-8 text-center pointer-events-none bottom-[13svh]"
-        >
-          <p className="text-[clamp(1.75rem,4vw,3.5rem)] leading-none tracking-tight uppercase">
-            Design <span className="font-light-italic text-gold">×</span> Intelligence
-          </p>
-          <p className="max-w-md text-sm opacity-65">Interfaces that feel alive, powered by AI that actually helps.</p>
-        </div>
-
-        {/* Progress */}
-        <div
-          data-tone
-          className="absolute flex items-center gap-4 text-xs tracking-[0.2em] uppercase bottom-8 inset-x-8 md:inset-x-10"
-        >
-          <span>Creative</span>
-          <div className="relative flex-1 h-px bg-current/25">
-            <div data-progress className="absolute inset-0 origin-left bg-gold" />
-          </div>
-          <span>AI</span>
-        </div>
       </div>
     </section>
   );
@@ -293,8 +241,7 @@ function DisciplinePanel({ discipline }: { discipline: Discipline }) {
 function StaticDisciplines() {
   return (
     <section id="disciplines" className="px-8 py-24 md:px-10">
-      <p className="text-xs tracking-[0.3em] uppercase opacity-65">(01) Two disciplines</p>
-      <svg viewBox="-110 -110 220 220" className="w-[min(60vmin,28rem)] mx-auto my-12" aria-hidden="true">
+      <svg viewBox="-110 -110 220 220" className="w-[min(60vmin,28rem)] mx-auto mb-12" aria-hidden="true">
         <g transform="scale(1)">
           <LinePlanet />
         </g>
