@@ -5,7 +5,7 @@ tags: [claude/index]
 
 # Index
 
-_Generated automatically on 01-10-2026 18:43. Do not edit by hand._
+_Generated automatically on 01-10-2026 19:05. Do not edit by hand._
 
 - [[CLAUDE]] — project context
 - [[00-inbox]] — inbox
@@ -16,6 +16,7 @@ _Generated automatically on 01-10-2026 18:43. Do not edit by hand._
 
 ## plans
 
+- [[plans/planeta-line-art|planeta-line-art]]
 - [[plans/redesign-creative-ai|redesign-creative-ai]]
 
 ## processes

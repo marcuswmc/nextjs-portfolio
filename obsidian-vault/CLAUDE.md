@@ -9,7 +9,7 @@ Portfólio de Marcus Vinicius, **Creative Developer & AI Developer** baseado em 
 | Framework | Next.js 15.4 (App Router, Turbopack no dev), React 19.1, TypeScript |
 | Estilo | Tailwind CSS 4 (tokens `canvas/ink/contrast/on-contrast/gold`), fonte Amiamie (3 cortes) |
 | Animação | GSAP 3.13 (ScrollTrigger, SplitText, Flip) via `@/lib/gsap`, Lenis |
-| 3D | three, @react-three/fiber 9.8, @react-three/drei; experimentos three.js puros em iframe |
+| 3D | Home: planeta em SVG + GSAP DrawSVG. Lab: three, @react-three/fiber 9.8, drei; experimentos three.js puros em iframe |
 | Código/SEO | shiki (highlight no build), next/og (imagens OG), sitemap/robots |
 | IA (desligado) | ai SDK v5 + @ai-sdk/google — chat fora do layout, código mantido |
 | Deploy | Vercel, @vercel/analytics, domínio marcussilva.dev (`NEXT_PUBLIC_SITE_URL` opcional) |
@@ -38,7 +38,7 @@ These are settled. Do not reopen them without a good reason (details in `decisio
 - **Cores e tema:** tokens do site, nunca `bg-black`/`text-white` fixos; dark mode só pelo sistema, sem toggle.
 - **GSAP:** importar de `@/lib/gsap`; Flip de grids via `src/lib/flip.ts` (segura `minHeight` do container).
 - **Navegação:** header fixo no desktop, menu fullscreen só no mobile; links via `NavLink`; sem transição de páginas e sem loader inicial (removidos a pedido).
-- **Planeta 3D:** fora do Hero; vive em `Disciplines`, monta na 1ª interação com a seção a ≤1,5 viewport.
+- **Planeta da home:** line art em SVG (traço limpo, anel e lua dourados) → [[plans/planeta-line-art]]; cresce até tomar a tela, fundo inverte lá dentro, volta ao tamanho no fim. three.js só no `/lab`.
 - **Services:** só 2 disciplinas — Creative Development e AI Development (6 itens cada).
 - **Conteúdo honesto:** só publicar itens do Marcus; stacks de projetos detectados nos sites; nada de templates/skills de terceiros como dele.
 - **Chat IA:** desligado (fora do layout); `/api/chat` e `src/sections/Chat.tsx` mantidos.
@@ -73,5 +73,6 @@ nextjs-portfolio/
 - **Do not publicar as cenas da Revelo** (tasks RL-gym) até ele confirmar autorização.
 - **Do not usar `transition-transform` (CSS) no mesmo elemento que o GSAP anima** — trava o transform; separar em wrapper.
 - **Do not colocar `leading-*` antes de `text-[tamanho]` dentro de `cn()`** — o tailwind-merge descarta o leading.
+- **Do not usar `from()` com stagger dentro de timeline para estados iniciais** — só o 1º alvo é pré-renderizado; usar `gsap.set` + `to()`.
 - **Do not passar objeto em variável para `next/dynamic`** — as opções precisam ser literais inline.
 - **Do not rodar scripts de teste (playwright) com cwd no projeto** — salvam PNGs na raiz; usar o scratchpad.
